@@ -183,7 +183,7 @@ class userLinkedList:
         
 
         
-
+# Ta shold be able to input values here
 # Task 1: Model list of users in a Linked List sorted by ID.
 # Task 2: Utilize addUser function to add a new user. Because no ids have been freed (yet),
 #         we just add these to the end of the LL.
@@ -204,7 +204,7 @@ bankOC.addUser(user5, 1)
 
 print("Task 1/2 \n")
 bankOC.print()
-
+# TA should be able to select which one to delete
 # Task 3: Implement the deleteUser function. Free up the unique id, which can later be reassigned.
 
 # Deleting user with id 4.
@@ -216,12 +216,13 @@ print("Adding new user, Dylan6. Should be inserted into the LL, taking up the fr
 user6 = User("Dylan6 OC", "57 Raven Ln", '111-111-1111', 0)
 bankOC.addUser(user6, 1)
 bankOC.print()
-
+# TA selects which user to deduct balance
+# Edge case to implement, boundary of each value that is input
 # Task 4: User with ID 1 pays user with ID2 by some amount
 
 print("User 1's balance before payment: " + str(user1.balance))
 print("User 2's balance before payment: " + str(user2.balance))
-bankOC.payUserToUser(1, 2, 100)
+bankOC.payUserToUser(1, 2, -50)
 print("User 1's balance after payment: " + str(user1.balance))
 print("User 2's balance after payment: " + str(user2.balance))
 
@@ -230,7 +231,7 @@ print("User 2's balance after payment: " + str(user2.balance))
 print("User 1's balance before payment: " + str(user1.balance))
 print("User 3's balance before payment: " + str(user3.balance))
 bankOC.payUserToUser(1, 3, 200)
-
+# Don't need to show anything for this
 # Task 5: Write a method that gets the median id of the list.
 print("Odd number, median id is: ")
 # Odd case: When there's an odd amount of elements, returns median as expected.
@@ -240,12 +241,14 @@ bankOC.deleteUser(1)
 print("Even number, median id is: ")
 print(bankOC.getMedianID())
 
+# Two inputs, merge account
 # Task 6: Write a method that merges two accounts into one.
 # Merges the "Dylan duplicate" accounts, which have balances of 400 and 500, for a total of 900.
 
 bankOC.mergeAccounts(4, 5)
 bankOC.print()
 
+# Need to do this, hardcode
 # Task 7: Merge two linked lists. If there's a contested ID, create a new ID for one and add it to the new list.
 
 bankOC1 = userLinkedList()

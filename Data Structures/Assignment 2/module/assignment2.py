@@ -40,13 +40,10 @@ class Stack:
     
     # Serializes stack to a list, which can be printed. Used for Unit Testing.
     def print(self):
-        res = []
         cur = self.head
         while cur: 
-            res.append(cur.element)
+            print(cur.element) 
             cur = cur.next
-        # print(res) 
-        return res
     
     # Input: str = "10 + 20 * 2"
     # Output: 50
@@ -54,19 +51,39 @@ class Stack:
     # Output: NaN
     def arithmeticEval(self, string):
         # Preprocessing
-        arr = []
         num = ''
-        for c in string:
-            if c == " ":
+        i = 0
+        while i < len(string):
+            char = string[i]
+            if char == " ":
+                i += 1
                 continue
-            elif (c in "+-*/"):
+            elif (char in "+-"):
                 # Reached punctuation, snapshot whatever's in num
-                arr.append(num)
-                arr.append(c)
+                self.push(num)
+                self.push(char)
                 num = ''
+            elif (char in "*/"):
+                firstVal = int(num)
+                # Finding second value
+                num = ''
+                i += 1
+                while i < len(string):
+                    if string[i] in "1234567890":
+                        num += string[i]
+                    i += 1
+                secondVal = int(num)
+
+                if char == '*':
+                    self.push(str(firstVal * secondVal))
+                    continue
+                if char == "/":
+                    self.push(str(firstVal // secondVal))
             else:
-                num += c
-        arr.append(num)
-        print(arr)
+                num += char
+            i += 1
+        self.push(num)
+print("TEST")
 stack = Stack()
 stack.arithmeticEval("10 + 20 * 2")
+stack.print()
