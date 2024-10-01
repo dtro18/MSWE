@@ -38,16 +38,26 @@ class Stack:
             cur = cur.next
         return res
     
-    # Serializes stack to a list, which can be printed. Used for Unit Testing.
+    # Serializes stack to a string, which can be printed. Used for Unit Testing.
+    def serialize(self):
+        # For testing purposes.
+        resStr = ""
+        cur = self.head
+        while cur: 
+            resStr += str(cur.element)
+            cur = cur.next
+        # So that test case can be validated.
+        return resStr
+    
     def print(self):
         cur = self.head
         while cur: 
-            print(cur.element) 
+            print(cur.element)
             cur = cur.next
+
     # Helper function for the arithmetic eval. 
     def reverseStack(self):
         tempStack1 = Stack() 
-        
         while not self.is_empty():
             tempStack1.push(self.pop())
         tempStack2 = Stack()
@@ -56,32 +66,33 @@ class Stack:
         while not tempStack2.is_empty():
             self.push(tempStack2.pop())
 
-    # Input: str = "10 + 20 * 2"
-    # Output: 50
-    # Input: str = “foo / 30 + 7”
-    # Output: NaN
+    # Evaluates a numeric string input using order of operations
+    # Two pointer method to deal with negative numbers
+    # Reset function to work off r + 1 when a space is encountered
     def arithmeticEval(self, string):
-        # Preprocessing
-        
         i = 0
         num = ''
         while i < len(string):
             char = string[i]
-            if char == " ":
-                i += 1
-                continue
-            elif char not in "1234567890*/+- ":
+            if char not in "1234567890*/+- ":
                 raise ValueError("NaN")
-            elif (char in "+-"):
-                self.push(char)
+            elif char == " ":
                 i += 1
                 continue
-            elif (char in "*/"):
+            # Case will load positive numbers, neg numbers, +/- symbols
+            elif char in "1234567890+-":
+                l = r = i
+                while string[r] != " ":
+                    r += 1
+                self.push(string[l:r])
+                # i is set to the next space after whatever was just inserted
+                i = r
+            elif char in "*/":
                 firstVal = int(self.pop())
                 # Finding second value 
                 i += 1
                 while i < len(string):
-                    if string[i] in "1234567890":
+                    if string[i] in "1234567890-":
                         while i < len(string) and string[i] != " ":
                             num += string[i]
                             i += 1
@@ -105,7 +116,6 @@ class Stack:
                 num = ''
 
         self.reverseStack()
-        self.print()
 
         while self.size() > 1:
             secondVal = int(self.pop())
@@ -115,9 +125,7 @@ class Stack:
                 self.push(str(firstVal + secondVal))
             elif operand == "-":
                 self.push(str(secondVal - firstVal))
-        # return self.peek()
+        return self.pop()
 
 stack = Stack()
-stack.arithmeticEval("10 * 10 * 10 + 150 / 2")
-# 10 + 40 + 10 - 2 - 14
-stack.print()
+print(stack.arithmeticEval("10 + 20 * -2"))
