@@ -178,6 +178,7 @@ class Queue:
             self.head = newNode
         self.size += 1
 
+    # Returns an element, not the whole node
     def dequeue(self):
         if self.is_empty():
             raise ValueError("Queue is empty.")
@@ -203,6 +204,38 @@ class Queue:
     def get_size(self):
         return self.size
         
-    # Task 4
-    # Use one queue for permanent storage, and another for temporary storage
+    # Task 4 Uses two queues to implement a stack with 
 
+
+class StackWithTwoQs:
+    # queueOne maintained as the permanent queue.
+    def __init__(self):
+        self.queueOne = Queue()  # your implemented Queue class
+        self.queueTwo = Queue() # your implemented Queue class
+
+    # all stack methods 
+
+    def push(self, element): # pushes x in the stack. 
+        self.queueOne.enqueue(element)
+    def pop(self): # removes the latest element from the stack and returns it. 
+        if self.get_size == 0:
+            raise ValueError("Queue is empty.")
+        while self.queueOne.get_size() > 1:
+            self.queueTwo.enqueue(self.queueOne.dequeue())
+        returnedElem = self.queueOne.dequeue()
+        # Reset queueOne as the primary queue.
+        self.queueOne, self.queueTwo = self.queueTwo, self.queueOne
+        return returnedElem
+
+    def peek(self): # returns the latest element from the stack without removing it 
+        while self.queueOne.get_size() > 1:
+            self.queueTwo.enqueue(self.queueOne.dequeue())
+        returnedElem = self.queueOne.dequeue()
+        self.queueTwo.enqueue(returnedElem)
+        # Reset queueOne as the primary queue.
+        self.queueOne, self.queueTwo = self.queueTwo, self.queueOne
+        return returnedElem
+    
+    def get_size(self): # returns the size of the stack.
+        return self.queueOne.get_size()
+    
