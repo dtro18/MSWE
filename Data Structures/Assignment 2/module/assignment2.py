@@ -69,6 +69,10 @@ class Stack:
     # Evaluates a numeric string input using order of operations
     # Two pointer method to deal with negative numbers
     # Reset function to work off r + 1 when a space is encountered
+
+    # Handle invalid operators (letters)
+    # Handle divide by zero
+
     def arithmeticEval(self, string):
         i = 0
         num = ''
@@ -143,36 +147,62 @@ class Queue:
         self.size = 0
 
     def is_empty(self):
-        return self.head == self.tail == 0
+        return self.head == None
     
     def print(self):
         cur = self.head
         while cur:
-
-            print("\n")
+            print(cur.element)
             cur = cur.next
+            
+    def serialize(self):
+        # For testing purposes.
+        resStr = ""
+        cur = self.head
+        while cur: 
+            resStr += str(cur.element)
+            cur = cur.next
+        # So that test case can be validated.
+        return resStr
 
     # Should be O(1) time
-    def enqueue(self, node):
+    def enqueue(self, element):
         # Check if there are any nodes at all. If no, create the first node.
         if self.is_empty():
-            newNode = self.QueueNode(node, None)
+            newNode = self.QueueNode(element, None)
             self.head = newNode
             self.tail = newNode
-            return
-
         # Insert node at the front with at least one existing node
-        newNode = self.QueueNode(node, self.head.next)
-        self.head = newNode
+        else:
+            newNode = self.QueueNode(element, self.head)
+            self.head = newNode
+        self.size += 1
 
-    
     def dequeue(self):
-        pass
-            
+        if self.is_empty():
+            raise ValueError("Queue is empty.")
+        # Handle case where dequeuing last element
+        elif self.get_size() == 1:
+            tmpVal = self.head.element
+            self.head = self.tail = None
+            self.size -= 1
+            return tmpVal
+        cur = self.head
+        prev = None
+        while cur:
+            if cur == self.tail:
+                self.tail = prev
+                self.size -= 1
+                return cur.element
+            prev = cur
+            cur = cur.next
 
+    def poll(self):
+        return self.tail.element
+    
+    def get_size(self):
+        return self.size
+        
+    # Task 4
+    # Use one queue for permanent storage, and another for temporary storage
 
-
-
-stack = Stack()
-
-print(stack.arithmeticEval("10 + 20 * -2"))
