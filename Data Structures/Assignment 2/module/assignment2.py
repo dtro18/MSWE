@@ -126,6 +126,53 @@ class Stack:
             elif operand == "-":
                 self.push(str(secondVal - firstVal))
         return self.pop()
+    
+class Queue:
+
+    class QueueNode:
+        def __init__(self, element, next=None):
+            self.element = element
+            # Points at another ListNode
+            self.next = next
+        
+    # Init obj of type userLinkedList
+    def __init__(self):
+        # Will point at ListNode
+        self.head = None
+        self.tail = None
+        self.size = 0
+
+    def is_empty(self):
+        return self.head == self.tail == 0
+    
+    def print(self):
+        cur = self.head
+        while cur:
+
+            print("\n")
+            cur = cur.next
+
+    # Should be O(1) time
+    def enqueue(self, node):
+        # Check if there are any nodes at all. If no, create the first node.
+        if self.is_empty():
+            newNode = self.QueueNode(node, None)
+            self.head = newNode
+            self.tail = newNode
+            return
+
+        # Insert node at the front with at least one existing node
+        newNode = self.QueueNode(node, self.head.next)
+        self.head = newNode
+
+    
+    def dequeue(self):
+        pass
+            
+
+
+
 
 stack = Stack()
+
 print(stack.arithmeticEval("10 + 20 * -2"))
