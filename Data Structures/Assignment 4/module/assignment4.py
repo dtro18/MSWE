@@ -133,3 +133,6 @@ with open('tree-input.txt', 'r') as file:
 # Task 2: Recursive DFS print of the tree.
 bst.printTreeDFS()
 bst.printTreeBFS()
+
+
+# Todo: check delete implementation

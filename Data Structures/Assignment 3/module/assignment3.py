@@ -55,6 +55,7 @@ class Hash:
         if len(self.hashTable[index]) == 0:
             self.hashTable[index].append(x)
         else:
+            # Collision resolution mechanism - linear probing
             while len(self.hashTable[index]) != 0:
                 index = (index + 1) % NUM_BUCKETS
             self.hashTable[index].append(x)
