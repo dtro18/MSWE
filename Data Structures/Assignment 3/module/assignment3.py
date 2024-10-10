@@ -49,6 +49,8 @@ class Hash:
 
     # Insert string x to the HashTable in the index returned by hash(x).
     def insert(self, x):
+        if x == '':
+            return 
         index = self.hash(x)
         if len(self.hashTable[index]) == 0:
             self.hashTable[index].append(x)
@@ -74,19 +76,22 @@ hashMap = Hash()
 with open('pride-and-prejudice.txt', 'r') as file:
     for line in file:
         curStr = ''
-        for c in line:
-            if not c.isalnum():
+        i = 0
+        while i < len(line):
+            if not line[i].isalnum():
                 # Delimiter reached, check if the curStr is alr in the dict and if not add it
                 sortedString = ''.join(sorted(curStr)).lower()
-                idx = hashMap.hash(sortedString)
-                if len(hashMap.hashTable[idx]) == 0:
+                hashIdx = hashMap.hash(sortedString)
+                if len(hashMap.hashTable[hashIdx]) == 0:
                     hashMap.insert(sortedString)
                 # Reset the string and keep building
                 curStr = ''
-
+                while i < len(line) and not line[i].isalnum():
+                    i += 1
             # Add something to the string being built if its alphanumeric
             else:
-                curStr += c
+                curStr += line[i]
+                i += 1
         # If the line ends on an actual character, need to snapshot whatever's in curStr again.
         if len(curStr) > 0:
             sortedString = ''.join(sorted(curStr)).lower()
