@@ -1,6 +1,6 @@
 import os
 os.chdir('C:/MSWE Projects/Data Structures/Assignment 4')
-
+import collections
 class User:
     def __init__(self, id, lastName, dept, program, year):
         self.id = id
@@ -36,7 +36,7 @@ class BST:
         # Continue until you find a node that has no children
         while cur:
             # Move left
-            if cur.element.lastName.lower() < user.lastName.lower():
+            if user.lastName.lower() < cur.element.lastName.lower():
                 if not cur.left:
                     cur.left = Node(user, cur)
                     return
@@ -87,8 +87,8 @@ class BST:
                 cur = cur.right
         raise ValueError("Node not found")
 
-    def printTree(self):
-        file = open("tree-output-txt", "w")
+    def printTreeDFS(self):
+        file = open("tree-output-dfs.txt", "w")
         def dfs(node):
             if not node:
                 return
@@ -98,6 +98,21 @@ class BST:
 
         dfs(self.head)
         file.close()
+    
+    def printTreeBFS(self):
+        # Init q with root.
+        file = open("tree-output-bfs.txt", "w")
+        q = collections.deque()
+        q.append(self.head)
+        while q:
+            node = q.popleft()
+            if node:
+                node.printNodeToText(file)
+                q.append(node.left)
+                q.append(node.right)
+        file.close()
+
+
 
             
 bst = BST()
@@ -114,5 +129,7 @@ with open('tree-input.txt', 'r') as file:
         user = User(id, lname, dept, prog, year)
         if operation == "I":
             bst.insert(user)
-            
-bst.printTree()
+
+# Task 2: Recursive DFS print of the tree.
+bst.printTreeDFS()
+bst.printTreeBFS()
