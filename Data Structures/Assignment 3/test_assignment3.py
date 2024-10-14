@@ -3,7 +3,12 @@ from module.assignment3 import Hash
 
 # Testing stack functions for Task 1.
 class TestTask1(unittest.TestCase):
-    def test_hash(self):
+    def test_hashFn(self):
+        # Ensures that the hash function returns diff idx for diff strings
+        hashMap = Hash()
+        self.assertNotEqual(hashMap.hash("string1"), hashMap.hash("string2"))
+
+    def test_insert(self):
         # Tests if the stack has been correctly implmented.
         hashMap = Hash()
         self.assertEqual(hashMap.get_size(), 0)
@@ -25,6 +30,7 @@ class TestTask1(unittest.TestCase):
         self.assertEqual(hashMap.get_size(), 7)
     def test_collision(self):
         hashMap = Hash()
+        
         # Tests that two strings that hash to the same value
         # Are both inputted (thru collision resolution)
         hashMap.insert("Collide")
