@@ -71,12 +71,12 @@ class minHeap:
         self.upheap(len(self.arr) - 1)
 
     def peek(self):
-        if self.get_size == 0:
+        if self.get_size() == 0:
             raise ValueError("Heap is empty")
         return self.arr[0]
         
     def heapPop(self):
-        if self.get_size == 0:
+        if self.get_size() == 0:
             raise ValueError("Heap is empty")
         self.swap(0, len(self.arr) - 1)
         poppedElem = self.arr.pop()
@@ -149,65 +149,18 @@ class maxHeap:
         self.upheap(len(self.arr) - 1)
 
     def peek(self):
-        if self.get_size == 0:
+        if self.get_size() == 0:
             raise ValueError("Heap is empty")
         return self.arr[0]
         
     def heapPop(self):
-        if self.get_size == 0:
+        if self.get_size() == 0:
             raise ValueError("Heap is empty")
         self.swap(0, len(self.arr) - 1)
         poppedElem = self.arr.pop()
         self.downheap(0)
         return poppedElem
     
-# Builds a tree-based heap given an array-based heap
-class HeapBuilder():
-    # [1, 2, 3, 4, 5, 6, 7]
-    def __init__(self, inputArr, mode):
-        self.head = None
-        if mode == "MIN":
-            self.heapArr = minHeap(inputArr)
-        elif mode == "MAX":
-            self.heapArr = maxHeap(inputArr)
-        self.createTree()
-
-    def createTree(self):
-        # BFS approach
-
-        nodeQ = collections.deque()
-        valQ = collections.deque(self.heapArr.arr) # Load the values into a queue
-
-        if self.heapArr.get_size() >= 1:
-            self.head = Node(valQ.popleft())
-            nodeQ.append(self.head)
-
-        while valQ and nodeQ:
-            node = nodeQ.popleft()
-            if valQ:
-                leftVal = valQ.popleft()
-                if leftVal is not None:
-                    node.left = Node(leftVal)
-                    nodeQ.append(node.left)
-            if valQ:
-                rightVal = valQ.popleft()
-                if rightVal is not None:
-                    node.right = Node(rightVal)
-                    nodeQ.append(node.right)
-
-    def printTree(self):
-        q = collections.deque([self.head])
-
-        while q:
-            node = q.popleft()
-            if node:
-                print(node.val)
-                if node.left:
-                    q.append(node.left)
-                if node.right:
-                    q.append(node.right)
-        # Do we need to delete nodes without values?
-
 # Implemented BST class from Assignment 4.
 class BST:
     def __init__(self):
@@ -329,16 +282,16 @@ class BSTToheapTransformer():
         self.maxHeap = maxHeap(copy)
 
 
-bst = BST()
-bst.insert(5)
-bst.insert(6)
-bst.insert(7)
-bst.insert(8)
-bst.insert(1)
-bst.insert(2)
-bst.insert(3)
+# bst = BST()
+# bst.insert(5)
+# bst.insert(6)
+# bst.insert(7)
+# bst.insert(8)
+# bst.insert(1)
+# bst.insert(2)
+# bst.insert(3)
 
-bst.printTreeBFS()
-bstTransformer = BSTToheapTransformer(bst)
-print(bstTransformer.minHeap.arr)
-print(bstTransformer.maxHeap.arr)
+# bst.printTreeBFS()
+# bstTransformer = BSTToheapTransformer(bst)
+# print(bstTransformer.minHeap.arr)
+# print(bstTransformer.maxHeap.arr)

@@ -4,26 +4,40 @@ from module.assignment5 import Node, minHeap, maxHeap, HeapBuilder, BST, BSTTohe
 # Testing stack functions for Task 1.
 class TestTask1(unittest.TestCase):
     def test_minHeap(self):
-        # Task 1 Build a BST from the input data:
-        # bst = BST()
-        # with open('tree-input.txt', 'r') as file:
-        #     for line in file:
-        #         # Init a user with the values obtained from file
-        #         operation = line[0]
-        #         id = line[1:8]
-        #         lname = line[8:33].rstrip()
-        #         dept = line[33:37]
-        #         prog = line[37:41].rstrip()
-        #         year = line[41]
-        #         user = User(id, lname, dept, prog, year)
-        #         if operation == "I":
-        #             bst.insert(user)
-        # self.assertEqual(bst.head)
-        pass
+        heap = minHeap([5, 4, 3, 2, 1])
+        self.assertEqual(heap.arr, [1, 2, 3, 5, 4])
+
+        # Checking peek function.
+        self.assertEqual(heap.peek(), 1)
+
+        # Popping all values to make sure min value is popped every time.
+        res = []
+        for i in range(heap.get_size()):
+            res.append(heap.heapPop())
+        self.assertEqual(res, [1, 2, 3, 4, 5])
+
+        # Popping from an empty heap should result in an error.
+        with self.assertRaises(ValueError) as context:
+            heap.heapPop()
+        self.assertEqual(str(context.exception), "Heap is empty")
+
     def test_maxHeap(self):
         heap = maxHeap([1, 2, 3, 4, 5])
-        print(heap.arr)
         self.assertEqual(heap.arr, [5, 4, 3, 1, 2])
+
+        # Checking peek function.
+        self.assertEqual(heap.peek(), 5)
+
+        # Popping all values to make sure min value is popped every time.
+        res = []
+        for i in range(heap.get_size()):
+            res.append(heap.heapPop())
+        self.assertEqual(res, [5, 4, 3, 2, 1])
+
+        # Popping from an empty heap should result in an error.
+        with self.assertRaises(ValueError) as context:
+            heap.heapPop()
+        self.assertEqual(str(context.exception), "Heap is empty")
 
     def test_task2(self):
         bst = BST()
@@ -34,11 +48,11 @@ class TestTask1(unittest.TestCase):
         bst.insert(1)
         bst.insert(2)
         bst.insert(3)
-
-        bst.printTreeBFS()
         bstTransformer = BSTToheapTransformer(bst)
+        # Test that the BST has been heapified.
         self.assertEqual(bstTransformer.minHeap.arr, [1, 2, 3, 5, 7, 6, 8])
         self.assertEqual(bstTransformer.maxHeap.arr, [8, 7, 6, 2, 1, 3, 5])
+        
 
 # heap = Heap()
 # heap.insert(3)
