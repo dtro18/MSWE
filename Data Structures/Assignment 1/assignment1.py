@@ -87,6 +87,8 @@ class userLinkedList:
     def payUserToUser(self, payerId, payeeId, amount):
         if self.is_empty():
             raise IndexError("Linked List is empty.")
+        if amount < 0:
+            raise ValueError("Cannot pay a negative amount.")
         cur = self.head
         payerNode = None
         payeeNode = None
@@ -222,6 +224,7 @@ bankOC.print()
 
 print("User 1's balance before payment: " + str(user1.balance))
 print("User 2's balance before payment: " + str(user2.balance))
+# Negative balance; should raise an error. Fix it to continue with the tests.
 bankOC.payUserToUser(1, 2, -50)
 print("User 1's balance after payment: " + str(user1.balance))
 print("User 2's balance after payment: " + str(user2.balance))

@@ -51,31 +51,19 @@ class BST:
                     return
                 cur = cur.right
 
-
-    # Deletes a user, passing in a user id.
-    def delete(self, name):
-        if not self.head:
-            raise ValueError("No nodes present")
-        # Finds the minimum node in a subtree and returns it
-        def findMin(treeHead):
-            cur = treeHead
-            while cur.left:
-                cur = cur.left
-            return cur
-
+    # Deletes a node with < 2 children, passing in a given user object.
+    def delete(self, user):
         cur = self.head
         # Continue until you find a node that has no children
-        while cur:
-            
+        while cur.left != None and cur.right != None:
             # Base case: We found the node
-            if cur.element.lastName.lower() == name.lower():
+            if cur.element == user:
+                # Elem to be deleted has two children -- cannot delete
                 if cur.left and cur.right:
-                    minNode = findMin(cur.right)
-                    cur.element = minNode.element
-                    del minNode
-                    return
+                    raise ValueError("Cannot delete this node.")
+                
                 # Determine which side of the grandparent to insert the grandchildren in
-                elif cur.parent and cur.element.lastName.lower() < cur.parent.element.lastName.lower():
+                if cur.element.lastName.lower() < cur.parent.element.lastName.lower():
                     # Left side
                     # Elem being deleted has no children.
                     if not cur.left and not cur.right:
@@ -83,11 +71,8 @@ class BST:
                     # Cur's left side exists, should be hooked up to grandparent
                     elif cur.left:
                         cur.parent.left = cur.left
-                        cur.left.parent = cur.parent
                     else:
                         cur.parent.left = cur.right
-                        cur.right.parent = cur.parent
-                    return
                 elif cur.element.lastName.lower() > cur.parent.element.lastName.lower():
                     # Right Side
                     # Elem being deleted has no children.
@@ -95,17 +80,14 @@ class BST:
                         cur.parent.right = None
                     elif cur.left:
                         cur.parent.right = cur.left
-                        cur.left.parent = cur.parent
                     else:
                         cur.parent.right = cur.right
-                        cur.right.parent = cur.parent
-                    return
-            if cur.element.lastName.lower() > name.lower():
+                return
+            if cur.element.lastName.lower() < user.lastName.lower():
                 cur = cur.left
             # Move right bc will never have an == case
             else:
                 cur = cur.right
-
         raise ValueError("Node not found")
 
     def printTreeDFS(self):
@@ -151,7 +133,9 @@ with open('tree-input.txt', 'r') as file:
         if operation == "I":
             bst.insert(user)
 
-# Task 2/3: Recursive DFS/BFS print of the tree.
+# Task 2: Recursive DFS print of the tree.
 bst.printTreeDFS()
 bst.printTreeBFS()
 
+
+# Todo: check delete implementation
