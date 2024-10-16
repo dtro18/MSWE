@@ -54,7 +54,8 @@ class BST:
 
     # Deletes a user, passing in a user id.
     def delete(self, name):
-
+        if not self.head:
+            raise ValueError("No nodes present")
         # Finds the minimum node in a subtree and returns it
         def findMin(treeHead):
             cur = treeHead
@@ -68,14 +69,13 @@ class BST:
             
             # Base case: We found the node
             if cur.element.lastName.lower() == name.lower():
-                print("Executing")
                 if cur.left and cur.right:
                     minNode = findMin(cur.right)
                     cur.element = minNode.element
                     del minNode
                     return
                 # Determine which side of the grandparent to insert the grandchildren in
-                elif cur.element.lastName.lower() < cur.parent.element.lastName.lower():
+                elif cur.parent and cur.element.lastName.lower() < cur.parent.element.lastName.lower():
                     # Left side
                     # Elem being deleted has no children.
                     if not cur.left and not cur.right:
@@ -151,10 +151,7 @@ with open('tree-input.txt', 'r') as file:
         if operation == "I":
             bst.insert(user)
 
-# Task 2: Recursive DFS print of the tree.
+# Task 2/3: Recursive DFS/BFS print of the tree.
 bst.printTreeDFS()
 bst.printTreeBFS()
 
-bst.delete("Schafer")
-bst.printTreeBFS()
-# Todo: check delete implementation

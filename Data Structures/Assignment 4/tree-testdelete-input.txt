@@ -1,6 +1,0 @@
-I8534534McKay                    0251CT  1
-I8400342LaPorte                  0045JA  1
-I8499120Black                    0341RST 1
-I8400912Green                    0045RFM 1
-I8422911Johnston                 0341RST 1
-I8212399Schafer                  0251EST 1

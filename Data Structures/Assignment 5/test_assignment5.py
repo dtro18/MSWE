@@ -1,5 +1,5 @@
 import unittest
-from module.assignment5 import Node, minHeap, maxHeap, HeapBuilder, BST, BSTToheapTransformer
+from module.assignment5 import Node, minHeap, maxHeap, BST, BSTToheapTransformer
 
 # Testing stack functions for Task 1.
 class TestTask1(unittest.TestCase):

@@ -2,7 +2,7 @@ import unittest
 from module.assignment4 import User, Node, BST
 
 
-# Testing stack functions for Task 1.
+# Testing BFS functions for Task 1.
 class TestTask1(unittest.TestCase):
     def test_buildBST(self):
         # Task 1 Build a BST from the input data:
@@ -22,10 +22,10 @@ class TestTask1(unittest.TestCase):
         # Verify Task worked by checking text files.
 
     # Tests if a user with no children has been deleted
-    def test_deleteNoChild(self): 
+    def test_delete(self): 
         # Creating a smaller tree to demonstrate delete function.
         bst = BST()
-        with open('tree-testdelete-input.txt', 'r') as file:
+        with open('tree-input.txt', 'r') as file:
             for line in file:
                 # Init a user with the values obtained from file
                 operation = line[0]
@@ -37,9 +37,28 @@ class TestTask1(unittest.TestCase):
                 user = User(id, lname, dept, prog, year)
                 if operation == "I":
                     bst.insert(user)
-        noChildUser = User("8212399", "Schafer", "0251", "EST", "1")
-        oneChildUser = User("8400912", "Green", "0045", "RFM", "1")
-        twoChildUser = User("8534534", "McKay", "0251", "CT", "1")
+        noChildUser = "Schafer"
+        oneChildUser = "Green"
+        twoChildUser = "McKay"
+
+        # Testing normal deletion function. Should remove Schafer, Green, and McKay from output.
         bst.delete(noChildUser)
+        bst.delete(oneChildUser)
+        bst.delete(twoChildUser)
+
+        # Testing deletion of a node that's not present.
+        with self.assertRaises(ValueError) as context:
+            bst.delete("InvalidName")
+        self.assertEqual(str(context.exception), "Node not found")
+        
+        # Updates the tree-output-bfs file to reflect changes.
         bst.printTreeBFS()
         
+    def test_deleteEmpty(self):
+        # Testing edge case where cannot delete any nodes.
+        bst = BST()
+        with self.assertRaises(ValueError) as context:
+            bst.delete("InvalidName")
+        self.assertEqual(str(context.exception), "No nodes present")
+
+# For task 2, easier to just run the print functions from the actual program.

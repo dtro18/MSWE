@@ -1,9 +1,10 @@
 import collections
 
 class Node:
-    def __init__(self, val):
+    def __init__(self, val, parent):
         self.right = None
         self.left  = None
+        self.parent = parent
         self.val = val
 
 class minHeap:
@@ -161,7 +162,7 @@ class maxHeap:
         self.downheap(0)
         return poppedElem
     
-# Implemented BST class from Assignment 4.
+# Implemented modified BST class from Assignment 4.
 class BST:
     def __init__(self):
         self.head = None
@@ -171,36 +172,48 @@ class BST:
         cur = self.head
         # Base case (handed an empty tree)
         if not cur:
-            self.head = Node(val)
+            self.head = Node(val, None)
 
         # Continue until you find a node that has no children
         while cur:
             # Move left
             if val < cur.val:
                 if not cur.left:
-                    cur.left = Node(val)
+                    cur.left = Node(val, cur)
                     return
                 cur = cur.left
             # Move right bc will never have an == case
             else:
                 if not cur.right:
-                    cur.right = Node(val)
+                    cur.right = Node(val, cur)
                     return
                 cur = cur.right
 
-    # Deletes a node with < 2 children, passing in a given user object.
-    def delete(self, user):
+
+    # Deletes a user, passing in a user id.
+    def delete(self, val):
+        if not self.head:
+            raise ValueError("No nodes present")
+        # Finds the minimum node in a subtree and returns it
+        def findMin(treeHead):
+            cur = treeHead
+            while cur.left:
+                cur = cur.left
+            return cur
+
         cur = self.head
         # Continue until you find a node that has no children
-        while cur.left != None and cur.right != None:
+        while cur:
+            
             # Base case: We found the node
-            if cur.element == user:
-                # Elem to be deleted has two children -- cannot delete
+            if cur.val == val:
                 if cur.left and cur.right:
-                    raise ValueError("Cannot delete this node.")
-                
+                    minNode = findMin(cur.right)
+                    cur.val = minNode.val
+                    del minNode
+                    return
                 # Determine which side of the grandparent to insert the grandchildren in
-                if cur.element.lastName.lower() < cur.parent.element.lastName.lower():
+                elif cur.parent and cur.val < cur.parent.val:
                     # Left side
                     # Elem being deleted has no children.
                     if not cur.left and not cur.right:
@@ -208,47 +221,55 @@ class BST:
                     # Cur's left side exists, should be hooked up to grandparent
                     elif cur.left:
                         cur.parent.left = cur.left
+                        cur.left.parent = cur.parent
                     else:
                         cur.parent.left = cur.right
-                elif cur.element.lastName.lower() > cur.parent.element.lastName.lower():
+                        cur.right.parent = cur.parent
+                    return
+                elif cur.val > cur.parent.val:
                     # Right Side
                     # Elem being deleted has no children.
                     if not cur.left and not cur.right:
                         cur.parent.right = None
                     elif cur.left:
                         cur.parent.right = cur.left
+                        cur.left.parent = cur.parent
                     else:
                         cur.parent.right = cur.right
-                return
-            if cur.element.lastName.lower() < user.lastName.lower():
+                        cur.right.parent = cur.parent
+                    return
+            if cur.val > val:
                 cur = cur.left
             # Move right bc will never have an == case
             else:
                 cur = cur.right
+
         raise ValueError("Node not found")
 
-    # Modified from A4 to just print to console (rather than txt file)
     def printTreeDFS(self):
+        file = open("tree-output-dfs.txt", "w")
         def dfs(node):
             if not node:
                 return
             dfs(node.left)
-            print(node.val)
+            node.printNodeToText(file)
             dfs(node.right)
 
         dfs(self.head)
-
-    # Modified from A4 to just print to console (rather than txt file)
+        file.close()
+    
     def printTreeBFS(self):
         # Init q with root.
+        file = open("tree-output-bfs.txt", "w")
         q = collections.deque()
         q.append(self.head)
         while q:
             node = q.popleft()
             if node:
-                print(node.val)
+                node.printNodeToText(file)
                 q.append(node.left)
                 q.append(node.right)
+        file.close()
 
 # Takes a bst and makes an accessible minheap/m axheap
 class BSTToheapTransformer():
@@ -280,18 +301,3 @@ class BSTToheapTransformer():
     def populateMaxHeap(self):
         copy = self.heapArr[:]
         self.maxHeap = maxHeap(copy)
-
-
-# bst = BST()
-# bst.insert(5)
-# bst.insert(6)
-# bst.insert(7)
-# bst.insert(8)
-# bst.insert(1)
-# bst.insert(2)
-# bst.insert(3)
-
-# bst.printTreeBFS()
-# bstTransformer = BSTToheapTransformer(bst)
-# print(bstTransformer.minHeap.arr)
-# print(bstTransformer.maxHeap.arr)
