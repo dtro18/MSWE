@@ -1,5 +1,5 @@
 import unittest
-from module.assignment1 import binarySearch
+from module.assignment2 import binarySearch
 
 # Testing stack functions for Task 1.
 class TestTask1(unittest.TestCase):
