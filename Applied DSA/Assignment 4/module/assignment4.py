@@ -1,5 +1,8 @@
+import collections
+import heapq
 import os
 os.chdir('C:/MSWE Projects/Applied DSA/Assignment 4')
+
 # References - Leetcode Count Connected Components in an Undirected Graph
 # Assumptions - Cities that occur more than once in the data are treated as one city, taking the first population to be the "true" population for the city.
 class City:
@@ -27,11 +30,14 @@ class Graph:
         # The same value in different vertices will produce different hashes.
         def __hash__(self):
             return hash(id(self))
+        
+        def __lt__(self, other):
+            return self
     # Nested Edge Class
     class Edge:
         __slots__ = '_origin', '_destination', '_element'
 
-        def __init__(self, u, v, x):
+        def __init__(self, u, v, x=1):
             self._origin = u
             self._destination = v
             self._element = x
@@ -102,6 +108,7 @@ class Graph:
         edges = []
         for edge in self._outgoing[v].values():
             edges.append(edge)
+        return edges
 
     def insert_vertex(self, x=None):
         # x is the new vertex's element
@@ -111,7 +118,7 @@ class Graph:
             self._incoming[v] = {}
         return v
     
-    def insert_edge(self, u, v, x=None):
+    def insert_edge(self, u, v, x=1):
         # Inserts edge between u and v. 
         e = self.Edge(u, v, x)
         self._outgoing[u][v] = e
@@ -237,7 +244,41 @@ for idx in actualParents:
 print(islandPops)
     
 
-# print(visited)      
-# print(len(list(archipelagoGraph.vertices())))
-# list(archipelagoGraph.vertices())[694]
-# print(vertexToInt[(list(archipelagoGraph.vertices())[694])])
+# Task 5: Minimum path length between nodes
+def dijkstra(g, src, dest):
+
+    d = {} # what we return????
+    cloud = {} # maps a reachable v to its distance from source. Vertices in the cloud are "finalized" and distance cannot be shortened. 
+    pq = []
+    heapq.heapify(pq)
+    
+    # for each vertex, add entry to q, with source having dist 0
+    for v in g.vertices():
+        if v is src:
+            d[v] = 0
+        else:
+            d[v] = float("inf")
+
+        heapq.heappush(pq, (d[v], v))
+
+    while pq:
+        key, u = heapq.heappop(pq) # Pop the smallest distance (i.e. explore the closest node from where we are)
+        if u in cloud:
+            continue
+        # Finalize u's position. There is no shorter way to get to u.
+        cloud[u] = key # Map vertex u to its final distance from source
+
+        # Add neighboring vertices into the heap.
+        for e in g.incident_edges(u):
+            v = e.opposite(u)
+            # Relaxation step
+            if v not in cloud:
+                wgt = e.element()
+                if d[u] + wgt < d[v]:
+                    d[v] = d[u] + wgt
+                    heapq.heappush(pq, (d[v], v))
+    return cloud[dest]
+
+print(dijkstra(archipelagoGraph, cityToVertex["citrus heights"], cityToVertex["citrus heights"]))
+
+        # Store q as tuple of key, v
