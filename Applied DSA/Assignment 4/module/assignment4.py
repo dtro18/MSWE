@@ -132,11 +132,11 @@ with open('city_population.txt', 'r') as file:
         name = line[:colonIdx].strip().lower()
         pop = int(line[colonIdx + 1:].strip())
         city = City(name, pop)
+        
         if name not in cityToVertex:
             v = archipelagoGraph.insert_vertex(city)
             cityToVertex[name] = v
         # Add it to dict for fast indexing
-        
 with open('road_network.txt', 'r') as file:
     for line in file:
         # Init a user with the values obtained from file
@@ -196,5 +196,48 @@ for edge in edges:
     n2 = vertexToInt[v2]
     # print(f"Processing edge between {v1.element().name} and {v2.element().name} (IDs {n1}, {n2})")
     connectedComponents -= union(n1, n2)
-    
+
+# Should be one
 print(connectedComponents)
+
+# Task 4: Find population of islands
+vertices = archipelagoGraph.vertices()
+# Flatten the parents set to find potential parents/representatives of each island.
+potentialParents = set(parent)
+# Go through and search the potential parents to see if any are linked.
+actualParents = set()
+for idx in potentialParents:
+    cur = idx
+    while cur != parent[idx]:
+        cur = parent[cur]
+    actualParents.add(cur)
+
+# DFS to add all the populations
+visited = set()
+def dfsAddPops(v):
+    # Skip visited cities
+    if v in visited:
+        return 0
+    visited.add(v)
+    # Grab the vertex's population and store it
+    pop = v.element().population
+    # Loop thru that vertex's neighbors
+    for adjVert in archipelagoGraph._outgoing[v].keys():
+        # Recursive call
+        pop += dfsAddPops(adjVert)
+    return pop
+
+# Define a list to hold populations of multiple islands, if there are multiple islands
+islandPops = []
+for idx in actualParents:
+    # Convert index to vertex obj
+    vertex = list(archipelagoGraph.vertices())[idx]
+    islandPops.append(dfsAddPops(vertex))
+
+print(islandPops)
+    
+
+# print(visited)      
+# print(len(list(archipelagoGraph.vertices())))
+# list(archipelagoGraph.vertices())[694]
+# print(vertexToInt[(list(archipelagoGraph.vertices())[694])])
