@@ -282,3 +282,31 @@ def dijkstra(g, src, dest):
 print(dijkstra(archipelagoGraph, cityToVertex["citrus heights"], cityToVertex["citrus heights"]))
 
         # Store q as tuple of key, v
+
+
+s1 = "ab"
+s2 = "eidboooo"
+
+# Should check if two strings of equal length are permutations of each other
+def isPermutation(s1, s2):
+    s1Dict = {}
+    s2Dict = {}
+    
+    for char in s1:
+        s1Dict[char] = 1 + s1Dict.get(char, 0)
+    for char in s2:
+        s2Dict[char] = 1 + s2Dict.get(char, 0)
+    return s1Dict == s2Dict
+
+
+def recursiveCheck(s1, s2, i, j):
+    print(s1)
+    print(s2[i:j])
+    if isPermutation(s1, s2[i:j]):
+        return True
+    elif j >= len(s2):
+        return False
+    
+    return recursiveCheck(s1, s2, i + 1, j + 1) # Where i, j are indices of s2
+
+print(recursiveCheck(s1, s2, 0, len(s1)))
