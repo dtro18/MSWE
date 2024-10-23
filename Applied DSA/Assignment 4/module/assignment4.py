@@ -69,6 +69,7 @@ class Graph:
         self._outgoing = {}
         # Won't be used unless the graph is directed.
         self._incoming = {} if directed else self._outgoing
+        self.parent = []
 
     def is_directed(self):
         # Returns false if self._incoming exists.
@@ -124,127 +125,119 @@ class Graph:
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
 
+    def unionFind(self):
+        self.parent = [i for i in range(self.vertex_count())]
+        numNodes = self.vertex_count()
+        # Maintains size of each connected component, which is inisially all 1 for all of the nodes.
+        # Once a representative is established for each connected component, we'll update that parent's rank
+        rank = [1] * numNodes
+        def find(n1):
+            res = n1
+            # Index is the node, and value is the parent. If a node has a parent that isn't itself,
+            # then value will be the index of the parent.
+            while res != self.parent[res]:
+                # Set the child to the grandparent. Indexing child should now point not to the parent,
+                # but the grandpareant.
+                self.parent[res] = self.parent[self.parent[res]]
+                # Update res.
+                res = self.parent[res]
+            return res
+        # Given two nodes, connects them if they weren't already connected.
+        def union(n1, n2):
+            p1 = find(n1)
+            p2 = find(n2)
 
+            if p1 == p2:
+                # Same parent, just return. Connected components shouldn't be decremented
+                return 0
+            if rank[p2] > rank[p1]:
+                self.parent[p1] = p2
+                rank[p2] += rank[p1]
+            else:
+                self.parent[p2] = p1
+                rank[p1] += rank[p2]
+            return 1
+
+        connectedComponents = numNodes
+        # Assigns a node to a numerical value.
+        vertexToInt = {v: idx for idx, v in enumerate(self.vertices())}
+        edges = self.edges()
+        for edge in edges:
+            v1, v2 = edge.endpoints()
+            n1 = vertexToInt[v1] 
+            n2 = vertexToInt[v2]
+            connectedComponents -= union(n1, n2)
+        return connectedComponents
     
-# Define graph - Task 1/2
-archipelagoGraph = Graph()
+    def findIslandPop(self):
+        vertices = self.vertices()
+        # Flatten the parents set to find potential parents/representatives of each island.
+        potentialParents = set(self.parent)
+        # Go through and search the potential parents to see if any are linked.
+        actualParents = set()
+        for idx in potentialParents:
+            cur = idx
+            while cur != self.parent[idx]:
+                cur = self.parent[cur]
+            actualParents.add(cur)
 
-# Tracks city name to vertex
-cityToVertex = {}
-# Load cities/pops (vertices)
-with open('city_population.txt', 'r') as file:
-    for line in file:
-        # Init a user with the values obtained from file
-        colonIdx = line.find(":")
-        name = line[:colonIdx].strip().lower()
-        pop = int(line[colonIdx + 1:].strip())
-        city = City(name, pop)
+        # DFS to add all the populations
+        visited = set()
+        def dfsAddPops(v):
+            # Skip visited cities
+            if v in visited:
+                return 0
+            visited.add(v)
+            # Grab the vertex's population and store it
+            pop = v.element().population
+            # Loop thru that vertex's neighbors
+            for adjVert in self._outgoing[v].keys():
+                # Recursive call
+                pop += dfsAddPops(adjVert)
+            return pop
+
+        # Define a list to hold populations of multiple islands, if there are multiple islands
+        islandPops = []
+        for idx in actualParents:
+            # Convert index to vertex obj
+            vertex = list(self.vertices())[idx]
+            islandPops.append(dfsAddPops(vertex))
+        return islandPops.copy()
+    def dijkstra(self, src, dest):
+
+        d = {} # what we return????
+        cloud = {} # maps a reachable v to its distance from source. Vertices in the cloud are "finalized" and distance cannot be shortened. 
+        pq = []
+        heapq.heapify(pq)
         
-        if name not in cityToVertex:
-            v = archipelagoGraph.insert_vertex(city)
-            cityToVertex[name] = v
-        # Add it to dict for fast indexing
-with open('road_network.txt', 'r') as file:
-    for line in file:
-        # Init a user with the values obtained from file
-        colonIdx = line.find(":")
-        city1 = line[:colonIdx].strip().lower()
-        city2 = line[colonIdx + 1:].strip().lower()
-        v1 = cityToVertex.get(city1)
-        v2 = cityToVertex.get(city2)
-        archipelagoGraph.insert_edge(v1, v2)
+        # for each vertex, add entry to q, with source having dist 0
+        for v in self.vertices():
+            if v is src:
+                d[v] = 0
+            else:
+                d[v] = float("inf")
 
+            heapq.heappush(pq, (d[v], v))
 
-# Task 3 - Determine number of islands
-# Will be using Union Find algorithm for this purpose. Also could've used DFS+Set approach.
+        while pq:
+            key, u = heapq.heappop(pq) # Pop the smallest distance (i.e. explore the closest node from where we are)
+            if u in cloud:
+                continue
+            # Finalize u's position. There is no shorter way to get to u.
+            cloud[u] = key # Map vertex u to its final distance from source
 
-# Parent tracks an index for every node. Initially every node is its own parent. 
-# Purpose is to connect nodes (forest approach)
-numNodes = archipelagoGraph.vertex_count()
-parent = [i for i in range(numNodes)]
-# Maintains size of each connected component, which is inisially all 1 for all of the nodes.
-# Once a representative is established for each connected component, we'll update that parent's rank
-rank = [1] * numNodes
-def find(n1):
-    res = n1
-    # Index is the node, and value is the parent. If a node has a parent that isn't itself,
-    # then value will be the index of the parent.
-    while res != parent[res]:
-        # Set the child to the grandparent. Indexing child should now point not to the parent,
-        # but the grandpareant.
-        parent[res] = parent[parent[res]]
-        # Update res.
-        res = parent[res]
-    return res
-# Given two nodes, connects them if they weren't already connected.
-def union(n1, n2):
-    p1 = find(n1)
-    p2 = find(n2)
-
-    if p1 == p2:
-        # Same parent, just return. Connected components shouldn't be decremented
-        return 0
-    if rank[p2] > rank[p1]:
-        parent[p1] = p2
-        rank[p2] += rank[p1]
-    else:
-        parent[p2] = p1
-        rank[p1] += rank[p2]
-    return 1
-
-connectedComponents = numNodes
-# Assigns a node to a numerical value.
-vertexToInt = {v: idx for idx, v in enumerate(archipelagoGraph.vertices())}
-edges = archipelagoGraph.edges()
-print(archipelagoGraph.edge_count())
-for edge in edges:
-    v1, v2 = edge.endpoints()
-    n1 = vertexToInt[v1] 
-    n2 = vertexToInt[v2]
-    # print(f"Processing edge between {v1.element().name} and {v2.element().name} (IDs {n1}, {n2})")
-    connectedComponents -= union(n1, n2)
-
-# Should be one
-print(connectedComponents)
-
-# Task 4: Find population of islands
-vertices = archipelagoGraph.vertices()
-# Flatten the parents set to find potential parents/representatives of each island.
-potentialParents = set(parent)
-# Go through and search the potential parents to see if any are linked.
-actualParents = set()
-for idx in potentialParents:
-    cur = idx
-    while cur != parent[idx]:
-        cur = parent[cur]
-    actualParents.add(cur)
-
-# DFS to add all the populations
-visited = set()
-def dfsAddPops(v):
-    # Skip visited cities
-    if v in visited:
-        return 0
-    visited.add(v)
-    # Grab the vertex's population and store it
-    pop = v.element().population
-    # Loop thru that vertex's neighbors
-    for adjVert in archipelagoGraph._outgoing[v].keys():
-        # Recursive call
-        pop += dfsAddPops(adjVert)
-    return pop
-
-# Define a list to hold populations of multiple islands, if there are multiple islands
-islandPops = []
-for idx in actualParents:
-    # Convert index to vertex obj
-    vertex = list(archipelagoGraph.vertices())[idx]
-    islandPops.append(dfsAddPops(vertex))
-
-print(islandPops)
+            # Add neighboring vertices into the heap.
+            for e in self.incident_edges(u):
+                v = e.opposite(u)
+                # Relaxation step
+                if v not in cloud:
+                    wgt = e.element()
+                    if d[u] + wgt < d[v]:
+                        d[v] = d[u] + wgt
+                        heapq.heappush(pq, (d[v], v))
+        return cloud[dest]
     
 
-# Task 5: Minimum path length between nodes
 def dijkstra(g, src, dest):
 
     d = {} # what we return????
@@ -278,35 +271,3 @@ def dijkstra(g, src, dest):
                     d[v] = d[u] + wgt
                     heapq.heappush(pq, (d[v], v))
     return cloud[dest]
-
-print(dijkstra(archipelagoGraph, cityToVertex["citrus heights"], cityToVertex["citrus heights"]))
-
-        # Store q as tuple of key, v
-
-
-s1 = "ab"
-s2 = "eidboooo"
-
-# Should check if two strings of equal length are permutations of each other
-def isPermutation(s1, s2):
-    s1Dict = {}
-    s2Dict = {}
-    
-    for char in s1:
-        s1Dict[char] = 1 + s1Dict.get(char, 0)
-    for char in s2:
-        s2Dict[char] = 1 + s2Dict.get(char, 0)
-    return s1Dict == s2Dict
-
-
-def recursiveCheck(s1, s2, i, j):
-    print(s1)
-    print(s2[i:j])
-    if isPermutation(s1, s2[i:j]):
-        return True
-    elif j >= len(s2):
-        return False
-    
-    return recursiveCheck(s1, s2, i + 1, j + 1) # Where i, j are indices of s2
-
-print(recursiveCheck(s1, s2, 0, len(s1)))

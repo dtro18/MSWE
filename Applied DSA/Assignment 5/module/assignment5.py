@@ -18,8 +18,6 @@ def isPermutation(s1, s2):
 
 
 def recursiveCheck(s1, s2, i, j):
-    print(s1)
-    print(s2[i:j])
     if isPermutation(s1, s2[i:j]):
         return True
     elif j >= len(s2):

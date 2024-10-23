@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+# O(nlogn)
 def quickSort(arr):
     if len(arr) < 2:
         return arr
@@ -35,7 +35,7 @@ def merge(s1, s2):
     mergedString.extend(s1[i:])
     mergedString.extend(s2[j:])
     return mergedString
-
+# O(nlogn)
 def mergeSort(s):
     if len(s) < 2:
         return s

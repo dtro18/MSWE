@@ -90,7 +90,7 @@ class BST:
                 cur = cur.right
         raise ValueError("Node not found")
 
-    def printTreeDFS(self):
+    def inOrderTraversal(self):
         file = open("tree-output-dfs.txt", "w")
         def dfs(node):
             if not node:
@@ -98,6 +98,30 @@ class BST:
             dfs(node.left)
             node.printNodeToText(file)
             dfs(node.right)
+
+        dfs(self.head)
+        file.close()
+
+    def preOrderTraversal(self):
+        file = open("tree-output-dfs.txt", "w")
+        def dfs(node):
+            if not node:
+                return
+            node.printNodeToText(file)
+            dfs(node.left)
+            dfs(node.right)
+
+        dfs(self.head)
+        file.close()
+
+    def postOrderTraversal(self):
+        file = open("tree-output-dfs.txt", "w")
+        def dfs(node):
+            if not node:
+                return
+            dfs(node.left)
+            dfs(node.right)
+            node.printNodeToText(file)
 
         dfs(self.head)
         file.close()
@@ -133,9 +157,9 @@ with open('tree-input.txt', 'r') as file:
         if operation == "I":
             bst.insert(user)
 
-# Task 2: Recursive DFS print of the tree.
-bst.printTreeDFS()
+# Task 2: Recursive DFS print of the tree. Can call preorder, inorder, postorder.
+# bst.preOrderTraversal()
+# bst.inOrderTraversal()
+# bst.postOrderTraversal()
 bst.printTreeBFS()
 
-
-# Todo: check delete implementation
