@@ -225,7 +225,7 @@ bankOC.print()
 print("User 1's balance before payment: " + str(user1.balance))
 print("User 2's balance before payment: " + str(user2.balance))
 # Negative balance; should raise an error. Fix it to continue with the tests.
-bankOC.payUserToUser(1, 2, -50)
+bankOC.payUserToUser(1, 2, 100)
 print("User 1's balance after payment: " + str(user1.balance))
 print("User 2's balance after payment: " + str(user2.balance))
 
@@ -248,7 +248,7 @@ print(bankOC.getMedianID())
 # Task 6: Write a method that merges two accounts into one.
 # Merges the "Dylan duplicate" accounts, which have balances of 400 and 500, for a total of 900.
 
-bankOC.mergeAccounts(4, 5)
+bankOC.mergeAccounts(2, 5)
 bankOC.print()
 
 # Need to do this, hardcode

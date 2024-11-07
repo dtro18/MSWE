@@ -21,8 +21,10 @@ class TestTask1(unittest.TestCase):
     def test_groupAnagrams(self):
         # Group anagrams uses quicksort since it's the faster algo
         # Testing standard case
-        self.assertEqual(groupAnagrams(["bucket","rat","mango","tango","ogtan","tar"]), [["bucket"],["rat","tar"],["mango"],["tango","ogtan"]])
+        self.assertEqual(groupAnagrams(["bucket","tra","rat","mango","tango","ogtan","tar"]), [["bucket"],["tra","rat","tar"],["mango"],["tango","ogtan"]])
         # Given empty list (should return list of lists)
         self.assertEqual(groupAnagrams([]), [[]])
         # Given list containing just one value
         self.assertEqual(groupAnagrams(["bucket"]), [["bucket"]])
+
+        

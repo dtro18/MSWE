@@ -28,21 +28,23 @@ class Hash:
         # A hash function that converts a string x to an integer, i.e., index in the hashtable.
     def hash(self, x):
         
-        # Hash Code Function
+        # Cyclic Shift Hash Code Function
         # Shifts # 1 left 2 bits, which is 32 1s. Equivalent to 2^32
         # Will be used to validate that the result is within 32 bits
         mask = (1 << 32) - 1  # Limit to 32 bit integers
         # Holds hash value as it is computed
         h = 0
         for char in x:
-            # Moves binary representation of h left 5 and checks it against mask. If it's greater than mask, snips off the leading digits that exceed 32 bits.
-            # If the shift left evaluated to 0, then try a shift right of 27. Take whatever of these actually has a value. 
+            # Grabs the left 5 digits and sticks them on to the right end. 
+            # Experimentally determined. 
             h = (h << 5 & mask) | (h >> 27)
             # Shifting 5 deterrmined by experimental method to yield least number of collisions. 
             h += ord(char)
         
-        # Compression function
-
+        # Compression function (MAD method)
+        # p is prime > n
+        # a, b are primes < p - 1
+        # Purpose is to fit the hash value to the appropriate bucket size
         idx = (((self.a * h) + self.b) % self.p) % NUM_BUCKETS
         return idx
 
@@ -84,6 +86,7 @@ with open('pride-and-prejudice.txt', 'r') as file:
                 sortedString = ''.join(sorted(curStr)).lower()
                 hashIdx = hashMap.hash(sortedString)
                 if len(hashMap.hashTable[hashIdx]) == 0:
+                    print(sortedString)
                     hashMap.insert(sortedString)
                 # Reset the string and keep building
                 curStr = ''
@@ -99,5 +102,6 @@ with open('pride-and-prejudice.txt', 'r') as file:
             idx = hashMap.hash(sortedString)
             if len(hashMap.hashTable[idx]) == 0:
                 hashMap.insert(sortedString)
+                print(sortedString)
 
-print(hashMap.get_size())
+# print(hashMap.get_size())

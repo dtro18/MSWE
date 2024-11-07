@@ -48,6 +48,7 @@ def minQueenMoves (queenPositions):
     def backtrack(col, builtArr):
         # Return if we reach the last column with no hiccups
         if col == n:
+            print(validArr)
             validArr.append(builtArr.copy())
             return
         # Test position in each row of a given colummn
@@ -87,12 +88,3 @@ def minQueenMoves (queenPositions):
 
     
 
-# Normal case
-input = [1, 2, 3, 4, 5, 6, 7, 8]
-print(minQueenMoves(input))
-# Normal case
-input = [1, 1, 1, 1, 1, 1, 1, 1]
-print(minQueenMoves(input))
-# One-off case
-input = [1, 5, 8, 6, 3, 7, 2, 5]
-print(minQueenMoves(input))

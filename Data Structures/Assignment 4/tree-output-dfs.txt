@@ -1,23 +1,5 @@
-8534534
-McKay
-0251
-CT
-1
-
-8400342
-LaPorte
-0045
-JA
-1
-
-8499120
-Black
-0341
-RST
-1
-
-8301164
-Bannister
+8503881
+Appleford
 0251
 EST
 1
@@ -28,16 +10,16 @@ Banks
 EST
 1
 
-8503881
-Appleford
+8301164
+Bannister
 0251
 EST
 1
 
-8400912
-Green
-0045
-RFM
+8499120
+Black
+0341
+RST
 1
 
 8422991
@@ -46,22 +28,22 @@ Card
 JA
 2
 
-8508883
-Fisher
-0341
-TXT
-1
-
 8399000
 Doyle
 0334
 ENT
 1
 
-8422911
-Johnston
+8508883
+Fisher
 0341
-RST
+TXT
+1
+
+8400912
+Green
+0045
+RFM
 1
 
 8488431
@@ -76,6 +58,12 @@ Hopper
 CT
 1
 
+8422911
+Johnston
+0341
+RST
+1
+
 8306700
 Jones
 0251
@@ -88,22 +76,22 @@ Jordan
 ENT
 1
 
+8400342
+LaPorte
+0045
+JA
+1
+
 8300500
 Last
 0251
 CT
 1
 
-8212399
-Schafer
+8534534
+McKay
 0251
-EST
-1
-
-8412094
-Phillips
-0251
-EST
+CT
 1
 
 8322889
@@ -118,10 +106,16 @@ Newman
 CT
 2
 
-8367091
-White
-0341
-TXT
+8412094
+Phillips
+0251
+EST
+1
+
+8212399
+Schafer
+0251
+EST
 1
 
 8400001
@@ -142,10 +136,10 @@ Walker
 TXT
 1
 
-8500000
-West
-0334
-ENT
+8499341
+Waters
+0341
+TXT
 1
 
 8400000
@@ -154,16 +148,16 @@ Watson
 ENT
 2
 
-8499341
-Waters
-0341
-TXT
-1
-
 8500060
 Watts
 0341
 RST
+1
+
+8500000
+West
+0334
+ENT
 1
 
 8301234
@@ -171,6 +165,12 @@ Weston
 0334
 ENT
 2
+
+8367091
+White
+0341
+TXT
+1
 
 8388231
 Woods

@@ -52,7 +52,7 @@ def binarySearch2d(arr, val):
     
     # Perform 1d binary search
     l, r = 0, COLS - 1
-
+    
     while l <= r:
         col = (l + r) // 2
         if arr[row][col] == val:

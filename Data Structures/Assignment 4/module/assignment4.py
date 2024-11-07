@@ -159,7 +159,7 @@ with open('tree-input.txt', 'r') as file:
 
 # Task 2: Recursive DFS print of the tree. Can call preorder, inorder, postorder.
 # bst.preOrderTraversal()
-# bst.inOrderTraversal()
+bst.inOrderTraversal()
 # bst.postOrderTraversal()
 bst.printTreeBFS()
 

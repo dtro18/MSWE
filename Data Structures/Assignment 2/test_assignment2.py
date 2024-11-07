@@ -45,6 +45,7 @@ class TestTask2(unittest.TestCase):
         self.assertEqual(stack.arithmeticEval("10 + 20 * 2"), '50')
         self.assertEqual(stack.arithmeticEval("10 + 20 * -2"), '-30')
         self.assertEqual(stack.arithmeticEval("10 * 10 * 10 * 10"), "10000")
+        # self.assertEqual(stack.arithmeticEval("/ 10"), "10000")
 
 class TestTask3(unittest.TestCase):
     def test_implement_queue(self):

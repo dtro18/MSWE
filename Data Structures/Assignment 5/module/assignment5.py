@@ -207,11 +207,13 @@ class BST:
             
             # Base case: We found the node
             if cur.val == val:
+                # Node has 2 children
                 if cur.left and cur.right:
                     minNode = findMin(cur.right)
                     cur.val = minNode.val
                     del minNode
                     return
+                # Node has 1 or 0 children
                 # Determine which side of the grandparent to insert the grandchildren in
                 elif cur.parent and cur.val < cur.parent.val:
                     # Left side
@@ -245,7 +247,7 @@ class BST:
                 cur = cur.right
 
         raise ValueError("Node not found")
-
+    # Not called
     def printTreeDFS(self):
         file = open("tree-output-dfs.txt", "w")
         def dfs(node):
@@ -257,7 +259,7 @@ class BST:
 
         dfs(self.head)
         file.close()
-    
+    # Not called
     def printTreeBFS(self):
         # Init q with root.
         file = open("tree-output-bfs.txt", "w")

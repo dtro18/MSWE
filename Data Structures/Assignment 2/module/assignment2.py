@@ -93,6 +93,7 @@ class Stack:
                 i = r
             elif char in "*/":
                 firstVal = int(self.pop())
+            
                 # Finding second value 
                 i += 1
                 while i < len(string):
@@ -103,6 +104,7 @@ class Stack:
                         break
                     else:
                         i += 1
+                
                 secondVal = int(num) 
                 # Reset the numstring once we've found second value
                 num = ''
