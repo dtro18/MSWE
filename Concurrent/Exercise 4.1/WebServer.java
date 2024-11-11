@@ -11,6 +11,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.StringTokenizer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 
 // The tutorial can be found just here on the SSaurel's Blog : 
 // https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java
@@ -21,6 +24,13 @@ public class WebServer {
     static final String DEFAULT_FILE = "index.html";
     static final String FILE_NOT_FOUND = "404.html";
     static final String METHOD_NOT_SUPPORTED = "not_supported.html";
+
+	// Executor framework - producer/consumer
+	// Decouple task submission from task execution
+
+	// TODO: Check multithreaded nature somehow????
+	private static final int NTHREADS = 100; 
+    private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS); 
 
     // port to listen connection
     static final int PORT = 8080;
@@ -36,24 +46,40 @@ public class WebServer {
     }
 	
     public static void main(String[] args) {
-	try {
-	    ServerSocket serverConnect = new ServerSocket(PORT);
-	    System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
+		ServerSocket serverConnect = null;
+		try {
+			serverConnect = new ServerSocket(PORT);
+			System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
+				
+			// we listen until user halts server execution
+			while (true) {
+				WebServer myServer = new WebServer(serverConnect.accept());
+				
+				if (verbose) {
+					System.out.println("Connection opened. (" + new Date() + ")");
+				}
+				Runnable task = new Runnable() {
+					public void run() {
+						myServer.handleRequest();
+					}
+				};
+				exec.execute(task);
+				// myServer.handleRequest();
+			}
+				
+		} catch (IOException e) {
+			System.err.println("Server Connection error : " + e.getMessage());
+		} finally {
+			exec.shutdown();
+			if (serverConnect != null && !serverConnect.isClosed()) {
+				try {
+					serverConnect.close();
+				} catch(IOException e){
+					System.err.println("Error closing server socket.");
+				}
+			}
 			
-	    // we listen until user halts server execution
-	    while (true) {
-		WebServer myServer = new WebServer(serverConnect.accept());
-		
-		if (verbose) {
-		    System.out.println("Connection opened. (" + new Date() + ")");
 		}
-
-		myServer.handleRequest();
-	    }
-			
-	} catch (IOException e) {
-	    System.err.println("Server Connection error : " + e.getMessage());
-	}
     }
 
     public void handleRequest() {
