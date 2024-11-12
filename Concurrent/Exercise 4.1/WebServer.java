@@ -27,12 +27,10 @@ public class WebServer {
 
 	// Executor framework - producer/consumer
 	// Decouple task submission from task execution
-
-	// TODO: Check multithreaded nature somehow????
 	private static final int NTHREADS = 100; 
     private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS); 
 
-    // port to listen connection
+    // port to listen connectionS
     static final int PORT = 8080;
 	
     // verbose mode
@@ -48,21 +46,33 @@ public class WebServer {
     public static void main(String[] args) {
 		ServerSocket serverConnect = null;
 		try {
+			// ServerSocket object that sits and waits for connections
 			serverConnect = new ServerSocket(PORT);
 			System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
 				
-			// we listen until user halts server execution
+			// we listen for connections on a specified port (8080)
 			while (true) {
+				// When something connects to the ServerSocket object (serverConnect), a new socket object is made. This socket object represents the unique hclient-server connection.
+				// WebServer manages all the communication with a specific client using its given socket.
+				// Multithreading comes in here. Threads are assigned for a single client's socket.
 				WebServer myServer = new WebServer(serverConnect.accept());
 				
 				if (verbose) {
 					System.out.println("Connection opened. (" + new Date() + ")");
+					
 				}
+				// runnables are just tasks that can be executed by a thread
+				// Defines what happens when a thread runs
 				Runnable task = new Runnable() {
 					public void run() {
+						// Debugging 
+						System.out.println("Handling request in thread: " + Thread.currentThread().getName() + " (ID: " + Thread.currentThread().getName() + ")");
+						// What should happen when the thread runs. We tell the webserver to handle it.
 						myServer.handleRequest();
 					}
 				};
+				// exec manages the pool of threads, handling tasks in separate threads.
+				// tell exec to pick a thread from its pool and run the task
 				exec.execute(task);
 				// myServer.handleRequest();
 			}
