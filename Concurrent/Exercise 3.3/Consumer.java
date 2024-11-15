@@ -24,6 +24,15 @@ public class Consumer implements Runnable {
 		e.printStackTrace();
 	    }
 	} while (msg.get() != "stop");
+	msg = new Message("stop");
+
+	// When a consumer eats a stop message, propagate it back into the queue.
+	try {
+		queue.put(msg);
+	} catch(InterruptedException e) {
+		e.printStackTrace();
+	}
+
 	// Don't count the "stop" message
 	count--;
 	RandomUtils.print("Messages received: " + count, id);
