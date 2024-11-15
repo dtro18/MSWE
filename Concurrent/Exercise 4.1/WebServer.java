@@ -74,7 +74,6 @@ public class WebServer {
 				// exec manages the pool of threads, handling tasks in separate threads.
 				// tell exec to pick a thread from its pool and run the task
 				exec.execute(task);
-				// myServer.handleRequest();
 			}
 				
 		} catch (IOException e) {

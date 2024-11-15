@@ -1,16 +1,17 @@
 import java.util.HashMap;
 import java.util.Vector;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HashMapTest {
 
     private boolean running = true;
-    private HashMap<String, Integer> people = new HashMap<String, Integer>();
+    private ConcurrentHashMap<String, Integer> people = new ConcurrentHashMap<String, Integer>();
 
-    private synchronized void addPerson() {
+    private void addPerson() {
 	people.put(RandomUtils.randomString(), RandomUtils.randomInteger());
     }
 
-    private synchronized void deletePeople(String pattern) {
+    private void deletePeople(String pattern) {
 	Vector<String> hasPattern = new Vector<String>();
 	for (String key : people.keySet()) {
 	    if (key.contains(pattern))
@@ -20,7 +21,7 @@ public class HashMapTest {
 	    people.remove(key);
     }
 
-    private synchronized void printPeople() {
+    private void printPeople() {
 	for (HashMap.Entry<String, Integer> entry : people.entrySet()) {
 	    System.out.println(entry.getKey() + ": " + entry.getValue());
 	}

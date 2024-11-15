@@ -20,7 +20,7 @@ def main():
     num_processors= os.cpu_count()
     # Creates an executor object to submit tasks to
     with concurrent.futures.ThreadPoolExecutor(max_workers=num_processors) as executor:
-        # Submit takes a function and its parameters
+        # Submit takes a function and its parameters. Submit a task for each text file.
         futures = [executor.submit(readTextFile, file) for file in files]
         # As completed will begin yielding futures as they complete, allowing processing of futures as they come.
         for future in concurrent.futures.as_completed(futures):
@@ -28,13 +28,15 @@ def main():
     for (w, c) in masterDict.most_common(40):
         print(w, '-', c)
 
-
+# Function to read words from a text file given a file path.
 def readTextFile(filepath):
     stopwordsDir = os.path.join(directory, 'stop_words')
     stopwords = set(open(stopwordsDir).read().split(','))
     with open(filepath.lower(), 'r') as file:
         text = file.read().lower()
+    # Only grab words that have > 3 characters.
     words = re.findall('\w{3,}', text)
+    # Reads words into a counter and returns that counter object.
     counts = collections.Counter(w for w in words if w not in stopwords)
     return counts
 

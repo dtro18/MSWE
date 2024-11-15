@@ -16,9 +16,11 @@ public class Main3 {
 	// Add a sequence of addRow operations with short random naps.
         for(int i=0; i < 20; i++) {
             try {
+                // Requests the permit. If no permits are available, it blocks.
                 semaphore.acquire();
                 System.out.println("Add semaphore acquired.");
                 d.addRow("LAX FLIGHT #"+i);
+                // Releases the permit. Notifies all other blocked threads that a permit just became available.
                 semaphore.release();
                 System.out.println("Add semaphore released.");
             } catch(InterruptedException e) {

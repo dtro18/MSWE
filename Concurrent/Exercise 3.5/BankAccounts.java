@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.*;
  */
 public class BankAccounts {
 	// Synchronized keywords. Could synchronize the whole function, but introduces a bottleneck.
-    public synchronized static void transferMoney(Account fromAccount,
+    public static void transferMoney(Account fromAccount,
                                      Account toAccount,
                                      DollarAmount amount)
             throws InsufficientFundsException {
