@@ -1,34 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intro To React</title>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
     <script>
-        function start() {
-            const rootElement = 
-                // Function creates a new element, which is smallest building block of visual interface 
-                // Takes args (type, {props}, ...children)
-                React.createElement("div", {},
-                    React.createElement("h1", {}, "Bookmarks"),
-                    React.createElement("ul", {},
-                        React.createElement("li", {},
-                            React.createElement("h2", {}, "Etherient"),
-                            React.createElement("a", { href: "https://www.etherient.com" }, "The home page of Etherient")
-                        ),
-                        React.createElement("li", {},
-                            React.createElement("h2", {}, "Frank's Home"),
-                            React.createElement("a", { href: "https://www.zammetti.com" }, "The web home page of Frank Zammetti")
-                        )
-                    )
+
+      function start() {
+        // Bookmark defines a proper react component.
+        class Bookmark extends React.Component {
+          // State changes don't result in component recreation
+          constructor(props) {
+            // Must call superclass's constructor and pass it the props that are given to constructor
+            super(props);
+            console.log("Bookmark Component Created");
+            // Title is set as a member variable and initial value is taken from passed props
+            // Variable becomes the state of the bookmark component
+            this.title = this.props.title;
+          }
+
+        // Render is only requirement of a component
+        // Can return another react component, an element, an array of those, or a frag
+          render() {
+            return (
+              React.createElement("li", { },
+                React.createElement("h2", { }, this.title),
+                React.createElement("a", { href : this.props.href }, this.props.description
+                ),
+                React.createElement("button", {
+                  onClick : () => {
+                    this.title = this.title + "-CHANGED";
+                    this.setState({});
+                  }
+                }, "Click me")
+              )
             );
-            ReactDOM.render(rootElement, document.getElementById("mainContainer"));
+          }
         }
+
+        const topMostComponent =
+          React.createElement("div", { },
+            React.createElement("h1", { }, "Bookmarks"),
+            React.createElement("ul", { },
+              React.createElement(
+                Bookmark, { title : "Etherient", href : "https://www.etherient.com", description : "The home page of Etherient" }
+              ),
+              React.createElement(
+                Bookmark, { title : "Frank's Site", href : "https://www.zammetti.com", description : "The web home of Frank W. Zammetti" }
+              )
+            )
+          );
+        const root = ReactDOM.createRoot(document.getElementById("mainContainer"));
+        root.render(topMostComponent);
+      }
+
     </script>
-</head>
-<body onload="start();">
+  </head>
+  <body onLoad="start();">
     <div id="mainContainer"></div>
-</body>
+  </body>
 </html>
