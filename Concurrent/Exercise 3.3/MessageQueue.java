@@ -7,9 +7,10 @@ public class MessageQueue {
     private static int n_ids;
 
     public static void main(String[] args) {
+
 	// Blocking queue can only have one thread access it at a time.
 	BlockingQueue<Message> queue = new LinkedBlockingQueue<>(10);
-
+	// Deal with situation where multiple consumers for fewer producers.
 	// Collect CL Arguments
 	int consumerCount = Integer.parseInt(args[0]);
 	int producerCount = Integer.parseInt(args[1]);

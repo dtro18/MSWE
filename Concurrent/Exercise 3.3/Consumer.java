@@ -15,6 +15,7 @@ public class Consumer implements Runnable {
 	int count = 0;
 	do {
 	    try {
+		// Take is a blocking call. If the queue is empty, it will wait.
 		msg = queue.take(); // Get a message from the queue
 		count++;
 		RandomUtils.print("Consumed " + msg.get(), id);

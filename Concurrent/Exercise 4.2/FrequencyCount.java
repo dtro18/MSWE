@@ -122,8 +122,10 @@ public class FrequencyCount {
 			paths.forEach(p -> {
 				Runnable task = new Runnable() {
 					public void run() {
+						// Give each thread its own counter
 						Counter c = new Counter();
 						countWords(p, c);
+						// Merge the thread's counter with the masterCounter
 						masterCounter.merge(c);
 					}
 				};
@@ -132,6 +134,7 @@ public class FrequencyCount {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
+			// Call this when all tasks have been scheduled
 			exec.shutdown();
 			try {
 				if (!exec.awaitTermination(60, TimeUnit.SECONDS)) {

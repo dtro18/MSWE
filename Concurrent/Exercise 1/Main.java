@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalTime;
 
 class MultithreadingDemo extends Thread {
     private boolean running = true;
@@ -13,9 +14,11 @@ class MultithreadingDemo extends Thread {
         while(running) {
             try {
                 // Displaying the thread that is running
+                LocalTime now = LocalTime.now();
                 System.out.println(
                     Thread.currentThread().getName()
-                    + " is running");
+                    + " is running," + " Time: " + now);
+
                 Thread.sleep(2000);
             }
             catch (Exception e) {
