@@ -15,17 +15,19 @@
             // Must call superclass's constructor and pass it the props that are given to constructor
             super(props);
             console.log("Bookmark Component Created");
+          }
             // Title is set as a member variable and initial value is taken from passed props
             // Variable becomes the state of the bookmark component
-            this.title = this.props.title;
-          }
+            title = this.props.title;
+            titleStyle = { color : "red"}
 
         // Render is only requirement of a component
         // Can return another react component, an element, an array of those, or a frag
           render() {
             return (
               React.createElement("li", { },
-                React.createElement("h2", { }, this.title),
+                // Style prop is an object mapping css attributes to values
+                React.createElement("h2", { style: this.titleStyle }, this.title),
                 React.createElement("a", { href : this.props.href }, this.props.description
                 ),
                 React.createElement("button", {

@@ -1,0 +1,5 @@
+// Allows Babel to work with a suite of plugins that allow for transpiling 
+{
+    "presets": [ "@babel/preset-react" ],
+    "plugins": [ "@babel/plugin-proposal-class-properties" ]
+}
