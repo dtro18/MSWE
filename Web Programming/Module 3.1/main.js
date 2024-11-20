@@ -46,6 +46,10 @@ function start() {
   }), /*#__PURE__*/React.createElement(Course, {
     title: "243 Database Programming",
     courseGrade: 99.85
+  }), /*#__PURE__*/React.createElement(Course, {
+    title: "244 Concurrent Programming"
+  }), /*#__PURE__*/React.createElement(Course, {
+    title: "250 Web Programming"
   }))), document.getElementById("mainContainer"));
 }
 start();

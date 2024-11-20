@@ -57,6 +57,12 @@ function start() {
           title={"243 Database Programming"}
           courseGrade={99.85}
         />
+        <Course
+          title={"244 Concurrent Programming"}
+        />
+        <Course
+          title={"250 Web Programming"}
+        />
       </ul>
     </div>,
     document.getElementById("mainContainer")

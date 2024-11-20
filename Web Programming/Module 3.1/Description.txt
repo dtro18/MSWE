@@ -1,0 +1,22 @@
+Environment Used:
+Node.js: v22.11.0
+Browser: Google Chrome
+OS: Windows 10
+Computer Architecture: x64
+
+Testing:
+To test my webpage, I'd use a variety of browsers and a variety of operating systems.
+For instance, I'd check the GET request response on Chrome, Firefox, Microsoft Edge, and Opera.
+Additionally, I'd use a Unix-based system to check the same browsers, as well as safari.
+I would also check the connectivity using a mobile device.
+
+I could also write a script that sends the system multiple requests concurrently in order to see how
+the server performs under load.
+
+React features:
+I defined a react component to represent a Course, which displays the course's name,
+its information, and the grade in the class. I also incorporated a button which can dynamically denote
+if a class has been passed by accessing a state variable.
+
+I wrote it in a jsx file, which I then transpiled using Babel. I hosted a local webserver using logic from
+previous assignments, and had the webserver access the javacript files.
