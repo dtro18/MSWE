@@ -1,4 +1,6 @@
 // Allows Babel to work with a suite of plugins that allow for transpiling 
+// Command to compile:
+// npx babel main.jsx --out-file main.js
 {
     "presets": [ "@babel/preset-react" ],
     "plugins": [ "@babel/plugin-proposal-class-properties" ]
