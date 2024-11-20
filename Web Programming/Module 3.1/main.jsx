@@ -1,10 +1,22 @@
 function start() {
     class Bookmark extends React.Component {
       constructor(props) {
+        // When calling constructor for a react component instance, must call superclass's constructor
+        // must also pass it props
         super(props);
         console.log("Bookmark component created");
       }
-  
+      // Prop types necessary to enforce that a prop must be a certain type
+      // propTypes is like defaultProps in that it's a property of the component class
+      // If passing an incorrect type, React outputs a message
+      // Enforces that description should have a number, and throws an error.
+      static propTypes = { description : PropTypes.string}
+      // Default props property -- feature of the component class
+      // Define default values for props
+      // Good idea to define default props.
+      static defaultProps = { description: "Unknown" }
+      // title treated as a member variable and init using the props passed in
+      // variable becomes state of object.
       title = this.props.title;
       titleStyle = { color: "red" };
   
