@@ -55,10 +55,36 @@ let person1: PersonType = {
 
 // Arrow functions:
 // No need to type "function" or specify a return value
-const test = (name) => {
-    alert(`Hello, ${name}`);
-}
-test("Jack");
+// const test = (name) => {
+//     alert(`Hello, ${name}`);
+// }
+// test("Jack");
 
 const addNums = (a: number, b: number): number => a + b;
 alert(addNums(2, 3));
+
+
+// TS has built in getter/setter functions
+
+class Planet {
+    private _name: string = "No name set";
+    get name() {
+        return `This planet's name is '${this._name}'.`;
+    }
+
+    set name(inName: string) {
+        if (inName === "Pluto") {
+            this._name = "Not a planet";
+        } else {
+            this._name = inName;
+        }
+    }
+}
+let p: Planet = new Planet();
+// Calling p.name is the same as p.name(), which will direct to the getter
+alert(p.name); // 'No name set'.
+// Calling p.name in this context will direct to the setter.    
+p.name = "Pluto";
+alert(p.name); // 'Not a planet' (sorry, little guy!)
+p.name = "Venus";
+alert(p.name); // 'Venus'
