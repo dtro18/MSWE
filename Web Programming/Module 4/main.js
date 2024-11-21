@@ -1,55 +1,72 @@
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import React from "react";
+import ReactDOM from 'react-dom/client';
+var DuckComponent = /** @class */ (function (_super) {
+    __extends(DuckComponent, _super);
+    function DuckComponent(props) {
+        var _this = _super.call(this, props) || this;
+        _this.addDuck = function () {
+            _this.setState(function (prevState) { return ({
+                duckCount: prevState.duckCount + 1,
+                duckString: prevState.duckString + "🦆",
+            }); });
+            _this.quack();
+        };
+        _this.quack = function () {
+            alert("Quack");
+        };
+        _this.state = {
+            duckCount: 0,
+            duckString: "" // Where duck emojis will be added
+        };
+        return _this;
+    }
+    DuckComponent.prototype.render = function () {
+        return (_jsxs("div", { children: [_jsx("h2", { children: this.state.duckString }), _jsx("button", { onClick: this.addDuck, children: " Add Duck" })] }));
+    };
+    return DuckComponent;
+}(React.Component));
+var Course = /** @class */ (function (_super) {
+    __extends(Course, _super);
+    function Course(props) {
+        var _this = _super.call(this, props) || this;
+        // title treated as a member variable and init using the props passed in
+        // variable becomes state of object.
+        _this.courseTitle = _this.props.title;
+        return _this;
+    }
+    Course.prototype.render = function () {
+        var _this = this;
+        return (_jsxs("li", { children: [_jsx("h2", { children: this.courseTitle }), _jsx("h3", { children: "Course Grade: " + this.props.courseGrade }), _jsx("button", { onClick: function () {
+                        _this.courseTitle = _this.courseTitle + " - PASSED";
+                        _this.setState({});
+                    }, children: "Marked Completed" })] }));
+    };
+    // Partial - don't need to provide every param
+    // Provides a default value for courseGrade if it is not supplied
+    Course.defaultProps = {
+        courseGrade: "N/A",
+    };
+    return Course;
+}(React.Component));
+var root = ReactDOM.createRoot(document.getElementById('mainContainer'));
 function start() {
-  class Course extends React.Component {
-    constructor(props) {
-      // When calling constructor for a react component instance, must call superclass's constructor
-      // must also pass it props
-      super(props);
-      // title treated as a member variable and init using the props passed in
-      // variable becomes state of object.
-      _defineProperty(this, "courseTitle", this.props.title);
-    }
-    // Prop types necessary to enforce that a prop must be a certain type
-    // propTypes is like defaultProps in that it's a property of the component class
-    // If passing an incorrect type, React outputs a message
-    // Enforces that description should have a number, and throws an error.
-
-    render() {
-      return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("h2", null, this.courseTitle), /*#__PURE__*/React.createElement("h3", null, "Course Grade: " + this.props.courseGrade), /*#__PURE__*/React.createElement("button", {
-        onClick: () => {
-          this.courseTitle = this.courseTitle + " - PASSED";
-          this.setState({});
-        }
-      }, "Marked Completed"));
-    }
-  }
-  _defineProperty(Course, "propTypes", {
-    description: PropTypes.string
-  });
-  // Default props property -- feature of the component class
-  // Define default values for props
-  // Good idea to define default props.
-  _defineProperty(Course, "defaultProps", {
-    courseGrade: "N/A"
-  });
-  ReactDOM.render(/*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Fall 2024 Schedule"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement(Course, {
-    title: "240 Data Structures",
-    courseGrade: 99.87
-  }), /*#__PURE__*/React.createElement(Course, {
-    title: "241 Algorithms",
-    courseGrade: 99.85
-  }), /*#__PURE__*/React.createElement(Course, {
-    title: "242 Network Programming",
-    courseGrade: 99.87
-  }), /*#__PURE__*/React.createElement(Course, {
-    title: "243 Database Programming",
-    courseGrade: 99.85
-  }), /*#__PURE__*/React.createElement(Course, {
-    title: "244 Concurrent Programming"
-  }), /*#__PURE__*/React.createElement(Course, {
-    title: "250 Web Programming"
-  }))), document.getElementById("mainContainer"));
+    root.render(_jsxs("div", { children: [_jsx("h1", { children: "Duck Counter" }), _jsx(DuckComponent, {})] }));
 }
 start();
+//# sourceMappingURL=main.js.map
