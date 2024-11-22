@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import DuckComponent from "./components/DuckComponent";
-
+// Run command: npm run dev
 // Define main App component
 function App() {
   return (
