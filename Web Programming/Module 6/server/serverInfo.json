@@ -1,0 +1,10 @@
+
+{
+    "smtp" : {
+        "host" : "smtp.gmail.com", "port" : 465,
+        "auth" : { "user" : "user@domain.com", "pass" : "xxx" } },
+    "imap" : {
+        "host" : "imap.gmail.com", "port" : 993,
+        "auth" : { "user" : "user@domain.com", "pass" : "xxx" } }
+}
+

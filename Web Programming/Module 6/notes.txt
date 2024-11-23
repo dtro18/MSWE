@@ -13,3 +13,6 @@ HTTP Methods
 CORS
 - Security mechanism built into web browsers
 - specify domains you'll accept calls from
+
+SMTP - Simple Mail Transfer Protocol
+- Defines how emails are sent from an email client
