@@ -1,21 +1,24 @@
-// import getA from "./module1";
-// import getB from "./module2";
-// alert(getA() * getB());
+import { User, generateUser} from "./module1";
 
-
+// Run server by npm run start
 // index.ts
-// Find the h2 element
+// Find the button element
+const button = document.getElementById('createPersonButton');
+// Find the text box to be changed
 const tipElement = document.querySelector('h2');
 
-if (tipElement) {
-    // Change its text
-    tipElement.textContent = "This text was changed by TypeScript!";
-    
-    // Change its style
-    tipElement.style.color = 'blue';
-    
-    // Add a click handler
-    tipElement.addEventListener('click', () => {
-        alert('You clicked the tip!');
+if (button) {
+    button.addEventListener('click', () => {
+        const person = generateUser();
+        if (tipElement) {
+            tipElement.innerHTML = `
+            ID: ${person.id}<br>
+            Name: ${person.name}<br>
+            Email: ${person.email}<br>
+            Birthday: ${person.birthday}<br>
+            Occupation: ${person.occupation}
+        `;
+        }
+        
     });
 }

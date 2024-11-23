@@ -6,7 +6,7 @@ const stylesHandler = 'style-loader';
 const config = {
       entry: './src/index.ts',
       resolve : {
-        extensions : [ ".ts", '.js' ]
+        extensions : [ ".ts", ".js" ]
       },
     output: {
         path: path.resolve(__dirname, 'dist'),
