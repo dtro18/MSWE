@@ -1,0 +1,15 @@
+URL 
+- identifies a set of things with which you want to interact
+- resource or collection of resources
+- represented by nouns i.e. mysite.com/users
+- NOT verbs i.e. mysite.com/add
+HTTP Methods
+- verbs, actions to perform on a specified resource
+- GET: retrieve a resource, considered SAFE because it doesn't change data on the server
+- POST: create a new resource (UNSAFE)
+- PUT: update an existing resource (UNSAFE)
+- DELETE: delete an existing resource (UNSAFE)
+
+CORS
+- Security mechanism built into web browsers
+- specify domains you'll accept calls from
