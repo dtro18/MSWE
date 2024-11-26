@@ -155,7 +155,7 @@ app.post("/contacts", (inRequest, inResponse) => __awaiter(void 0, void 0, void 
         inResponse.json(contacts);
     }
     catch (inError) {
-        inResponse.send("error");
+        inResponse.send("Error adding contact");
     }
 }));
 app.delete("/contacts/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {

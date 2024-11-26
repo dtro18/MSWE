@@ -140,7 +140,7 @@ app.post("/contacts",
             // Return the added contact, including an ID which we need to access that contact again
             inResponse.json(contacts);
         } catch (inError) {
-        inResponse.send("error");
+        inResponse.send("Error adding contact");
         }
     }
 );
