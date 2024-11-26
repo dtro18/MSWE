@@ -44,9 +44,12 @@ app.get("/mailboxes",
             const imapWorker: IMAP.Worker = new IMAP.Worker(serverInfo);
             // listMailboxes called, stored in an mailboxes array of type Imailbox
             const mailboxes: IMAP.IMailbox[] = await imapWorker.listMailboxes();
+            console.log("GET /mailboxes (1): Ok", mailboxes);
             inResponse.json(mailboxes);
         } catch (inError) {
-            inResponse.send("Error");
+            console.log("Logging in console.")
+            console.log("Logging in console.", inError); // Log the error itself
+            inResponse.status(500).send("Error 1234");
         }
     }
 );
@@ -74,7 +77,7 @@ app.get("/mailboxes/:mailbox/:id",
         try {
             // IMAP worker object is instantiated
             const imapWorker: IMAP.Worker = new IMAP.Worker(serverInfo);
-            const messageBody: string = await imapWorker.getMessageBody({
+            const messageBody: string | undefined = await imapWorker.getMessageBody({
                 mailbox: inRequest.params.mailbox,
                 id: parseInt(inRequest.params.id, 10)
             })
@@ -154,3 +157,8 @@ app.delete("/contacts/:id",
         }
     }
 );
+
+// Start app listening.
+app.listen(80, () => {
+    console.log("MailBag server open for requests");
+});

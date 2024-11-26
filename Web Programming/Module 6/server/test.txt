@@ -1,0 +1,8 @@
+Send Message:
+curl -d "{ \"to\" : \"jlozada0910@gmail.com\", \"from\" : \"dtro18@gmail.com\", \"subject\" : \"This is a test\", \"text\" : \"Insert Message Here\" }" -H "Content-Type:application/json" -X POST http://localhost/messages
+
+View Mailboxes:
+curl localhost/mailboxes
+
+Get List of Messages:
+curl localhost/mailboxes/INBOX
