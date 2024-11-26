@@ -1,0 +1,17 @@
+Environment Used:
+Node.js: v22.11.0
+Browser: Google Chrome
+OS: Windows 10
+Computer Architecture: x64
+
+Testing:
+To test my server-side code, I'd use the curl commands in the CMD to test the different API routes
+defined by the application. So far, the List mailbox/display message functionality is there, but I would
+need to do some testing on the Contacts.ts file to list contacts, add contacts, and delete contacts. 
+I would also try testing the application with different loads (i.e. larger mailboxes vs smaller) and
+make sure that the application is equipped to handle error codes (i.e. invalid email addresses, authentication)
+correctly.
+
+REST:
+REST helps the application by modularizing the frontend and the backend, such that requests from the frontend
+can be sent in JSON format from the backend, making data transmission structured.
