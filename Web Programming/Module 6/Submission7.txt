@@ -1,0 +1,23 @@
+Environment Used:
+Node.js: v22.11.0
+Browser: Google Chrome
+OS: Windows 10
+Computer Architecture: x64
+
+Testing:
+To test my server-side code, I'd use the curl commands in the CMD to test the different API routes
+defined by the application. In fact, I used curl commands to debug an error in which a selected message
+would not be displayed. The curl commands allowed me to determine that the problem was in the frontend
+not accessing the correct API endpoint. 
+I would also try testing the application with different loads (i.e. larger mailboxes vs smaller) and
+make sure that the application is equipped to handle error codes (i.e. invalid email addresses, authentication)
+correctly.
+
+AJAX:
+AJAX facilitates the implementation of RESTFul apis, in that it prevents the user from having
+to reload the entire page; rather, only certain components are re-rendered upon event occurence.
+It is the "under-the-hood" object that makes HTTP requests to the server.
+In this application, rather than making naked AJAX requests, we used Axios to introduce the
+async/await functionality, such that we can have more concurrent behavior.
+Before AJAX, in order to reload the page, the server would have to return an entirely new page every time
+an event happened that changed the page contents.

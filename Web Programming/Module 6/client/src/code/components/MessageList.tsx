@@ -24,6 +24,7 @@ const MessageList = ({ state }): JSX.Element => {
       <TableHead>
         <TableRow>
           <TableCell style={{ width: 120 }}>
+            
             <TableSortLabel
               active
               direction={state.sortBy === 'ascending' ? 'asc' : 'desc'}
