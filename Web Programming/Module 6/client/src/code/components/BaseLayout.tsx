@@ -38,9 +38,9 @@ class BaseLayout extends Component {
   render(): JSX.Element {
 
     return (
-
+     // UI layout done by CSS grid, which means this div is our container element
      <div className="appContainer">
-
+      
       <Dialog open={ this.state.pleaseWaitVisible } disableEscapeKeyDown={ true }
         transitionDuration={ 0 }
         onClose={( inEvent, inReason) => {
@@ -60,7 +60,8 @@ class BaseLayout extends Component {
        <div className="centerArea">
         <div className="messageList"><MessageList state={ this.state } /></div>
         <div className="centerViews">
-          { this.state.currentView === "welcome" && <WelcomeView /> }
+          
+          { this.state.currentView === "welcome" && <WelcomeView />}
           { (this.state.currentView === "message" || this.state.currentView === "compose") &&
             <MessageView state={ this.state } />
           }

@@ -8,7 +8,7 @@ import NewMessageIcon from "@mui/icons-material/Email";
 
 
 /**
- * Toolbar.
+ * Toolbar. Defined in the functional way where the sole function is the render() function
  */
 const Toolbar = ({ state }): JSX.Element => (
 

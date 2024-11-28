@@ -95,6 +95,7 @@ class Worker {
     // Grab the actual body of a message
     getMessageBody(inCallOptions) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("IMAP.Worker.getMessageBody()", inCallOptions);
             const client = yield this.connectToServer();
             // Call list messages again, but this time specify we want the body
             const messages = yield client.listMessages(

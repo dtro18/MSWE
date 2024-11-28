@@ -2,9 +2,9 @@
 {
     "smtp" : {
         "host" : "smtp.gmail.com", "port" : 465,
-        "auth" : { "user" : "user@domain.com", "pass" : "xxx" } },
+        "auth" : { "user" : "dtro18@gmail.com", "pass" : "rlav jpdq ssxh oxdc" } },
     "imap" : {
         "host" : "imap.gmail.com", "port" : 993,
-        "auth" : { "user" : "user@domain.com", "pass" : "xxx" } }
+        "auth" : { "user" : "dtro18@gmail.com", "pass" : "rlav jpdq ssxh oxdc" } }
 }
 

@@ -66,7 +66,7 @@ export class Worker {
 
     console.log("IMAP.Worker.getMessageBody()", inID);
 
-    const response: AxiosResponse = await axios.get(`${config.serverAddress}/messages/${inMailbox}/${inID}`);
+    const response: AxiosResponse = await axios.get(`${config.serverAddress}/mailboxes/${inMailbox}/${inID}`);
     return response.data;
 
   } /* End getMessageBody(). */

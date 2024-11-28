@@ -55,8 +55,8 @@ export function createState(inParentComponent: React.Component): any {
       contactID : null,
       contactName : null,
       contactEmail : null,
-
-
+      
+      sortBy: "ascending",
       // ------------------------------------------------------------------------------------------------
       // ------------------------------------ View Switch functions -------------------------------------
       // ------------------------------------------------------------------------------------------------
@@ -73,8 +73,13 @@ export function createState(inParentComponent: React.Component): any {
 
       }.bind(inParentComponent), /* End showHidePleaseWait(). */
 
+      // Function to control display of entries in the messageList
 
-      /**
+      setSortBy : function(toggleSort: string): void {
+        this.setState(() => ({sortBy: toggleSort}));
+      }.bind(inParentComponent),
+
+      /**.
        * Show ContactView in view mode.
        *
        * @param inID    The ID of the contact to show.
@@ -330,7 +335,7 @@ export function createState(inParentComponent: React.Component): any {
         await contactsWorker.deleteContact(this.state.contactID);
         this.state.showHidePleaseWait(false);
 
-        // Remove from list.
+        // Remove from list and copy in contacts without the deleted one.
         const cl = this.state.contacts.filter((inElement) => inElement._id != this.state.contactID);
 
         // Update state.

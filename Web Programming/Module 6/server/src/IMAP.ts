@@ -120,6 +120,7 @@ export class Worker {
 
     // Grab the actual body of a message
     public async getMessageBody(inCallOptions: ICallOptions): Promise<string | undefined>  {
+        console.log("IMAP.Worker.getMessageBody()", inCallOptions);
         const client: any = await this.connectToServer();
         // Call list messages again, but this time specify we want the body
         const messages: any[] = await client.listMessages(
