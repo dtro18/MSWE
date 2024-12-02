@@ -9,8 +9,8 @@ export interface User {
     birthday: Date;
     occupation: String;
 }
-
-export function generateUser() {
+// Enforce that function returns a User
+export function generateUser(): User {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
 

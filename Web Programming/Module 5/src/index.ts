@@ -9,7 +9,8 @@ const tipElement = document.querySelector('h2');
 
 if (button) {
     button.addEventListener('click', () => {
-        const person = generateUser();
+        // Enforce that generated person is a User (of TS interface)
+        const person: User = generateUser();
         if (tipElement) {
             tipElement.innerHTML = `
             ID: ${person.id}<br>
