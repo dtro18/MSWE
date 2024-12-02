@@ -1,5 +1,5 @@
 import { User, generateUser} from "./module1";
-
+// Entry point of the application, accesses and updates the DOM
 // Run server by npm run start
 // index.ts
 // Find the button element

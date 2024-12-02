@@ -6,6 +6,7 @@ interface DuckState {
   duckString: string;
 }
 // Class component manages DuckState
+// No props expected, but it is passed a state type to enforce the type of the state (as defined by the interface)
 class DuckComponent extends React.Component<{}, DuckState> {
   constructor(props: {}) {
     super(props);

@@ -8,7 +8,7 @@
 
 // Grab file system module
 const fs = require("fs")
-
+// Opens a server and answers any requests with loading the html page (i.e. load this all the time).
 require("http").createServer((inRequest, inResponse) => {
     fs.readFile("test.html", (err, data) => {
         if (err) {

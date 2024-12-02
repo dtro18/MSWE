@@ -6,7 +6,7 @@
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
     <script>
-
+      // Defines bookmark react component
       function start() {
         // Bookmark defines a proper react component.
         class Bookmark extends React.Component {
@@ -17,7 +17,7 @@
             console.log("Bookmark Component Created");
           }
             // Title is set as a member variable and initial value is taken from passed props
-            // Variable becomes the state of the bookmark component
+            // Variable title becomes the state of the bookmark component
             title = this.props.title;
             titleStyle = { color : "red"}
 
@@ -25,11 +25,13 @@
         // Can return another react component, an element, an array of those, or a frag
           render() {
             return (
+              // Create element takes type of element, props, and children as params
               React.createElement("li", { },
                 // Style prop is an object mapping css attributes to values
                 React.createElement("h2", { style: this.titleStyle }, this.title),
                 React.createElement("a", { href : this.props.href }, this.props.description
                 ),
+                // Tells you that this is a button element. We pass in an arrow function as its props, and its children is "Click me".
                 React.createElement("button", {
                   onClick : () => {
                     this.title = this.title + "-CHANGED";
@@ -40,7 +42,7 @@
             );
           }
         }
-
+        // In what structure do we render the react elements? 
         const topMostComponent =
           React.createElement("div", { },
             React.createElement("h1", { }, "Bookmarks"),
@@ -53,7 +55,9 @@
               )
             )
           );
+        // Create a home for React appplication
         const root = ReactDOM.createRoot(document.getElementById("mainContainer"));
+        // Actually does the rendering of topMostComponent and slots it into the mainContainer.
         root.render(topMostComponent);
       }
 

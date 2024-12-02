@@ -8,11 +8,11 @@ require("http").createServer((inRequest, inResponse) => {
     // Constructor. Pass URL and an anonymous callback function
     // Must invoke the function the module (requestModule) represents.
     requestModule(
-    "http://worldtimeapi.org/api/timezone/America/New_York",
-    function (inErr, inResp, inBody) {
-    inResponse.end(
-    `Hello from my first Node Web server: ${inBody}`
-    );
-    }
+        "http://worldtimeapi.org/api/timezone/America/New_York",
+        // Makes a GET request to the API and returns the result in inBody
+        // Inerr/inresp contain error information and response metadata(http status)
+        (inErr, inResp, inBody) => {
+            inResponse.end(`Hello from my first Node Web server: ${inBody}`);
+        }
     );
    }).listen(80);

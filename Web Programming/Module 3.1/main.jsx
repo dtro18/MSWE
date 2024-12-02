@@ -1,3 +1,4 @@
+// Whole thing is a script run from the html
 function start() {
   class Course extends React.Component {
     constructor(props) {
@@ -36,7 +37,7 @@ function start() {
     }
   }
 
-
+  // Renders the page structure into the main container of index.html
   ReactDOM.render(
     <div>
       <h1>Fall 2024 Schedule</h1>
