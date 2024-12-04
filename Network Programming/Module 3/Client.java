@@ -4,7 +4,7 @@ import java.net.*;
 
 public class Client {
     public static final String SERVER = "";
-    public static final int PORT = ;
+    public static final int PORT = 8080;
     public static final int TIMEOUT = 15000;
 
     public static void main(String[] args) {
@@ -56,7 +56,10 @@ public class Client {
         
     } // End Main
 
-    
+    static void sendRequest(String request, Writer writer) {
+        
+    }
+
     static void define(String word, Writer writer, BufferedReader reader) 
         throws IOException, UnsupportedEncodingException {
             System.out.println("Attempting to define: " + word);
