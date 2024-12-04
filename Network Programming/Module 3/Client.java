@@ -25,11 +25,17 @@ public class Client {
             // Process Args
             if (args[0].equals("index")) {
                 System.out.println("Printing available files: \n");
-                // getAllFiles()
+                sendRequest("INDEX", writer);
+                for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                    System.out.println(line);
+                }
             // Get request and filename specified
             } else if (args.length == 2 && args[0].equals("get")) {
                 System.out.println("Attempting to retrieve: " + args[1]);
-                // getFile()
+                sendRequest("GET " + args[1], writer);
+                for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                    System.out.println(line);
+                }
             } else {
                 System.out.println("Error in CL arguments. \n");
             }
@@ -57,7 +63,10 @@ public class Client {
     } // End Main
 
     static void sendRequest(String request, Writer writer) {
-        
+        try {
+            writer.write(request + "\r\n");
+            writer.flush();
+        } catch (IOException e) {}
     }
 
     static void define(String word, Writer writer, BufferedReader reader) 
