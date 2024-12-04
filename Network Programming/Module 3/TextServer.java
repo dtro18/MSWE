@@ -67,7 +67,6 @@ public class TextServer {
                         String filename = parts[1].trim();
                         System.out.println(filename);
                         System.out.println(serveFile(filename));
-                        
                         out.write(serveFile(filename) + "\r\n");
                         out.flush();
                     }
@@ -126,8 +125,9 @@ public class TextServer {
         if (!Files.isReadable(filePath)) {
             return "Error: File is not readable.";
         }
-
+        
         try (Scanner scanner = new Scanner(filePath)) {
+            sb.append("ok\n");
             while (scanner.hasNextLine()) {
                 sb.append(scanner.nextLine()).append("\n");
             }
