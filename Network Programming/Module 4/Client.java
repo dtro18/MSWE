@@ -71,7 +71,7 @@ public class Client {
 
                 // Read the sequence number (first 4 bytes)
                 int sequenceNumber = dis.readInt();
-                System.out.println("Sequence number: " + sequenceNumber);
+                // System.out.println("Sequence number: " + sequenceNumber);
                 
                 if (sequenceNumber == -1) {
                     totalPackets += dis.readInt();
