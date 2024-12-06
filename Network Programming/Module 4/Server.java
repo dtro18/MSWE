@@ -61,6 +61,8 @@ public class Server {
         byte[] buffer = new byte [1024];
         // Test path
         // C:\\MSWE Projects\\Network Programming\\Module 2\\text1.txt
+
+        // Send control packet which has a sequence number of -1
         try {
             long fileSize = Files.size(filePath);
             int totalPackets = (int) Math.ceil((double) fileSize / buffer.length);
@@ -75,12 +77,12 @@ public class Server {
             server.send(controlPacket);
             System.out.println("Sent control packet with total packet count: " + totalPackets);
         
-       
+            
             try (FileInputStream fis = new FileInputStream(filePath.toString())) {
-                
-                
                 int bytesRead;
+                // Loop through to get the actual file data
                 while ((bytesRead = fis.read(buffer)) != -1) {
+
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     DataOutputStream dos = new DataOutputStream(baos);
 
@@ -105,6 +107,17 @@ public class Server {
             } catch (IOException e) {
                 System.err.println("Error reading the file: " + e.getMessage());
             }
+            // Code to tell client to check its shit
+            ByteArrayOutputStream endStreamBAOS = new ByteArrayOutputStream();
+            DataOutputStream endStreamDOS = new DataOutputStream(endStreamBAOS);
+            endStreamDOS.writeInt(-3); // Use -1 as an identifier for the control packet
+            endStreamDOS.writeInt(totalPackets);
+            byte[] endStreamData = endStreamBAOS.toByteArray();
+    
+            DatagramPacket endPacket = new DatagramPacket(endStreamData, endStreamData.length, address, clientPort);
+            server.send(endPacket);
+            System.out.println("Sent end packet with total packet count: " + totalPackets);
+
         } catch (IOException e) {
            
             byte[] data = ("Error reading file.").getBytes();

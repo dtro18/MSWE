@@ -78,6 +78,18 @@ public class Client {
                 } else if (sequenceNumber == -2) {
                     System.out.println("Error reading file.");
                     break;
+                
+                } else if (sequenceNumber == -3) {
+                    if (totalPackets > 0 && receivedPackets == totalPackets) {
+                        System.out.println("All packets received correctly");
+                        // Uncomment this to see the reconstructed text
+                        // printHashMapValues(contentHashMap);
+                        break;
+                    }
+                    else {
+                        System.out.println("Packets missing.");
+                    }
+                    break;
                 }
                 // Read the data (remaining bytes)
                 byte[] data = new byte[packet.getLength() - 4];
@@ -85,8 +97,6 @@ public class Client {
 
                 // Convert the data to a string for demonstration
                 String content = new String(data);
-                System.out.println("Content: " + content);
-                // Check the content to make sure no errors
                 
                 contentHashMap.put(sequenceNumber, content);
 
@@ -96,12 +106,6 @@ public class Client {
             }
              catch (IOException e) {
 
-            }
-            if (totalPackets > 0 && receivedPackets == totalPackets) {
-                System.out.println("All packets received correctly");
-                // Uncomment this to see the reconstructed text
-                // printHashMapValues(contentHashMap);
-                break;
             }
             
         }
