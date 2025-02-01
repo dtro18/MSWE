@@ -83,13 +83,16 @@ public class Client {
                     if (totalPackets > 0 && receivedPackets == totalPackets) {
                         System.out.println("All packets received correctly");
                         // Uncomment this to see the reconstructed text
-                        // printHashMapValues(contentHashMap);
+                        printHashMapValues(contentHashMap);
                         break;
                     }
                     else {
                         System.out.println("Packets missing.");
                     }
                     break;
+                    // Add logic to identify what the sequence number of the missing packet is
+                    // Ability to send specific packet requests
+                    // Add back into hashmap
                 }
                 // Read the data (remaining bytes)
                 byte[] data = new byte[packet.getLength() - 4];

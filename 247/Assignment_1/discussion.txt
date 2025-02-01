@@ -1,0 +1,120 @@
+Part 1: 
+Generate Hashes for the following:
+qwertyuiop
+über_alles!
+Lösenord
+lakers2023!
+
+md5decrypt:
+6eea9b7ef19179a06954edd0f6c05ceb
+75db59988623a7fdf3790b41ad3169f3
+da07b18679e77cb2e82df1e6101d60dd
+3b2cd0dc7af78aef77c35e33a9b75b8e
+
+md5online
+6eea9b7ef19179a06954edd0f6c05ceb
+e44a7cf74cb368dec4e0c0a8af7e6e77
+88fc757bb99a74998a3c7de1b8181c20
+3b2cd0dc7af78aef77c35e33a9b75b8e
+
+Generated using windows md5sum
+6eea9b7ef19179a06954edd0f6c05ceb
+e44a7cf74cb368dec4e0c0a8af7e6e77
+88fc757bb99a74998a3c7de1b8181c20
+3b2cd0dc7af78aef77c35e33a9b75b8e
+
+Cracking MD5Sum Hashes:
+
+md5decrypt:
+"qwertyuiop"
+"Sorry, we didn't find this hash in our database"
+""
+"Sorry, we didn't find this hash in our database"
+
+md5online:
+"qwertyuiop"
+"über_alles!"
+"LÃ¶senord"
+"lakers2023!"
+
+Analysis:
+Looks like the hash cracking works by searching a database of known passwords that have already been hashed using the md5
+encryption. If we find a hash that has been already calculated, we know which word produced that hash. The two sites likely
+have two different databases, with md5online seemingly have a more complex database that was able to match all four words
+(with a minor bug on the special character). Thus, MD5online is likely to be the more correct hash generation, and has the 
+more accurate decryption. MD5online's hashes also matched those produced by the Md5sum run on Windows, which lends it some 
+credibility as well. I noticed that md5 decrypt struggled when it was given non-english characters, like the umlaut (ü). 
+Its hash generation otherwise matched the other md5 encryption methods with normal english characters. This likely has to do with
+how the different websites decide how to deal with the special characters. We also saw some weirdness when "Lösenord" was decrypted 
+by the md5online. The website was unsure which special character to output for the "ö", so instead it outputs "Ã¶".
+
+Pros and cons:
+Online hash generation is convenient and fast. It's easy to input a string and get out a hash, and the service is free which is also a plus.
+However, entering passwords on any website is a security risk. We do not know if the password is being stored or how it is being stored (in plaintext vs not).
+Additionally, as we saw in the example hashes, non-english characters can create some discrepancies between different hashing websites that use the same
+encryption scheme (MD5). So if we use one website to generate a hash, and then we check our passwords by hashing through a different site, we may see some variability
+even though we used the same input and encryption scheme.
+
+
+
+Part 2:
+Decided that hashes were encrypted by SHA-1 using hashid -m [hash]
+
+Cracking Overview:
+
+dictionary mode (raw)
+Time: 17s
+Recovered: 144622/500000 (28.92%)
+
+base64
+Time: 1:14
+Recovered: 233812/500000 (46.76%)
+
+InsidePro-PasswordsPro
+Time: 31:39
+Recovered: 307005/500000 (61.40%)
+
+3rd party - darkweb2017-top10000
+Time: 2:30
+Recovered: 276000/500000 (52.20%)
+
+Part 3:
+Determined hashes were SHA-256
+
+3rd party - (https://github.com/initstring/passphrase-wordlist) + passphrase_rule1
+Time: 36s
+Recovered: 7/21 (33.33%)
+
+3rd party - (https://github.com/initstring/passphrase-wordlist) + passphrase_rule1 + passphrase_rule2
+Time: Time Limit Exceeded (Program ran for hours before I terminated)
+Recovered: 0/21
+
+3rd party - (https://github.com/initstring/passphrase-wordlist) + modified passphrase_rule2
+Modifications: Extended leetspeak to first 4 chars, added first 5 special characters (!@#%$) to the end
+Time: 3:08
+Recovered: 5/21 (23.80%)
+Not sure how the recovery was worse on this. Trying the rule1 ruleset to validate result.
+
+3rd party - (https://github.com/initstring/passphrase-wordlist) + passphrase_rule1
+Time: 36s
+Recovered: 8/21 (38.09%)
+
+3rd party - (https://github.com/initstring/passphrase-wordlist) + passphrase_rule1 + modified passphrase_rule2
+Time: 54:02
+Recovered: 14/21 (66.67%)
+
+Part 4:
+Found the hash for the odt file by running the script: /bin/libreoffice2john
+Hash type was determined to be: 18400 | Open Document Format (ODF) 1.2 (SHA-256, AES). However, running this through native classifiers didn't really work. 
+Loaded the hash into its own textfile and ran with passphrases.txt and best64 rule to get a baseline of what we're working with.
+
+passphrases.txt (3rd party wordlist)
+Time: 10:10
+Recovered: 0/1 (0.00%)
+
+rockyou.txt 
+Time: 4:31
+Recovered: 1/1 (100.00%)
+Password was "cowboys!"
+
+Additional notes: running with rules seems to result in an error "insufficient memory".

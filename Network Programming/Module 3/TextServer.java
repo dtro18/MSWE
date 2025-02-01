@@ -29,7 +29,7 @@ public class TextServer {
                     // Accept client connection. Block until client connects. 
                     Socket connection = server.accept();
                     System.out.println("Connection established");
-                    // Wrap connection in Daytime Task (callable implementation)
+                    // Wrap connection in Task (callable implementation)
                     Callable<Void> task = new TextTask(connection);
                     // Submits task to thread pool
                     pool.submit(task);
@@ -43,6 +43,7 @@ public class TextServer {
     private static class TextTask implements Callable<Void> {
         // Create that connection
         private Socket connection;
+        // Constructor that storers the passed socket in the instance of texttask
         TextTask(Socket connection) {
             this.connection = connection;
         }
