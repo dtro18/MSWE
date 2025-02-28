@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 
 public class Database extends UnicastRemoteObject implements DBInterface {
@@ -13,11 +15,18 @@ public class Database extends UnicastRemoteObject implements DBInterface {
     public Database() throws RemoteException {
         super();
         // Implement these?
-        vStudent = new ArrayList<>(); // Initialize to avoid NullPointerException
-        vCourse = new ArrayList<>();
+        vStudent = new ArrayList<Student>(); // Initialize to avoid NullPointerException
+        vCourse = new ArrayList<Course>();
     }
-    public ArrayList<Student> getAllStudentRecords() throws RemoteException {
-        return this.vStudent;
+    public String getAllStudentRecords() throws RemoteException {
+        String sReturn = "";
+        for (Student student : vStudent) {
+            sReturn += student.toString() + "\n";
+
+        }
+        return sReturn;
+
+
     }
     public ArrayList<Course> getAllCourseRecords() throws RemoteException {
         return this.vCourse;
@@ -100,11 +109,31 @@ public class Database extends UnicastRemoteObject implements DBInterface {
                 System.err.println("Could not find " + courseFileName);
                 System.exit(1);
             }
+            // Open the given student and course files.
+            try {
+                BufferedReader objStudentFile = new BufferedReader(new FileReader(studentFileName));
+                BufferedReader objCourseFile  = new BufferedReader(new FileReader(courseFileName));
+
+                // Populate student and course lists.
+                while (objStudentFile.ready()) {
+                    db.vStudent.add(new Student(objStudentFile.readLine()));
+                }
+                while (objCourseFile.ready()) {
+                    db.vCourse.add(new Course(objCourseFile.readLine()));
+                }
+
+                // Close the student and course files.
+                objStudentFile.close();
+                objCourseFile.close();
+            } catch (Exception e) {
+                System.out.println("Error reading file");
+            }
+            
 
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.rebind("Database", db);
             System.out.println("Database ready");
-
+            System.out.println(db.vStudent.size());
 
         } catch (RemoteException e) {
             System.err.println("Error initializing Database: " + e.getMessage());

@@ -16,8 +16,8 @@ public class Client {
         try {
             // Create a buffered reader using system input stream.
             BufferedReader objReader = new BufferedReader(new InputStreamReader(System.in));
-            // Registry registry = LocateRegistry.getRegistry(null, 1099);
-            // DBInterface stub = (DBInterface) registry.lookup("Server");
+            Registry registry = LocateRegistry.getRegistry(null, 1100);
+            
 
             // Structure to call a method
             // String response = stub.sayHello();
@@ -38,94 +38,98 @@ public class Client {
                 // Execute command 1: List all students.
                 if (sChoice.equals("1")) {
                     // Remote call
-                    ArrayList<Student> students = stub.getAllStudentRecords();
+                    IActivity stub = (IActivity) registry.lookup("ListAllStudentsHandler");
+                    String students = stub.execute("");
+                    System.out.println(students);
                 }
-
+                // TODO: Implement the rest of the user choices
+                // TODO: Change return values for getAllCourseRecords
+                // TODO: Deal with registration validation
                 // Execute command 2: List all courses.
-                if (sChoice.equals("2")) {
-                    // Remote call
-                    ArrayList<Course> courses = stub.getAllCourseRecords();
-                }
+                // if (sChoice.equals("2")) {
+                //     // Remote call
+                //     ArrayList<Course> courses = stub.getAllCourseRecords();
+                // }
 
-                // Execute command 3: List students registered for a course.
-                if (sChoice.equals("3")) {
-                    // Get course ID and course section from user.
-                    System.out.print("\nEnter course ID and press return >> ");
-                    String sCID = objReader.readLine().trim();
-                    System.out.print("\nEnter course section and press return >> ");
-                    String sSection = objReader.readLine().trim();
+                // // Execute command 3: List students registered for a course.
+                // if (sChoice.equals("3")) {
+                //     // Get course ID and course section from user.
+                //     System.out.print("\nEnter course ID and press return >> ");
+                //     String sCID = objReader.readLine().trim();
+                //     System.out.print("\nEnter course section and press return >> ");
+                //     String sSection = objReader.readLine().trim();
 
-                    // Get the list of students who registered for the given course.
-                    Course objCourse = stub.getCourseRecord(sCID, sSection);
-                    if (objCourse == null) {
-                        System.out.println("Invalid course ID or course section");
-                        continue;
-                    } else {
-                        ArrayList<Student> vStudent = objCourse.getRegisteredStudents();
+                //     // Get the list of students who registered for the given course.
+                //     Course objCourse = stub.getCourseRecord(sCID, sSection);
+                //     if (objCourse == null) {
+                //         System.out.println("Invalid course ID or course section");
+                //         continue;
+                //     } else {
+                //         ArrayList<Student> vStudent = objCourse.getRegisteredStudents();
 
-                        // Construct a list of student information and return it.
-                        String sReturn = "";
-                        for (int i=0; i<vStudent.size(); i++) {
-                            sReturn += (i == 0 ? "" : "\n") + ((Student) vStudent.get(i)).toString();
-                        }
-                        System.out.println(sReturn);
-                        continue;
-                    }
+                //         // Construct a list of student information and return it.
+                //         String sReturn = "";
+                //         for (int i=0; i<vStudent.size(); i++) {
+                //             sReturn += (i == 0 ? "" : "\n") + ((Student) vStudent.get(i)).toString();
+                //         }
+                //         System.out.println(sReturn);
+                //         continue;
+                //     }
 
                     
-                }
+                // }
 
-                // Execute command 4: List courses a student has registered for.
-                if (sChoice.equals("4")) {
-                    // Get student ID from user.
-                    System.out.println("\nEnter student ID and press return >> ");
-                    String sSID = objReader.readLine().trim();
+                // // Execute command 4: List courses a student has registered for.
+                // if (sChoice.equals("4")) {
+                //     // Get student ID from user.
+                //     System.out.println("\nEnter student ID and press return >> ");
+                //     String sSID = objReader.readLine().trim();
 
-                    // Get the list of courses the given student has registered for.
-                    Student objStudent = stub.getStudentRecord(sSID);
-                    if (objStudent == null) {
-                        System.out.println("Invalid student ID");
-                        continue;
-                    }
+                //     // Get the list of courses the given student has registered for.
+                //     Student objStudent = stub.getStudentRecord(sSID);
+                //     if (objStudent == null) {
+                //         System.out.println("Invalid student ID");
+                //         continue;
+                //     }
 
-                    ArrayList<Course> vCourse = objStudent.getRegisteredCourses();
+                //     ArrayList<Course> vCourse = objStudent.getRegisteredCourses();
 
-                    // Construct a list of course information and return it.
-                    String sReturn = "";
-                    for (int i=0; i<vCourse.size(); i++) {
-                        sReturn += (i == 0 ? "" : "\n") + ((Course) vCourse.get(i)).toString();
-                    }
+                //     // Construct a list of course information and return it.
+                //     String sReturn = "";
+                //     for (int i=0; i<vCourse.size(); i++) {
+                //         sReturn += (i == 0 ? "" : "\n") + ((Course) vCourse.get(i)).toString();
+                //     }
         
-                    System.out.println(sReturn);
-                }
+                //     System.out.println(sReturn);
+                // }
 
-                // Execute command 5: List courses a student has completed.
-                if (sChoice.equals("5")) {
-                    // Get student ID from user.
-                    EventBus.announce(EventBus.EV_SHOW, "\nEnter student ID and press return >> ");
-                    String sSID = objReader.readLine().trim();
+                // // Execute command 5: List courses a student has completed.
+                // if (sChoice.equals("5")) {
+                //     // Get student ID from user.
+                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter student ID and press return >> ");
+                //     String sSID = objReader.readLine().trim();
 
-                    // Announce the command event #5 with student ID.
-                    EventBus.announce(EventBus.EV_SHOW, "\n");
-                    EventBus.announce(EventBus.EV_LIST_COURSES_COMPLETED, sSID);
-                    continue;
-                }
+                //     // Announce the command event #5 with student ID.
+                //     EventBus.announce(EventBus.EV_SHOW, "\n");
+                //     EventBus.announce(EventBus.EV_LIST_COURSES_COMPLETED, sSID);
+                //     continue;
+                // }
 
-                // Execute command 6: Register a student for a course.
-                if (sChoice.equals("6")) {
-                    // Get student ID, course ID, and course section from user.
-                    EventBus.announce(EventBus.EV_SHOW, "\nEnter student ID and press return >> ");
-                    String sSID = objReader.readLine().trim();
-                    EventBus.announce(EventBus.EV_SHOW, "\nEnter course ID and press return >> ");
-                    String sCID = objReader.readLine().trim();
-                    EventBus.announce(EventBus.EV_SHOW, "\nEnter course section and press return >> ");
-                    String sSection = objReader.readLine().trim();
+                // // Execute command 6: Register a student for a course.
+                // if (sChoice.equals("6")) {
+                //     // Get student ID, course ID, and course section from user.
+                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter student ID and press return >> ");
+                //     String sSID = objReader.readLine().trim();
+                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter course ID and press return >> ");
+                //     String sCID = objReader.readLine().trim();
+                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter course section and press return >> ");
+                //     String sSection = objReader.readLine().trim();
 
-                    // Announce the command event #5 with student ID, course ID, and course section.
-                    EventBus.announce(EventBus.EV_SHOW, "\n");
-                    EventBus.announce(EventBus.EV_REGISTER_STUDENT, sSID + " " + sCID + " " + sSection);
-                    continue;
-                }
+                //     // Announce the command event #5 with student ID, course ID, and course section.
+                //     EventBus.announce(EventBus.EV_SHOW, "\n");
+                //     EventBus.announce(EventBus.EV_REGISTER_STUDENT, sSID + " " + sCID + " " + sSection);
+                //     continue;
+                // }
 
                 // Terminate this client.
                 if (sChoice.equalsIgnoreCase("X")) {

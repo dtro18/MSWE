@@ -21,16 +21,17 @@ public class Server extends UnicastRemoteObject {
         
     }
     public static void main(String[] args) {
-        // Create a buffered reader using system input stream.
         try {
+            // Using 1100 for serverRegistry
             Server server = new Server();
             Registry serverRegistry = LocateRegistry.createRegistry(1100);
             serverRegistry.rebind("Server", server);
             System.out.println("Server ready");
         
+            // Using 1099 for DB registry
             Registry dbRegistry = LocateRegistry.getRegistry(null, 1099);
-            DBInterface dbStub = (DBInterface) dbRegistry.lookup("Server");
-            System.out.println("Error finding registry.");
+            DBInterface dbStub = (DBInterface) dbRegistry.lookup("Database");
+            System.out.println("Database found");
 
             ListAllCoursesHandler listAllCoursesHandler = new ListAllCoursesHandler(dbStub);
             ListAllStudentsHandler listAllStudentsHandler = new ListAllStudentsHandler(dbStub);
@@ -42,6 +43,16 @@ public class Server extends UnicastRemoteObject {
             // Add course conflict logic to this
             RegisterStudentHandler registerStudentHandler = new RegisterStudentHandler(dbStub);
             RegistrationValidationHandler registrationValidationHandler = new RegistrationValidationHandler(dbStub);
+            
+            serverRegistry.rebind("ListAllStudentsHandler", listAllStudentsHandler);
+            serverRegistry.rebind("ListAllCoursesHandler", listAllCoursesHandler);
+            serverRegistry.rebind("ListCoursesCompletedHandler", listCoursesCompletedHandler);
+            serverRegistry.rebind("ListCoursesRegisteredHandler", listCoursesRegisteredHandler);
+            serverRegistry.rebind("ListStudentsRegisteredHandler", listStudentsRegisteredHandler);
+            serverRegistry.rebind("OverloadHandler", overloadHandler);
+            serverRegistry.rebind("RegisterStudentHandler", registerStudentHandler);
+            serverRegistry.rebind("RegistrationValidationHandler", registrationValidationHandler);
+
 
 
         } catch (Exception e) {

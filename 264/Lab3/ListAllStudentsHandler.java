@@ -6,12 +6,13 @@
  */
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
  * "List all students" command event handler.
  */
-public class ListAllStudentsHandler implements IActivity {
+public class ListAllStudentsHandler extends UnicastRemoteObject implements IActivity {
 
     /**
      * Construct "List all students" command event handler.
@@ -21,7 +22,7 @@ public class ListAllStudentsHandler implements IActivity {
      * @param iOutputEvCode output event code to send the command processing result
      */
     DBInterface dbStub;
-    public ListAllStudentsHandler(DBInterface stub) {
+    public ListAllStudentsHandler(DBInterface stub) throws RemoteException{
         super();
         dbStub = stub;
     }
@@ -36,12 +37,12 @@ public class ListAllStudentsHandler implements IActivity {
         // Get all student records.
         String sReturn = "";
         try {    
-            ArrayList<Student> vStudent = dbStub.getAllStudentRecords();
+            String vStudent = dbStub.getAllStudentRecords();
             // Construct a list of student information and return it.
-            for (int i=0; i<vStudent.size(); i++) {
-                sReturn += (i == 0 ? "" : "\n") + ((Student) vStudent.get(i)).toString();
-            }
-            return sReturn;
+            // for (int i=0; i<vStudent.size(); i++) {
+            //     sReturn += (i == 0 ? "" : "\n") + ((Student) vStudent.get(i)).toString();
+            // }
+            return vStudent;
         } catch (RemoteException e) {
             e.printStackTrace();
             System.exit(1);
