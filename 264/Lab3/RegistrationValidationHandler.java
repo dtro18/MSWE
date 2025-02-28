@@ -5,16 +5,16 @@
  * Copyright: Copyright (c) 2003,2004 Carnegie Mellon University
  *
  */
-
- import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
- import java.util.StringTokenizer;
- 
+import java.util.StringTokenizer;
+
  
  /**
   * "Register a student for a course" command event handler.
   */
- public class RegistrationValidationHandler implements IActivity {
+ public class RegistrationValidationHandler extends UnicastRemoteObject implements IActivity {
  
      /**
       * Construct "Register a student for a course" command event handler.
@@ -24,7 +24,7 @@ import java.util.ArrayList;
       * @param iOutputEvCode output event code to send the command processing result
       */
     DBInterface dbStub;
-     public RegistrationValidationHandler(DBInterface stub) {
+     public RegistrationValidationHandler(DBInterface stub) throws RemoteException{
          super();
          dbStub = stub;
      }

@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+// Initialize: java Database.java Students.txt Courses.txt
 
 public class Database extends UnicastRemoteObject implements DBInterface {
     public ArrayList<Student> vStudent;
@@ -28,8 +29,14 @@ public class Database extends UnicastRemoteObject implements DBInterface {
 
 
     }
-    public ArrayList<Course> getAllCourseRecords() throws RemoteException {
-        return this.vCourse;
+    public String getAllCourseRecords() throws RemoteException {
+        // return this.vCourse;
+        String sReturn = "";
+        for (Course course : vCourse) {
+            sReturn += course.toString() + "\n";
+
+        }
+        return sReturn;
     }
     public Student getStudentRecord(String sSID) throws RemoteException {
         for (int i=0; i<this.vStudent.size(); i++) {

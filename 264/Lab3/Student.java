@@ -6,6 +6,7 @@
  */
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -19,7 +20,9 @@ import java.util.StringTokenizer;
  * @author Jung Soo Kim
  * @version 1.0
  */
-public class Student {
+public class Student implements Serializable {
+
+    private static final long serialVersionUID = 1L; // Ensure compatibility
 
     /**
      * A string representing this student's ID.

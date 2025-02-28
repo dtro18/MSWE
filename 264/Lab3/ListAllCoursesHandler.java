@@ -6,6 +6,7 @@
  */
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 
 // Change the extended class to IActivity
-public class ListAllCoursesHandler implements IActivity {
+public class ListAllCoursesHandler extends UnicastRemoteObject implements IActivity {
 
     /**
      * Construct "List all courses" command event handler.
@@ -24,7 +25,7 @@ public class ListAllCoursesHandler implements IActivity {
      * @param iOutputEvCode output event code to send the command processing result
      */
     DBInterface dbStub;
-    public ListAllCoursesHandler(DBInterface stub) {
+    public ListAllCoursesHandler(DBInterface stub) throws RemoteException{
         super();
         dbStub = stub;
     }
@@ -39,15 +40,12 @@ public class ListAllCoursesHandler implements IActivity {
         // Get all course records.
         // ListAllCoursesHandler listAllCoursesHandler = new ListAllCoursesHandler(dbStub);
 
-        ArrayList<Course> vCourse;
+        // ArrayList<Course> vCourse;
         String sReturn = "";
         try {
-            vCourse = dbStub.getAllCourseRecords();
+            String vCourse = dbStub.getAllCourseRecords();
             // Construct a list of course information and return it.
-            sReturn = "";
-            for (int i=0; i<vCourse.size(); i++) {
-                sReturn += (i == 0 ? "" : "\n") + ((Course) vCourse.get(i)).toString();
-            }
+            return vCourse;
             
         } catch (RemoteException e) {
             e.printStackTrace();

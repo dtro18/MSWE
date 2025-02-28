@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface DBInterface extends Remote {
     String getAllStudentRecords() throws RemoteException;
-    ArrayList<Course> getAllCourseRecords() throws RemoteException;
+    String getAllCourseRecords() throws RemoteException;
     Student getStudentRecord(String sSID) throws RemoteException;
     String getStudentName(String sSID) throws RemoteException;
     Course getCourseRecord(String sCID, String sSection) throws RemoteException;

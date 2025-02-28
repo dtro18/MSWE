@@ -8,12 +8,13 @@
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.rmi.server.UnicastRemoteObject;
 
 
 /**
  * "List students who registered for a course" command event handler.
  */
-public class ListStudentsRegisteredHandler implements IActivity {
+public class ListStudentsRegisteredHandler extends UnicastRemoteObject implements IActivity {
 
     /**
      * Construct "List students who registered for a course" command event handler.
@@ -23,7 +24,7 @@ public class ListStudentsRegisteredHandler implements IActivity {
      * @param iOutputEvCode output event code to send the command processing result
      */
     DBInterface dbStub;
-    public ListStudentsRegisteredHandler(DBInterface stub) {
+    public ListStudentsRegisteredHandler(DBInterface stub) throws RemoteException{
         super();
         dbStub = stub;
     }

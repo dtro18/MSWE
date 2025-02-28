@@ -4,7 +4,7 @@
  * Copyright: Copyright (c) 2003,2004 Carnegie Mellon University
  *
  */
-
+import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 // import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 /**
  * "Register a student for a course" command event handler.
  */
-public class RegisterStudentHandler implements IActivity {
+public class RegisterStudentHandler extends UnicastRemoteObject implements IActivity {
 
     /**
      * Construct "Register a student for a course" command event handler.
@@ -23,7 +23,7 @@ public class RegisterStudentHandler implements IActivity {
      * @param iOutputEvCode output event code to send the command processing result
      */
     DBInterface dbStub;
-    public RegisterStudentHandler(DBInterface stub) {
+    public RegisterStudentHandler(DBInterface stub) throws RemoteException{
         super();
         dbStub = stub;
     }
@@ -41,7 +41,7 @@ public class RegisterStudentHandler implements IActivity {
         }
         // If no error:
         StringTokenizer objTokenizer = new StringTokenizer(param);
-        // String success  = objTokenizer.nextToken();
+        String success  = objTokenizer.nextToken();
         String sSID     = objTokenizer.nextToken();
         String sCID     = objTokenizer.nextToken();
         String sSection = objTokenizer.nextToken();
@@ -50,11 +50,14 @@ public class RegisterStudentHandler implements IActivity {
             // Not sure if we need this...
             // Student objStudent = dbStub.getStudentRecord(sSID);
             Course objCourse = dbStub.getCourseRecord(sCID, sSection);
-
+            
+            int numEnrolled = objCourse.getRegisteredStudents().size();
+            System.out.println("numEnrolled: " + numEnrolled);
             // Request validated. Proceed to register.
             dbStub.makeARegistration(sSID, sCID, sSection);
-
-            int numEnrolled = objCourse.getRegisteredStudents().size();
+            objCourse = dbStub.getCourseRecord(sCID, sSection);
+            
+            numEnrolled = objCourse.getRegisteredStudents().size();
             System.out.println("numEnrolled: " + numEnrolled);
             if (numEnrolled > 3) {
                 return "Class is overbooked! Registering anyway.";

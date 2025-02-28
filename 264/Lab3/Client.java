@@ -4,11 +4,18 @@
 
 // Should call IActivity Interface
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.io.IOException;
 // import java.util.StringTokenizer;
 
 public class Client {
@@ -17,10 +24,24 @@ public class Client {
             // Create a buffered reader using system input stream.
             BufferedReader objReader = new BufferedReader(new InputStreamReader(System.in));
             Registry registry = LocateRegistry.getRegistry(null, 1100);
-            
 
-            // Structure to call a method
-            // String response = stub.sayHello();
+            // Create dual output stream to write to logfile every time System.out is printed to
+            String filePath = "logs.txt";
+            PrintStream fileOut = new PrintStream(
+                new BufferedOutputStream(new FileOutputStream(filePath, true)), true
+            );
+            PrintStream consoleOut = System.out;
+
+            PrintStream dualOut = new PrintStream(new OutputStream() {
+                @Override
+                public void write(int b) throws IOException {
+                    consoleOut.write(b); // Print to console
+                    fileOut.write(b);    // Print to file
+                }
+            });
+            System.setOut(dualOut);
+            System.setErr(dualOut);
+
             while (true) {
                 
                 // Show available commands and get a choice.
@@ -34,7 +55,6 @@ public class Client {
                 System.out.println("x) Exit");
                 System.out.println("\nEnter your choice and press return >> ");
                 String sChoice = objReader.readLine().trim();
-
                 // Execute command 1: List all students.
                 if (sChoice.equals("1")) {
                     // Remote call
@@ -42,100 +62,87 @@ public class Client {
                     String students = stub.execute("");
                     System.out.println(students);
                 }
-                // TODO: Implement the rest of the user choices
-                // TODO: Change return values for getAllCourseRecords
-                // TODO: Deal with registration validation
+
                 // Execute command 2: List all courses.
-                // if (sChoice.equals("2")) {
-                //     // Remote call
-                //     ArrayList<Course> courses = stub.getAllCourseRecords();
-                // }
+                if (sChoice.equals("2")) {
+                    IActivity stub = (IActivity) registry.lookup("ListAllCoursesHandler");
+                    String courses = stub.execute("");
+                    System.out.println(courses);
+                }
 
-                // // Execute command 3: List students registered for a course.
-                // if (sChoice.equals("3")) {
-                //     // Get course ID and course section from user.
-                //     System.out.print("\nEnter course ID and press return >> ");
-                //     String sCID = objReader.readLine().trim();
-                //     System.out.print("\nEnter course section and press return >> ");
-                //     String sSection = objReader.readLine().trim();
+                // Execute command 3: List students registered for a course.
+                if (sChoice.equals("3")) {
+                    // Get course ID and course section from user.
+                    System.out.println("\nEnter course ID and press return >> ");
+                    String sCID = objReader.readLine().trim();
+                    System.out.println("\nEnter course section and press return >> ");
+                    String sSection = objReader.readLine().trim();
 
-                //     // Get the list of students who registered for the given course.
-                //     Course objCourse = stub.getCourseRecord(sCID, sSection);
-                //     if (objCourse == null) {
-                //         System.out.println("Invalid course ID or course section");
-                //         continue;
-                //     } else {
-                //         ArrayList<Student> vStudent = objCourse.getRegisteredStudents();
+                    // Get the list of students who registered for the given course.
+                    IActivity stub = (IActivity) registry.lookup("ListStudentsRegisteredHandler");
+                    String students = stub.execute(sCID + " " + sSection);
 
-                //         // Construct a list of student information and return it.
-                //         String sReturn = "";
-                //         for (int i=0; i<vStudent.size(); i++) {
-                //             sReturn += (i == 0 ? "" : "\n") + ((Student) vStudent.get(i)).toString();
-                //         }
-                //         System.out.println(sReturn);
-                //         continue;
-                //     }
+                    System.out.println(students);
+                    }
 
-                    
-                // }
 
                 // // Execute command 4: List courses a student has registered for.
-                // if (sChoice.equals("4")) {
-                //     // Get student ID from user.
-                //     System.out.println("\nEnter student ID and press return >> ");
-                //     String sSID = objReader.readLine().trim();
+                if (sChoice.equals("4")) {
+                    // Get student ID from user.
+                    System.out.println("\nEnter student ID and press return >> ");
+                    String sSID = objReader.readLine().trim();
 
-                //     // Get the list of courses the given student has registered for.
-                //     Student objStudent = stub.getStudentRecord(sSID);
-                //     if (objStudent == null) {
-                //         System.out.println("Invalid student ID");
-                //         continue;
-                //     }
+                    // Get the list of courses the given student has registered for.
+                    IActivity stub = (IActivity) registry.lookup("ListCoursesRegisteredHandler");
+                    String courses = stub.execute(sSID);
 
-                //     ArrayList<Course> vCourse = objStudent.getRegisteredCourses();
 
-                //     // Construct a list of course information and return it.
-                //     String sReturn = "";
-                //     for (int i=0; i<vCourse.size(); i++) {
-                //         sReturn += (i == 0 ? "" : "\n") + ((Course) vCourse.get(i)).toString();
-                //     }
+                    // Student objStudent = stub.getStudentRecord(sSID);
+                    if (courses == "Invalid student ID") {
+                        System.out.println("Invalid student ID");
+                        continue;
+                    }
         
-                //     System.out.println(sReturn);
-                // }
+                    System.out.println(courses);
+                }
 
                 // // Execute command 5: List courses a student has completed.
-                // if (sChoice.equals("5")) {
-                //     // Get student ID from user.
-                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter student ID and press return >> ");
-                //     String sSID = objReader.readLine().trim();
+                if (sChoice.equals("5")) {
+                    // Get student ID from user.
+                    System.out.println("\nEnter student ID and press return >> ");
+                    String sSID = objReader.readLine().trim();
 
-                //     // Announce the command event #5 with student ID.
-                //     EventBus.announce(EventBus.EV_SHOW, "\n");
-                //     EventBus.announce(EventBus.EV_LIST_COURSES_COMPLETED, sSID);
-                //     continue;
-                // }
+                    IActivity stub = (IActivity) registry.lookup("ListCoursesCompletedHandler");
+                    String courses = stub.execute(sSID);
+                    System.out.println(courses);
+                    continue;
+                }
 
-                // // Execute command 6: Register a student for a course.
-                // if (sChoice.equals("6")) {
-                //     // Get student ID, course ID, and course section from user.
-                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter student ID and press return >> ");
-                //     String sSID = objReader.readLine().trim();
-                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter course ID and press return >> ");
-                //     String sCID = objReader.readLine().trim();
-                //     EventBus.announce(EventBus.EV_SHOW, "\nEnter course section and press return >> ");
-                //     String sSection = objReader.readLine().trim();
+                // Execute command 6: Register a student for a course.
+                if (sChoice.equals("6")) {
+                    // Get student ID, course ID, and course    section from user.
+                    System.out.println("\nEnter student ID and press return >> ");
+                    String sSID = objReader.readLine().trim();
+                    System.out.println("\nEnter course ID and press return >> ");
+                    String sCID = objReader.readLine().trim();
+                    System.out.println("\nEnter course section and press return >> ");
+                    String sSection = objReader.readLine().trim();
 
-                //     // Announce the command event #5 with student ID, course ID, and course section.
-                //     EventBus.announce(EventBus.EV_SHOW, "\n");
-                //     EventBus.announce(EventBus.EV_REGISTER_STUDENT, sSID + " " + sCID + " " + sSection);
-                //     continue;
-                // }
+                    // Grab the stub and execute the function
+                    IActivity stubValidation = (IActivity) registry.lookup("RegistrationValidationHandler");
+                    String validationResult = stubValidation.execute(sSID + " " +  sCID + " " + sSection);
+                    IActivity stubRegister = (IActivity) registry.lookup("RegisterStudentHandler");
+                    String registerResult = stubRegister.execute(validationResult);
+                    System.out.println(registerResult);
+                    continue;
+                }
 
                 // Terminate this client.
                 if (sChoice.equalsIgnoreCase("X")) {
                     break;
                 }
             }
+            fileOut.close();
 
             // Clean up the resources.
             objReader.close();
