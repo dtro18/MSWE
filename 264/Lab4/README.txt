@@ -1,7 +1,5 @@
-To run the assignment, git clone the project first:
+For testing, the project was built with JDK17 and Gradle 8.10. Additionally, Picasso 2.71828 was used.
+Android studio has some methods to install a version of JDK17.
 
-https://github.com/jwlin/android-retrofit-tutorial
-
-Import the cloned project with Android Studio, and replace "YOUR_API_KEY" in MainActivity.java with this API Key: 5f7cb29d489bbbb86ca6e6d90f422eb2
-
-Run the app with an Android 8.1 emulator (API Level 27) or higher.
+From there, select Build (The hammer icon) in the bottom left corner to build the app.
+The app was run using Medium Phone API 35. Run can be found in the taskbar.
