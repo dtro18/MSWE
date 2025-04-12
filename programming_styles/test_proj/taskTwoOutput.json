@@ -1,0 +1,25 @@
+{
+    "ns": 0,
+    "id": 1269,
+    "title": "Main Page",
+    "revision": {
+        "sha1": "phoiac9h4m842xq45sp7s6u21eteeq1",
+        "contributor": {
+            "id": 177,
+            "username": "Pathoschild"
+        },
+        "origin": 3988,
+        "format": "text/x-wiki",
+        "comment": "blanked, closed & redundant with site notice",
+        "model": "wikitext",
+        "id": 3988,
+        "text": {
+            "sha1": "phoiac9h4m842xq45sp7s6u21eteeq1",
+            "bytes": 0,
+            "location": "es:DB://cluster20/1?flags=utf-8,gzip",
+            "id": "44423a2f2f636c757374657232302f31"
+        },
+        "parentid": 3807,
+        "timestamp": "2009-03-16T01:13:23Z"
+    }
+}
