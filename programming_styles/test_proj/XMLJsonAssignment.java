@@ -45,7 +45,7 @@ public class XMLJsonAssignment {
     public void performTaskTwo() {
         // Presetting the xml file
         JSONObject mediumJsonObj = readXmlFile("books.xml");
-        JSONPointer jsonPointer = new JSONPointer("/mediawiki/page/0");
+        JSONPointer jsonPointer = new JSONPointer("/catalog");
         // Must cast to json object bc pointer returns just object
         saveJsonObjAsJson((JSONObject) jsonPointer.queryFrom(mediumJsonObj), "taskTwoOutput");
     }
@@ -93,7 +93,6 @@ public class XMLJsonAssignment {
     
     public void performTaskFour() {
         JSONObject largeJsonObject = readXmlFile("books.xml");
-        // Iterator<String> iter = smallJsonObj.keys();
         largeJsonObject = replacekeyInJSONObject(largeJsonObject);
         saveJsonObjAsJson(largeJsonObject, "taskFourOutput");
     }

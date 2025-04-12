@@ -2,7 +2,7 @@ To compile:
 javac -cp "lib/json-20250107.jar" -d out XMLJsonAssignment.java
 
 To run script with two args, file to be read in task 1 and path to be searched in task 3.
-java -cp "lib/json-20250107.jar;out" programming_styles.test_proj.XMLJsonAssignment books.xml /feed/doc/title
+java -cp "lib/json-20250107.jar;out" programming_styles.test_proj.XMLJsonAssignment books.xml /catalog
 
 
 Output when a huge (2gb) file was run:
