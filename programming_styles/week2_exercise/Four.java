@@ -1,4 +1,4 @@
-// package programming_styles.week2_exercise;
+// This one was annoying.
 
 import java.util.*;
 import java.io.*;
@@ -25,20 +25,19 @@ public class Four {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-        
-        System.out.println(stopWordsList);
-        // Handle this: "Certainly," replied Elizabeth--"there are such people, but I hope I
-        // Create adjacency list to store word and frequency at index i
+
         ArrayList<String> wordList = new ArrayList<>();
         ArrayList<Integer> freqList = new ArrayList<>();
 
         try {
-            File targetText = new File(args[0]);
+            File targetText = new File(args[1]);
             Scanner targetReader = new Scanner(targetText);
             String line;
-            String[] words;
+
+            // Outer loop through file
             while (targetReader.hasNextLine()) {
-                line = targetReader.nextLine();
+                // Add space so the last word is processed
+                line = targetReader.nextLine() + " ";
             
                 // If line is empty
                 if (line.length() == 0) {
@@ -47,45 +46,78 @@ public class Four {
 
                 // If line is not empty
                 Integer start_char = null; // Will store current word's start index
+                Integer j = 0;
                 for (int i = 0; i < line.length(); i++) {
                     char c = line.charAt(i);
-                    System.out.println(c);
+                    if (start_char == null) {
+                        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                            start_char = j;
+                        }
+                    } else {
+                        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
+                            boolean found = false;
+                            String word = "";
+                            // Grab the whole word
+                            for (int k = start_char; k < j; k++) {
 
-                }
-                words = line.split(" |--|-");
-                // Some lines are empty.
-                for (String word : words) {
-                    // Handle 
-                    word = word.toLowerCase().replaceAll("'s", "").replaceAll("[^a-z]", "");
+                                word += Character.toLowerCase(line.charAt(k));
+                            }
+                            // Check if word in stopWords
+                            boolean isStopWord = false;
+                            for (int m = 0; m < stopWordsList.size(); m ++) {
+                                if (word.equals(stopWordsList.get(m))) {
+                                    isStopWord = true;
+                                }
+                            }
+                            
+                            // If the word is not a stopword, proceed.
+                            if (!isStopWord && word.length() >= 2) {
+                                Integer insertedWordIdx = 0;
+                                for (int l = 0; l < wordList.size(); l ++) {
+                                    if (word.equals(wordList.get(l))) {
+                                        freqList.set(l, freqList.get(l) + 1);
+                                        insertedWordIdx = l;
+                                        found = true;
+                                        break;
 
-                    // System.out.println(word);
-                    if (stopWords.contains(word) | word.length() == 0){
-                        continue;
+                                    } 
+                                }
+                                if (!found) {
+                                    wordList.add(word);
+                                    freqList.add(1);
+                                    insertedWordIdx = wordList.size() - 1;
+                                }
+                                if (wordList.size() > 1) {
+                                    // Bubblesort desc both arrs
+                                    for (int o = insertedWordIdx; o > -1; o--) {
+                                        if (freqList.get(o) < freqList.get(insertedWordIdx)) {
+                                            Integer tempFreq = freqList.get(o);
+                                            freqList.set(o, freqList.get(insertedWordIdx));
+                                            freqList.set(insertedWordIdx, tempFreq);
+
+                                            String tempWord = wordList.get(o);
+                                            wordList.set(o, wordList.get(insertedWordIdx));
+                                            wordList.set(insertedWordIdx, tempWord);
+
+                                            insertedWordIdx = o;
+                                        }
+                                    }
+                                }
+                            }
+                            start_char = null;
+                        }
+                        
                     }
-                    if (freqDict.containsKey(word)) {
-                        freqDict.put(word, freqDict.get(word) + 1);
-                    }
-                    else {
-                        freqDict.put(word, 1);
-                    }
+                    j += 1;
                 }
             }
-            targetReader.close();
+        for (int i = 0; i < 25; i++ ) {
+            System.out.println(wordList.get(i));
+            System.out.println(freqList.get(i));
+        }
+        // System.out.println(wordList);
         } catch (FileNotFoundException e) {
             System.out.println("Target file not found");
-        }
-        // Create list to hold dictionary entries and sort them
-        List<freqObj> dictList = new ArrayList<freqObj>();
-        for (String key : freqDict.keySet()) {
-            Integer value = freqDict.get(key);
-            freqObj newFreqObj = new freqObj(key, value);
-            dictList.add(newFreqObj);
-        }
-        Collections.sort(dictList);
-        // Print in formatted descending order: e.g. mr  -  786
-        for (int i = 0; i < 25; i++) {
-            freqObj dictEntryObj = dictList.get(i);
-            System.out.println(dictEntryObj.toString());
         }
     }
 
