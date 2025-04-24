@@ -1,0 +1,1 @@
+ Package java.util.function for prewritten bind methods that send results of one function to another
