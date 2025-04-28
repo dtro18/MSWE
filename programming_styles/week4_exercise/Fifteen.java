@@ -1,9 +1,10 @@
-package week4_exercise;
-
 import java.io.IOException;
 import java.nio.file.Files;
+import java.io.File;
 import java.util.ArrayList;
 import java.nio.file.Paths;
+import java.util.regex.Pattern;
+import java.util.Scanner; 
 
 class WordFrequencyFramework {
     ArrayList<Runnable> _load_event_handlers = new ArrayList<>();
@@ -48,37 +49,64 @@ class DataStorage {
     public DataStorage(WordFrequencyFramework wfapp, StopWordFilter stop_word_filter) {
         _stop_word_filter = stop_word_filter;
 
-        wfapp.register_for_load_event(data_load);
+        wfapp.register_for_load_event(
+            () -> this.__load()
+        );
 
     }
     
-    public void __load(String path_to_file) {
-
-    }
-
-    private class data_load implements Runnable {
-        @Override
-        public void run() {
-            try {
-                String content = Files.readString(Paths.get("stop_words.txt"));
-                // Revisit this.
-                _data = content;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            
+    public void __load() {
+        String path_to_file = "pride-and-prejudice.txt";
+        try {
+            _data = Files.readString(Paths.get(path_to_file));
+            Pattern pattern = Pattern.compile("[\\W_]+");
+            _data = pattern.matcher(_data).replaceAll(" ").toLowerCase();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        // System.out.println(_data);
+        
     }
-
 }
 
 class StopWordFilter {
+    ArrayList<String> _stop_words = new ArrayList<>();
 
+    public StopWordFilter(WordFrequencyFramework wfapp) {
+        wfapp.register_for_load_event(
+            () -> this.__load()
+        );
+    }
+
+    public void __load() {
+        String path_to_file = "stop_words.txt";
+        try {
+            Scanner stopWordReader = new Scanner(new File(path_to_file));
+            String str = stopWordReader.nextLine();
+            String[] words = str.split(",");    
+            for (int i = 0; i < words.length; i++) {
+                _stop_words.add(words[i]);
+            }
+            stopWordReader.close();
+        } catch (Exception e) {
+            System.out.println("File not found");
+        }   
+        System.out.println(_stop_words);
+    }
 }
 
 class load_event implements Runnable {
     @Override
     public void run() {
 
+    }
+}
+
+public class Fifteen {
+    public static void main(String[] args) {
+        WordFrequencyFramework wfapp = new WordFrequencyFramework();
+        StopWordFilter stopWordFilter = new StopWordFilter(wfapp);
+        DataStorage dataStorageObj = new DataStorage(wfapp, stopWordFilter);
+        wfapp.run();
     }
 }
