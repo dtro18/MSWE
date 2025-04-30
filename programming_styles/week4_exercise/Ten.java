@@ -4,28 +4,46 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
-public class Nine {
-    // Reads in book words and calls the next function
-    static String readBookWords(Function<String, String> next) {
-        String path_to_file = "pride-and-prejudice.txt";
+class TFTheOne {
+
+
+    @FunctionalInterface
+    interface Chain<T, R> {
+        // Executes current function in the chain
+        R apply(T input);
+
+        // Creates a new chain that composes current function with next one
+        default <V> Chain<T, V> bind(Chain<R, V> next) {
+            return input -> next.apply(this.apply(input));
+        }
+    }
+
+    // Helper function that converts regular functions <T, R> to Chain instances
+    public static <T, R> Chain<T, R> makeChain(Function<T, R> function) {
+        return function::apply;
+    }
+
+    // make
+    public Chain<String, String> read_file = makeChain(path_to_file -> {
         String data = "";
         try {
             data = Files.readString(Paths.get(path_to_file));
-            Pattern pattern = Pattern.compile("[\\W_]+");
-            data = pattern.matcher(data).replaceAll(" ").toLowerCase();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return data;
+    });
 
-        return next.apply(data);
-    }
+    public Chain<String, String> filter_chars = makeChain(data -> {
+        Pattern pattern = Pattern.compile("[\\W_]+");
+        data = pattern.matcher(data).replaceAll(" ").toLowerCase();
+        return data;
+    });
 
-    static Function<String, ArrayList<String>> removeStopWords = wordList -> {
-
+    public Chain<String, ArrayList<String>> remove_stop_words = makeChain(word_list -> {
         // Stores stopwords
         ArrayList<String> stopWords = new ArrayList<>();
         try {
@@ -40,8 +58,9 @@ public class Nine {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } 
+
         ArrayList<String> filteredWords = new ArrayList<>();
-        String[] words = wordList.split(" ");
+        String[] words = word_list.split(" ");
         for (String word : words) {
             if (stopWords.contains(word) || word.length() < 2) {
                 continue;
@@ -50,26 +69,27 @@ public class Nine {
             }
         }
         return filteredWords;
-    };
-
-    // Takes in a processed arrayList as input and outputs a dictionary
-    static Function<ArrayList<String>, HashMap<String, Integer>> populateFreqDict = bookWords -> {
-        HashMap<String, Integer> freqDict = new HashMap<>();
-        for (String word : bookWords) {
-            if (freqDict.containsKey(word)) {
-                freqDict.put(word, freqDict.get(word) + 1);
+    });
+    
+    public Chain<ArrayList<String>, HashMap<String, Integer>> get_frequencies = makeChain(book_words -> {
+        // Takes in a processed arrayList as input and outputs a dictionary
+        HashMap<String, Integer> freq_dict = new HashMap<>();
+        for (String word : book_words) {
+            if (freq_dict.containsKey(word)) {
+                freq_dict.put(word, freq_dict.get(word) + 1);
             }
             else {
-                freqDict.put(word, 1);
+                freq_dict.put(word, 1);
             }
         }
-        return freqDict;
-    };
-    static Function<HashMap<String, Integer>, String> printTop25 = freqDict -> {
+        return freq_dict;
+    });
+
+    public Chain<HashMap<String, Integer>, String> get_top_25 = makeChain(freq_dict -> {
         PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(Comparator.comparing(Map.Entry::getValue));
         ArrayList<String> result = new ArrayList<>();
         // Iterate through the map and add entries to the PriorityQueue
-        for (Map.Entry<String, Integer> entry : freqDict.entrySet()) {
+        for (Map.Entry<String, Integer> entry : freq_dict.entrySet()) {
             pq.offer(entry);
             if (pq.size() > 25) {
                 pq.poll(); 
@@ -87,16 +107,20 @@ public class Nine {
             resString += result.get(i) + " \n";
         }
         return resString;
-    };
+    });
 
+}
+
+public class Ten {
     public static void main(String[] args) {
+        TFTheOne driver = new TFTheOne();
 
-        Function<String, String> kickForward = 
-            removeStopWords
-                .andThen(populateFreqDict)
-                .andThen(printTop25);
-
-        String result = readBookWords(kickForward);
+        String result = driver.read_file
+            .bind(driver.filter_chars)
+            .bind(driver.remove_stop_words)
+            .bind(driver.get_frequencies)
+            .bind(driver.get_top_25)
+            .apply(args[0]);
         System.out.println(result);
     }
 }
