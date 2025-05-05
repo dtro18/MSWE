@@ -8,6 +8,11 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 import java.lang.annotation.Annotation;
 
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.lang.reflect.Method;
+import java.io.File;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -35,19 +40,18 @@ public class JarClasses {
         return classNames;
     }
 
-    public static Method[] getMethodsOfClass(String className) {
-        Method[] methods = new Method[1];
-        try {
-            Class<?> myClass = Class.forName(className);
-            methods = myClass.getDeclaredMethods();
+    public static Method[] getMethodsOfClass(String jarPath, String className) {
+        try (URLClassLoader classLoader = new URLClassLoader(
+                new URL[] { new File(jarPath).toURI().toURL() })) {
             
-        } catch (Exception e) {
-            e.printStackTrace();
+            Class<?> clazz = classLoader.loadClass(className);
+            return clazz.getDeclaredMethods();
+            
+        } catch (Throwable t) {
+            // Catching Throwable to handle all issues, including linkage errors
+            System.err.println("Skipping class: " + className + " due to " + t.getClass().getSimpleName());
+            return new Method[0];
         }
-
-        return methods;
-       
-
     }
 
     public static void main(String[] args) {
@@ -63,11 +67,12 @@ public class JarClasses {
         // Redirect standard output to the file
         
         Set<String> classNames = getClassNames(args[0]);
+        System.out.println(classNames);
         for (String className : classNames) {
             System.out.println(className);
             System.out.println("\n");
-            for (Method method : getMethodsOfClass(className)) {
-                System.out.println(className);
+            for (Method method : getMethodsOfClass(args[0], className)) {
+                
                 try {
                     System.out.println(method.toString());
                 } catch (Exception e) {
