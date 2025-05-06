@@ -8,21 +8,12 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
-import java.lang.annotation.Annotation;
-
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.lang.reflect.Method;
 import java.io.File;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 
 public class JarClasses {
-    // Takes a jar file as command line argument and prints out a listing of all the classes inside
-    // Also print number of declared public, private, protected static methods, number of declared fields for each
+    // Gather classnames and store in hashset to avoid dup
     public static Set<String> getClassNames(String givenFile) {
         Set<String> classNames = new HashSet<>();
         try (JarFile jarFile = new JarFile(givenFile)) {
@@ -41,6 +32,8 @@ public class JarClasses {
         }
         return classNames;
     }
+
+    // Get class objects given the classname
     public static Class<?> getClassFromString(URLClassLoader classLoader, String className) {
         try {
             return classLoader.loadClass(className);
@@ -50,11 +43,11 @@ public class JarClasses {
         }
     }
 
+    // Get the methods of a class object and return as a list
     public static Method[] getMethodsOfClass(Class classPtr) {
         try {
             return classPtr.getDeclaredMethods();
         } catch (Throwable t) {
-            // Catching Throwable to handle all issues, including linkage errors
             System.err.println("Skipping class2: " + classPtr + " due to " + t.getClass().getSimpleName());
             return new Method[0];
         }
