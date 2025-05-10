@@ -1,498 +1,163 @@
-[org.json.JSONML, org.json.XMLParserConfiguration, org.json.JSONObject$Null, org.json.XMLXsiTypeConverter, org.json.Property, org.json.XML$1, org.json.XML$1$1, org.json.JSONException, org.json.JSONObject$1, org.json.JSONObject, org.json.JSONPointer$Builder, org.json.ParserConfiguration, org.json.HTTP, org.json.JSONPointerException, org.json.XML, org.json.JSONStringer, org.json.JSONPropertyIgnore, META-INF.versions.9.module-info, org.json.JSONPointer, org.json.HTTPTokener, org.json.CDL, org.json.JSONParserConfiguration, org.json.JSONTokener, org.json.Cookie, org.json.JSONPropertyName, org.json.StringBuilderWriter, org.json.JSONWriter, org.json.JSONString, org.json.JSONMLParserConfiguration, org.json.CookieList, org.json.JSONArray, org.json.XMLTokener]
-[org.json.JSONML, org.json.XMLParserConfiguration, org.json.JSONObject$Null, org.json.XMLXsiTypeConverter, org.json.Property, org.json.XML$1, org.json.XML$1$1, org.json.JSONException, org.json.JSONObject$1, org.json.JSONObject, org.json.JSONPointer$Builder, org.json.ParserConfiguration, org.json.HTTP, org.json.JSONPointerException, org.json.XML, org.json.JSONStringer, org.json.JSONPropertyIgnore, META-INF.versions.9.module-info, org.json.JSONPointer, org.json.HTTPTokener, org.json.CDL, org.json.JSONParserConfiguration, org.json.JSONTokener, org.json.Cookie, org.json.JSONPropertyName, org.json.StringBuilderWriter, org.json.JSONWriter, org.json.JSONString, org.json.JSONMLParserConfiguration, org.json.CookieList, org.json.JSONArray, org.json.XMLTokener]
-org.json.JSONML
-
-
-public static java.lang.String org.json.JSONML.toString(org.json.JSONArray) throws org.json.JSONException
-public static java.lang.String org.json.JSONML.toString(org.json.JSONObject) throws org.json.JSONException
-private static java.lang.Object org.json.JSONML.parse(org.json.XMLTokener,boolean,org.json.JSONArray,org.json.JSONMLParserConfiguration,int) throws org.json.JSONException
-private static java.lang.Object org.json.JSONML.parse(org.json.XMLTokener,boolean,org.json.JSONArray,boolean,int) throws org.json.JSONException
-public static org.json.JSONArray org.json.JSONML.toJSONArray(org.json.XMLTokener) throws org.json.JSONException
-public static org.json.JSONArray org.json.JSONML.toJSONArray(org.json.XMLTokener,boolean) throws org.json.JSONException
-public static org.json.JSONArray org.json.JSONML.toJSONArray(java.lang.String) throws org.json.JSONException
-public static org.json.JSONArray org.json.JSONML.toJSONArray(java.lang.String,boolean) throws org.json.JSONException
-public static org.json.JSONArray org.json.JSONML.toJSONArray(org.json.XMLTokener,org.json.JSONMLParserConfiguration) throws org.json.JSONException
-public static org.json.JSONArray org.json.JSONML.toJSONArray(java.lang.String,org.json.JSONMLParserConfiguration) throws org.json.JSONException
-public static org.json.JSONObject org.json.JSONML.toJSONObject(org.json.XMLTokener,org.json.JSONMLParserConfiguration) throws org.json.JSONException
-public static org.json.JSONObject org.json.JSONML.toJSONObject(org.json.XMLTokener,boolean) throws org.json.JSONException
-public static org.json.JSONObject org.json.JSONML.toJSONObject(java.lang.String,boolean) throws org.json.JSONException
-public static org.json.JSONObject org.json.JSONML.toJSONObject(org.json.XMLTokener) throws org.json.JSONException
-public static org.json.JSONObject org.json.JSONML.toJSONObject(java.lang.String,org.json.JSONMLParserConfiguration) throws org.json.JSONException
-public static org.json.JSONObject org.json.JSONML.toJSONObject(java.lang.String) throws org.json.JSONException
-org.json.XMLParserConfiguration
-
-
-protected org.json.XMLParserConfiguration org.json.XMLParserConfiguration.clone()
-protected org.json.ParserConfiguration org.json.XMLParserConfiguration.clone()
-protected java.lang.Object org.json.XMLParserConfiguration.clone() throws java.lang.CloneNotSupportedException
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withConvertNilAttributeToNull(boolean)
-public boolean org.json.XMLParserConfiguration.isConvertNilAttributeToNull()
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withcDataTagName(java.lang.String)
-public java.lang.String org.json.XMLParserConfiguration.getcDataTagName()
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withForceList(java.util.Set)
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withXsiTypeMap(java.util.Map)
-public org.json.ParserConfiguration org.json.XMLParserConfiguration.withKeepStrings(boolean)
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withKeepStrings(boolean)
-public boolean org.json.XMLParserConfiguration.isCloseEmptyTag()
-public java.util.Map org.json.XMLParserConfiguration.getXsiTypeMap()
-public java.util.Set org.json.XMLParserConfiguration.getForceList()
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withCloseEmptyTag(boolean)
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withShouldTrimWhitespace(boolean)
-public org.json.XMLParserConfiguration org.json.XMLParserConfiguration.withMaxNestingDepth(int)
-public org.json.ParserConfiguration org.json.XMLParserConfiguration.withMaxNestingDepth(int)
-public boolean org.json.XMLParserConfiguration.shouldTrimWhiteSpace()
-org.json.JSONObject$Null
-
-
-public boolean org.json.JSONObject$Null.equals(java.lang.Object)
-public java.lang.String org.json.JSONObject$Null.toString()
-public int org.json.JSONObject$Null.hashCode()
-protected final java.lang.Object org.json.JSONObject$Null.clone()
-org.json.XMLXsiTypeConverter
-
-
-public abstract java.lang.Object org.json.XMLXsiTypeConverter.convert(java.lang.String)
-org.json.Property
-
-
-public static org.json.JSONObject org.json.Property.toJSONObject(java.util.Properties) throws org.json.JSONException
-public static java.util.Properties org.json.Property.toProperties(org.json.JSONObject) throws org.json.JSONException
-org.json.XML$1
-
-
-public java.util.Iterator org.json.XML$1.iterator()
-org.json.XML$1$1
-
-
-public void org.json.XML$1$1.remove()
-public boolean org.json.XML$1$1.hasNext()
-public java.lang.Object org.json.XML$1$1.next()
-public java.lang.Integer org.json.XML$1$1.next()
-org.json.JSONException
-
-
-org.json.JSONObject$1
-
-
-org.json.JSONObject
-
-
-public java.lang.Object org.json.JSONObject.remove(java.lang.String)
-public java.lang.Object org.json.JSONObject.get(java.lang.String) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,float) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,int) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,long) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,java.lang.Object) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,java.util.Map) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,double) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,java.util.Collection) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.put(java.lang.String,boolean) throws org.json.JSONException
-public int org.json.JSONObject.length()
-public java.lang.String org.json.JSONObject.toString()
-public java.lang.String org.json.JSONObject.toString(int) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.append(java.lang.String,java.lang.Object) throws org.json.JSONException
-public boolean org.json.JSONObject.getBoolean(java.lang.String) throws org.json.JSONException
-public int org.json.JSONObject.getInt(java.lang.String) throws org.json.JSONException
-public long org.json.JSONObject.getLong(java.lang.String) throws org.json.JSONException
-public float org.json.JSONObject.getFloat(java.lang.String) throws org.json.JSONException
-public double org.json.JSONObject.getDouble(java.lang.String) throws org.json.JSONException
-public void org.json.JSONObject.clear()
-private static java.lang.Object org.json.JSONObject.wrap(java.lang.Object,java.util.Set)
-static java.lang.Object org.json.JSONObject.wrap(java.lang.Object,int,org.json.JSONParserConfiguration)
-private static java.lang.Object org.json.JSONObject.wrap(java.lang.Object,java.util.Set,int,org.json.JSONParserConfiguration)
-public static java.lang.Object org.json.JSONObject.wrap(java.lang.Object)
-public boolean org.json.JSONObject.isEmpty()
-static final void org.json.JSONObject.indent(java.io.Writer,int) throws java.io.IOException
-protected java.util.Set org.json.JSONObject.entrySet()
-private static java.lang.annotation.Annotation org.json.JSONObject.getAnnotation(java.lang.reflect.Method,java.lang.Class)
-public java.util.Map org.json.JSONObject.toMap()
-public org.json.JSONObject org.json.JSONObject.increment(java.lang.String) throws org.json.JSONException
-public java.io.Writer org.json.JSONObject.write(java.io.Writer) throws org.json.JSONException
-public java.io.Writer org.json.JSONObject.write(java.io.Writer,int,int) throws org.json.JSONException
-public java.util.Iterator org.json.JSONObject.keys()
-public java.util.Set org.json.JSONObject.keySet()
-public org.json.JSONArray org.json.JSONObject.names()
-public java.lang.Object org.json.JSONObject.query(java.lang.String)
-public java.lang.Object org.json.JSONObject.query(org.json.JSONPointer)
-public boolean org.json.JSONObject.isNull(java.lang.String)
-public java.lang.Number org.json.JSONObject.getNumber(java.lang.String) throws org.json.JSONException
-public static java.lang.String org.json.JSONObject.quote(java.lang.String)
-public static java.io.Writer org.json.JSONObject.quote(java.lang.String,java.io.Writer) throws java.io.IOException
-public java.lang.Object org.json.JSONObject.opt(java.lang.String)
-public java.lang.String org.json.JSONObject.getString(java.lang.String) throws org.json.JSONException
-public java.math.BigDecimal org.json.JSONObject.getBigDecimal(java.lang.String) throws org.json.JSONException
-public boolean org.json.JSONObject.has(java.lang.String)
-private static org.json.JSONException org.json.JSONObject.recursivelyDefinedObjectException(java.lang.String)
-private static org.json.JSONException org.json.JSONObject.wrongValueFormatException(java.lang.String,java.lang.String,java.lang.Object,java.lang.Throwable)
-public static java.lang.Object org.json.JSONObject.stringToValue(java.lang.String)
-public org.json.JSONArray org.json.JSONObject.optJSONArray(java.lang.String,org.json.JSONArray)
-public org.json.JSONArray org.json.JSONObject.optJSONArray(java.lang.String)
-public org.json.JSONArray org.json.JSONObject.toJSONArray(org.json.JSONArray) throws org.json.JSONException
-public static java.lang.String org.json.JSONObject.valueToString(java.lang.Object) throws org.json.JSONException
-protected static java.lang.Number org.json.JSONObject.stringToNumber(java.lang.String) throws java.lang.NumberFormatException
-private static int org.json.JSONObject.getAnnotationDepth(java.lang.reflect.Method,java.lang.Class)
-static java.math.BigDecimal org.json.JSONObject.objectToBigDecimal(java.lang.Object,java.math.BigDecimal,boolean)
-static java.math.BigDecimal org.json.JSONObject.objectToBigDecimal(java.lang.Object,java.math.BigDecimal)
-public java.math.BigInteger org.json.JSONObject.optBigInteger(java.lang.String,java.math.BigInteger)
-public org.json.JSONArray org.json.JSONObject.getJSONArray(java.lang.String) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONObject.optJSONObject(java.lang.String,org.json.JSONObject)
-public org.json.JSONObject org.json.JSONObject.optJSONObject(java.lang.String)
-static boolean org.json.JSONObject.isNumberSimilar(java.lang.Number,java.lang.Number)
-public java.lang.Double org.json.JSONObject.optDoubleObject(java.lang.String,java.lang.Double)
-public java.lang.Double org.json.JSONObject.optDoubleObject(java.lang.String)
-public java.math.BigDecimal org.json.JSONObject.optBigDecimal(java.lang.String,java.math.BigDecimal)
-protected static boolean org.json.JSONObject.isDecimalNotation(java.lang.String)
-static java.math.BigInteger org.json.JSONObject.objectToBigInteger(java.lang.Object,java.math.BigInteger)
-public static java.lang.String org.json.JSONObject.numberToString(java.lang.Number) throws org.json.JSONException
-public java.lang.Long org.json.JSONObject.optLongObject(java.lang.String,java.lang.Long)
-public java.lang.Long org.json.JSONObject.optLongObject(java.lang.String)
-private static boolean org.json.JSONObject.isValidMethodName(java.lang.String)
-public java.lang.Float org.json.JSONObject.optFloatObject(java.lang.String,java.lang.Float)
-public java.lang.Float org.json.JSONObject.optFloatObject(java.lang.String)
-public static void org.json.JSONObject.testValidity(java.lang.Object) throws org.json.JSONException
-private static boolean org.json.JSONObject.numberIsFinite(java.lang.Number)
-public java.lang.Boolean org.json.JSONObject.optBooleanObject(java.lang.String,java.lang.Boolean)
-public java.lang.Boolean org.json.JSONObject.optBooleanObject(java.lang.String)
-public static java.lang.String org.json.JSONObject.doubleToString(double)
-public java.math.BigInteger org.json.JSONObject.getBigInteger(java.lang.String) throws org.json.JSONException
-public java.lang.Integer org.json.JSONObject.optIntegerObject(java.lang.String,java.lang.Integer)
-public java.lang.Integer org.json.JSONObject.optIntegerObject(java.lang.String)
-private void org.json.JSONObject.populateMap(java.lang.Object)
-private void org.json.JSONObject.populateMap(java.lang.Object,java.util.Set)
-public org.json.JSONObject org.json.JSONObject.getJSONObject(java.lang.String) throws org.json.JSONException
-static final java.io.Writer org.json.JSONObject.writeValue(java.io.Writer,java.lang.Object,int,int) throws org.json.JSONException,java.io.IOException
-public java.lang.Object org.json.JSONObject.optQuery(java.lang.String)
-public java.lang.Object org.json.JSONObject.optQuery(org.json.JSONPointer)
-public float org.json.JSONObject.optFloat(java.lang.String)
-public float org.json.JSONObject.optFloat(java.lang.String,float)
-public int org.json.JSONObject.optInt(java.lang.String)
-public int org.json.JSONObject.optInt(java.lang.String,int)
-public long org.json.JSONObject.optLong(java.lang.String,long)
-public long org.json.JSONObject.optLong(java.lang.String)
-public org.json.JSONObject org.json.JSONObject.putOpt(java.lang.String,java.lang.Object) throws org.json.JSONException
-public java.lang.Enum org.json.JSONObject.optEnum(java.lang.Class,java.lang.String,java.lang.Enum)
-public java.lang.Enum org.json.JSONObject.optEnum(java.lang.Class,java.lang.String)
-public boolean org.json.JSONObject.optBoolean(java.lang.String,boolean)
-public boolean org.json.JSONObject.optBoolean(java.lang.String)
-public boolean org.json.JSONObject.similar(java.lang.Object)
-public java.lang.Enum org.json.JSONObject.getEnum(java.lang.Class,java.lang.String) throws org.json.JSONException
-public java.lang.Class org.json.JSONObject.getMapType()
-public static java.lang.String[] org.json.JSONObject.getNames(org.json.JSONObject)
-public static java.lang.String[] org.json.JSONObject.getNames(java.lang.Object)
-public org.json.JSONObject org.json.JSONObject.putOnce(java.lang.String,java.lang.Object) throws org.json.JSONException
-public double org.json.JSONObject.optDouble(java.lang.String)
-public double org.json.JSONObject.optDouble(java.lang.String,double)
-public java.lang.Number org.json.JSONObject.optNumber(java.lang.String,java.lang.Number)
-public java.lang.Number org.json.JSONObject.optNumber(java.lang.String)
-public org.json.JSONObject org.json.JSONObject.accumulate(java.lang.String,java.lang.Object) throws org.json.JSONException
-public java.lang.String org.json.JSONObject.optString(java.lang.String,java.lang.String)
-public java.lang.String org.json.JSONObject.optString(java.lang.String)
-private static java.lang.String org.json.JSONObject.removeLeadingZerosOfNumber(java.lang.String)
-private static java.lang.String org.json.JSONObject.getKeyNameFromMethod(java.lang.reflect.Method)
-org.json.JSONPointer$Builder
-
-
-public org.json.JSONPointer$Builder org.json.JSONPointer$Builder.append(int)
-public org.json.JSONPointer$Builder org.json.JSONPointer$Builder.append(java.lang.String)
-public org.json.JSONPointer org.json.JSONPointer$Builder.build()
-org.json.ParserConfiguration
-
-
-protected java.lang.Object org.json.ParserConfiguration.clone() throws java.lang.CloneNotSupportedException
-protected org.json.ParserConfiguration org.json.ParserConfiguration.clone()
-public boolean org.json.ParserConfiguration.isKeepStrings()
-public int org.json.ParserConfiguration.getMaxNestingDepth()
-public org.json.ParserConfiguration org.json.ParserConfiguration.withKeepStrings(boolean)
-public org.json.ParserConfiguration org.json.ParserConfiguration.withMaxNestingDepth(int)
-org.json.HTTP
-
-
-public static java.lang.String org.json.HTTP.toString(org.json.JSONObject) throws org.json.JSONException
-public static org.json.JSONObject org.json.HTTP.toJSONObject(java.lang.String) throws org.json.JSONException
-org.json.JSONPointerException
-
-
-org.json.XML
-
-
-public static java.lang.String org.json.XML.toString(java.lang.Object,java.lang.String,org.json.XMLParserConfiguration) throws org.json.JSONException
-public static java.lang.String org.json.XML.toString(java.lang.Object,java.lang.String,org.json.XMLParserConfiguration,int) throws org.json.JSONException
-public static java.lang.String org.json.XML.toString(java.lang.Object,java.lang.String,int)
-public static java.lang.String org.json.XML.toString(java.lang.Object,int)
-public static java.lang.String org.json.XML.toString(java.lang.Object) throws org.json.JSONException
-public static java.lang.String org.json.XML.toString(java.lang.Object,java.lang.String)
-private static java.lang.String org.json.XML.toString(java.lang.Object,java.lang.String,org.json.XMLParserConfiguration,int,int) throws org.json.JSONException
-private static final java.lang.String org.json.XML.indent(int)
-private static boolean org.json.XML.parse(org.json.XMLTokener,org.json.JSONObject,java.lang.String,org.json.XMLParserConfiguration,int) throws org.json.JSONException
-public static java.lang.String org.json.XML.escape(java.lang.String)
-public static java.lang.String org.json.XML.unescape(java.lang.String)
-public static java.lang.Object org.json.XML.stringToValue(java.lang.String,org.json.XMLXsiTypeConverter)
-public static java.lang.Object org.json.XML.stringToValue(java.lang.String)
-public static org.json.JSONObject org.json.XML.toJSONObject(java.lang.String,boolean) throws org.json.JSONException
-public static org.json.JSONObject org.json.XML.toJSONObject(java.lang.String,org.json.XMLParserConfiguration) throws org.json.JSONException
-public static org.json.JSONObject org.json.XML.toJSONObject(java.io.Reader) throws org.json.JSONException
-public static org.json.JSONObject org.json.XML.toJSONObject(java.lang.String) throws org.json.JSONException
-public static org.json.JSONObject org.json.XML.toJSONObject(java.io.Reader,boolean) throws org.json.JSONException
-public static org.json.JSONObject org.json.XML.toJSONObject(java.io.Reader,org.json.XMLParserConfiguration) throws org.json.JSONException
-private static java.lang.Number org.json.XML.stringToNumber(java.lang.String) throws java.lang.NumberFormatException
-private static boolean org.json.XML.isDecimalNotation(java.lang.String)
-private static java.lang.Iterable org.json.XML.codePointIterator(java.lang.String)
-private static void org.json.XML.removeEmpty(org.json.JSONObject,org.json.XMLParserConfiguration)
-public static void org.json.XML.noSpace(java.lang.String) throws org.json.JSONException
-private static boolean org.json.XML.mustEscape(int)
-private static boolean org.json.XML.isStringAllWhiteSpace(java.lang.String)
-org.json.JSONStringer
-
-
-public java.lang.String org.json.JSONStringer.toString()
-org.json.JSONPropertyIgnore
-
-
-META-INF.versions.9.module-info
-
-
-org.json.JSONPointer
-
-
-public java.lang.String org.json.JSONPointer.toString()
-public static org.json.JSONPointer$Builder org.json.JSONPointer.builder()
-private static java.lang.String org.json.JSONPointer.escape(java.lang.String)
-private static java.lang.String org.json.JSONPointer.unescape(java.lang.String)
-public java.lang.Object org.json.JSONPointer.queryFrom(java.lang.Object) throws org.json.JSONPointerException
-private static java.lang.Object org.json.JSONPointer.readByIndexToken(java.lang.Object,java.lang.String) throws org.json.JSONPointerException
-public java.lang.String org.json.JSONPointer.toURIFragment()
-org.json.HTTPTokener
-
-
-public java.lang.String org.json.HTTPTokener.nextToken() throws org.json.JSONException
-org.json.CDL
-
-
-public static java.lang.String org.json.CDL.toString(org.json.JSONArray,org.json.JSONArray,char) throws org.json.JSONException
-public static java.lang.String org.json.CDL.toString(org.json.JSONArray) throws org.json.JSONException
-public static java.lang.String org.json.CDL.toString(org.json.JSONArray,char) throws org.json.JSONException
-public static java.lang.String org.json.CDL.toString(org.json.JSONArray,org.json.JSONArray) throws org.json.JSONException
-private static java.lang.String org.json.CDL.getValue(org.json.JSONTokener,char) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(org.json.JSONArray,java.lang.String,char) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(org.json.JSONTokener) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(org.json.JSONTokener,char) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(org.json.JSONArray,org.json.JSONTokener) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(org.json.JSONArray,org.json.JSONTokener,char) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(java.lang.String) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(java.lang.String,char) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.toJSONArray(org.json.JSONArray,java.lang.String) throws org.json.JSONException
-public static org.json.JSONObject org.json.CDL.rowToJSONObject(org.json.JSONArray,org.json.JSONTokener,char) throws org.json.JSONException
-public static org.json.JSONObject org.json.CDL.rowToJSONObject(org.json.JSONArray,org.json.JSONTokener) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.rowToJSONArray(org.json.JSONTokener) throws org.json.JSONException
-public static org.json.JSONArray org.json.CDL.rowToJSONArray(org.json.JSONTokener,char) throws org.json.JSONException
-public static java.lang.String org.json.CDL.rowToString(org.json.JSONArray)
-public static java.lang.String org.json.CDL.rowToString(org.json.JSONArray,char)
-org.json.JSONParserConfiguration
-
-
-protected org.json.ParserConfiguration org.json.JSONParserConfiguration.clone()
-protected java.lang.Object org.json.JSONParserConfiguration.clone() throws java.lang.CloneNotSupportedException
-protected org.json.JSONParserConfiguration org.json.JSONParserConfiguration.clone()
-public boolean org.json.JSONParserConfiguration.isStrictMode()
-public org.json.JSONParserConfiguration org.json.JSONParserConfiguration.withStrictMode(boolean)
-public org.json.JSONParserConfiguration org.json.JSONParserConfiguration.withStrictMode()
-public org.json.JSONParserConfiguration org.json.JSONParserConfiguration.withOverwriteDuplicateKey(boolean)
-public org.json.ParserConfiguration org.json.JSONParserConfiguration.withMaxNestingDepth(int)
-public org.json.JSONParserConfiguration org.json.JSONParserConfiguration.withMaxNestingDepth(int)
-public boolean org.json.JSONParserConfiguration.isOverwriteDuplicateKey()
-org.json.JSONTokener
-
-
-public java.lang.String org.json.JSONTokener.toString()
-public boolean org.json.JSONTokener.end()
-public char org.json.JSONTokener.next(char) throws org.json.JSONException
-public char org.json.JSONTokener.next() throws org.json.JSONException
-public java.lang.String org.json.JSONTokener.next(int) throws org.json.JSONException
-public void org.json.JSONTokener.close() throws java.io.IOException
-public void org.json.JSONTokener.back() throws org.json.JSONException
-public boolean org.json.JSONTokener.more() throws org.json.JSONException
-public org.json.JSONException org.json.JSONTokener.syntaxError(java.lang.String,java.lang.Throwable)
-public org.json.JSONException org.json.JSONTokener.syntaxError(java.lang.String)
-private void org.json.JSONTokener.incrementIndexes(int)
-java.lang.Object org.json.JSONTokener.nextSimpleValue(char)
-private void org.json.JSONTokener.decrementIndexes()
-protected char org.json.JSONTokener.getPrevious()
-public java.lang.Object org.json.JSONTokener.nextValue() throws org.json.JSONException
-public char org.json.JSONTokener.nextClean() throws org.json.JSONException
-public char org.json.JSONTokener.skipTo(char) throws org.json.JSONException
-public java.lang.String org.json.JSONTokener.nextString(char) throws org.json.JSONException
-public static int org.json.JSONTokener.dehexchar(char)
-public java.lang.String org.json.JSONTokener.nextTo(char) throws org.json.JSONException
-public java.lang.String org.json.JSONTokener.nextTo(java.lang.String) throws org.json.JSONException
-public void org.json.JSONTokener.setJsonParserConfiguration(org.json.JSONParserConfiguration)
-public org.json.JSONParserConfiguration org.json.JSONTokener.getJsonParserConfiguration()
-org.json.Cookie
-
-
-public static java.lang.String org.json.Cookie.toString(org.json.JSONObject) throws org.json.JSONException
-public static java.lang.String org.json.Cookie.escape(java.lang.String)
-public static java.lang.String org.json.Cookie.unescape(java.lang.String)
-public static org.json.JSONObject org.json.Cookie.toJSONObject(java.lang.String)
-org.json.JSONPropertyName
-
-
-public abstract java.lang.String org.json.JSONPropertyName.value()
-org.json.StringBuilderWriter
-
-
-public java.lang.String org.json.StringBuilderWriter.toString()
-public org.json.StringBuilderWriter org.json.StringBuilderWriter.append(java.lang.CharSequence,int,int)
-public org.json.StringBuilderWriter org.json.StringBuilderWriter.append(char)
-public java.io.Writer org.json.StringBuilderWriter.append(java.lang.CharSequence) throws java.io.IOException
-public java.io.Writer org.json.StringBuilderWriter.append(java.lang.CharSequence,int,int) throws java.io.IOException
-public java.io.Writer org.json.StringBuilderWriter.append(char) throws java.io.IOException
-public java.lang.Appendable org.json.StringBuilderWriter.append(java.lang.CharSequence) throws java.io.IOException
-public java.lang.Appendable org.json.StringBuilderWriter.append(java.lang.CharSequence,int,int) throws java.io.IOException
-public java.lang.Appendable org.json.StringBuilderWriter.append(char) throws java.io.IOException
-public org.json.StringBuilderWriter org.json.StringBuilderWriter.append(java.lang.CharSequence)
-public void org.json.StringBuilderWriter.flush()
-public void org.json.StringBuilderWriter.write(java.lang.String)
-public void org.json.StringBuilderWriter.write(char[],int,int)
-public void org.json.StringBuilderWriter.write(int)
-public void org.json.StringBuilderWriter.write(java.lang.String,int,int)
-public void org.json.StringBuilderWriter.close() throws java.io.IOException
-org.json.JSONWriter
-
-
-public org.json.JSONWriter org.json.JSONWriter.value(java.lang.Object) throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.value(boolean) throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.value(double) throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.value(long) throws org.json.JSONException
-private org.json.JSONWriter org.json.JSONWriter.append(java.lang.String) throws org.json.JSONException
-private org.json.JSONWriter org.json.JSONWriter.end(char,char) throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.array() throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.key(java.lang.String) throws org.json.JSONException
-private void org.json.JSONWriter.push(org.json.JSONObject) throws org.json.JSONException
-private void org.json.JSONWriter.pop(char) throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.object() throws org.json.JSONException
-public static java.lang.String org.json.JSONWriter.valueToString(java.lang.Object) throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.endObject() throws org.json.JSONException
-public org.json.JSONWriter org.json.JSONWriter.endArray() throws org.json.JSONException
-org.json.JSONString
-
-
-public abstract java.lang.String org.json.JSONString.toJSONString()
-org.json.JSONMLParserConfiguration
-
-
-protected org.json.JSONMLParserConfiguration org.json.JSONMLParserConfiguration.clone()
-protected org.json.ParserConfiguration org.json.JSONMLParserConfiguration.clone()
-protected java.lang.Object org.json.JSONMLParserConfiguration.clone() throws java.lang.CloneNotSupportedException
-public org.json.ParserConfiguration org.json.JSONMLParserConfiguration.withKeepStrings(boolean)
-public org.json.JSONMLParserConfiguration org.json.JSONMLParserConfiguration.withKeepStrings(boolean)
-public org.json.JSONMLParserConfiguration org.json.JSONMLParserConfiguration.withMaxNestingDepth(int)
-public org.json.ParserConfiguration org.json.JSONMLParserConfiguration.withMaxNestingDepth(int)
-org.json.CookieList
-
-
-public static java.lang.String org.json.CookieList.toString(org.json.JSONObject) throws org.json.JSONException
-public static org.json.JSONObject org.json.CookieList.toJSONObject(java.lang.String) throws org.json.JSONException
-org.json.JSONArray
-
-
-public java.lang.Object org.json.JSONArray.remove(int)
-public java.lang.Object org.json.JSONArray.get(int) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(int,long) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(int,int) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(int,float) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(int,double) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(boolean)
-public org.json.JSONArray org.json.JSONArray.put(int,java.lang.Object) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(int,java.util.Map,org.json.JSONParserConfiguration) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(int,java.util.Map) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(long)
-public org.json.JSONArray org.json.JSONArray.put(int)
-public org.json.JSONArray org.json.JSONArray.put(float) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(double) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(java.util.Collection)
-public org.json.JSONArray org.json.JSONArray.put(int,java.util.Collection) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(int,boolean) throws org.json.JSONException
-public org.json.JSONArray org.json.JSONArray.put(java.lang.Object)
-public org.json.JSONArray org.json.JSONArray.put(java.util.Map)
-public int org.json.JSONArray.length()
-public java.lang.String org.json.JSONArray.toString(int) throws org.json.JSONException
-public java.lang.String org.json.JSONArray.toString()
-public boolean org.json.JSONArray.getBoolean(int) throws org.json.JSONException
-public int org.json.JSONArray.getInt(int) throws org.json.JSONException
-public long org.json.JSONArray.getLong(int) throws org.json.JSONException
-public float org.json.JSONArray.getFloat(int) throws org.json.JSONException
-public double org.json.JSONArray.getDouble(int) throws org.json.JSONException
-public void org.json.JSONArray.clear()
-public boolean org.json.JSONArray.isEmpty()
-public java.lang.String org.json.JSONArray.join(java.lang.String) throws org.json.JSONException
-public java.util.Iterator org.json.JSONArray.iterator()
-public java.util.List org.json.JSONArray.toList()
-private void org.json.JSONArray.addAll(java.lang.Object,boolean,int)
-private void org.json.JSONArray.addAll(java.lang.Iterable,boolean)
-private void org.json.JSONArray.addAll(java.lang.Object,boolean,int,org.json.JSONParserConfiguration) throws org.json.JSONException
-private void org.json.JSONArray.addAll(java.lang.Object,boolean) throws org.json.JSONException
-private void org.json.JSONArray.addAll(java.util.Collection,boolean,int,org.json.JSONParserConfiguration)
-public org.json.JSONArray org.json.JSONArray.putAll(java.util.Collection)
-public org.json.JSONArray org.json.JSONArray.putAll(org.json.JSONArray)
-public org.json.JSONArray org.json.JSONArray.putAll(java.lang.Iterable)
-public org.json.JSONArray org.json.JSONArray.putAll(java.lang.Object) throws org.json.JSONException
-public java.io.Writer org.json.JSONArray.write(java.io.Writer,int,int) throws org.json.JSONException
-public java.io.Writer org.json.JSONArray.write(java.io.Writer) throws org.json.JSONException
-public java.lang.Object org.json.JSONArray.query(java.lang.String)
-public java.lang.Object org.json.JSONArray.query(org.json.JSONPointer)
-public boolean org.json.JSONArray.isNull(int)
-public java.lang.Number org.json.JSONArray.getNumber(int) throws org.json.JSONException
-public java.lang.Object org.json.JSONArray.opt(int)
-public java.lang.String org.json.JSONArray.getString(int) throws org.json.JSONException
-public java.math.BigDecimal org.json.JSONArray.getBigDecimal(int) throws org.json.JSONException
-private static org.json.JSONException org.json.JSONArray.wrongValueFormatException(int,java.lang.String,java.lang.Object,java.lang.Throwable)
-public org.json.JSONArray org.json.JSONArray.optJSONArray(int,org.json.JSONArray)
-public org.json.JSONArray org.json.JSONArray.optJSONArray(int)
-public org.json.JSONObject org.json.JSONArray.toJSONObject(org.json.JSONArray) throws org.json.JSONException
-public java.math.BigInteger org.json.JSONArray.optBigInteger(int,java.math.BigInteger)
-public org.json.JSONArray org.json.JSONArray.getJSONArray(int) throws org.json.JSONException
-public org.json.JSONObject org.json.JSONArray.optJSONObject(int,org.json.JSONObject)
-public org.json.JSONObject org.json.JSONArray.optJSONObject(int)
-public java.lang.Double org.json.JSONArray.optDoubleObject(int)
-public java.lang.Double org.json.JSONArray.optDoubleObject(int,java.lang.Double)
-public java.math.BigDecimal org.json.JSONArray.optBigDecimal(int,java.math.BigDecimal)
-public java.lang.Long org.json.JSONArray.optLongObject(int)
-public java.lang.Long org.json.JSONArray.optLongObject(int,java.lang.Long)
-public java.lang.Float org.json.JSONArray.optFloatObject(int,java.lang.Float)
-public java.lang.Float org.json.JSONArray.optFloatObject(int)
-public java.lang.Boolean org.json.JSONArray.optBooleanObject(int,java.lang.Boolean)
-public java.lang.Boolean org.json.JSONArray.optBooleanObject(int)
-public java.math.BigInteger org.json.JSONArray.getBigInteger(int) throws org.json.JSONException
-public java.lang.Integer org.json.JSONArray.optIntegerObject(int,java.lang.Integer)
-public java.lang.Integer org.json.JSONArray.optIntegerObject(int)
-public org.json.JSONObject org.json.JSONArray.getJSONObject(int) throws org.json.JSONException
-public java.lang.Object org.json.JSONArray.optQuery(org.json.JSONPointer)
-public java.lang.Object org.json.JSONArray.optQuery(java.lang.String)
-public float org.json.JSONArray.optFloat(int)
-public float org.json.JSONArray.optFloat(int,float)
-public int org.json.JSONArray.optInt(int)
-public int org.json.JSONArray.optInt(int,int)
-public long org.json.JSONArray.optLong(int,long)
-public long org.json.JSONArray.optLong(int)
-public java.lang.Enum org.json.JSONArray.optEnum(java.lang.Class,int,java.lang.Enum)
-public java.lang.Enum org.json.JSONArray.optEnum(java.lang.Class,int)
-public boolean org.json.JSONArray.optBoolean(int,boolean)
-public boolean org.json.JSONArray.optBoolean(int)
-public boolean org.json.JSONArray.similar(java.lang.Object)
-public java.lang.Enum org.json.JSONArray.getEnum(java.lang.Class,int) throws org.json.JSONException
-public double org.json.JSONArray.optDouble(int,double)
-public double org.json.JSONArray.optDouble(int)
-public java.lang.Number org.json.JSONArray.optNumber(int)
-public java.lang.Number org.json.JSONArray.optNumber(int,java.lang.Number)
-public java.lang.String org.json.JSONArray.optString(int,java.lang.String)
-public java.lang.String org.json.JSONArray.optString(int)
-org.json.XMLTokener
-
-
-public java.lang.Object org.json.XMLTokener.nextToken() throws org.json.JSONException
-public java.lang.Object org.json.XMLTokener.nextContent() throws org.json.JSONException
-static java.lang.String org.json.XMLTokener.unescapeEntity(java.lang.String)
-public java.lang.String org.json.XMLTokener.nextCDATA() throws org.json.JSONException
-public java.lang.Object org.json.XMLTokener.nextMeta() throws org.json.JSONException
-public java.lang.Object org.json.XMLTokener.nextEntity(char) throws org.json.JSONException
-public void org.json.XMLTokener.skipPast(java.lang.String)
+[org.json.JSONML, org.json.XMLParserConfiguration, org.json.JSONObject$Null, org.json.XMLXsiTypeConverter, org.json.Property, org.json.XML$1, org.json.XML$1$1, org.json.JSONException, org.json.JSONObject$1, org.json.JSONObject, org.json.JSONPointer$Builder, org.json.HTTP, org.json.JSONPointerException, org.json.XML, org.json.JSONStringer, org.json.JSONPropertyIgnore, org.json.JSONPointer, org.json.HTTPTokener, org.json.CDL, org.json.JSONTokener, org.json.Cookie, org.json.JSONPropertyName, org.json.JSONWriter, org.json.JSONString, org.json.CookieList, org.json.JSONArray, org.json.XMLTokener]
+----------org.json.CDL----------
+  Public methods: 9
+  Private methods: 1
+  Protected methods: 0
+  Static methods: 10
+  Fields methods: 0
+----------org.json.Cookie----------
+  Public methods: 4
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 4
+  Fields methods: 0
+----------org.json.CookieList----------
+  Public methods: 2
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 2
+  Fields methods: 0
+----------org.json.HTTP----------
+  Public methods: 2
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 2
+  Fields methods: 1
+----------org.json.HTTPTokener----------
+  Public methods: 1
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 0
+----------org.json.JSONArray----------
+  Public methods: 72
+  Private methods: 5
+  Protected methods: 0
+  Static methods: 2
+  Fields methods: 1
+----------org.json.JSONException----------
+  Public methods: 0
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 1
+----------org.json.JSONML----------
+  Public methods: 10
+  Private methods: 1
+  Protected methods: 0
+  Static methods: 11
+  Fields methods: 0
+----------org.json.JSONObject----------
+  Public methods: 78
+  Private methods: 11
+  Protected methods: 3
+  Static methods: 27
+  Fields methods: 3
+----------org.json.JSONObject$1----------
+  Public methods: 0
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 0
+----------org.json.JSONObject$Null----------
+  Public methods: 3
+  Private methods: 0
+  Protected methods: 1
+  Static methods: 0
+  Fields methods: 0
+----------org.json.JSONPointer----------
+  Public methods: 4
+  Private methods: 3
+  Protected methods: 0
+  Static methods: 4
+  Fields methods: 2
+----------org.json.JSONPointer$Builder----------
+  Public methods: 3
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 1
+----------org.json.JSONPointerException----------
+  Public methods: 0
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 1
+----------org.json.JSONPropertyIgnore----------
+  Public methods: 0
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 0
+----------org.json.JSONPropertyName----------
+  Public methods: 1
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 0
+----------org.json.JSONString----------
+  Public methods: 1
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 0
+----------org.json.JSONStringer----------
+  Public methods: 1
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 0
+----------org.json.JSONTokener----------
+  Public methods: 16
+  Private methods: 2
+  Protected methods: 0
+  Static methods: 1
+  Fields methods: 8
+----------org.json.JSONWriter----------
+  Public methods: 10
+  Private methods: 4
+  Protected methods: 0
+  Static methods: 1
+  Fields methods: 6
+----------org.json.Property----------
+  Public methods: 2
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 2
+  Fields methods: 0
+----------org.json.XML----------
+  Public methods: 14
+  Private methods: 5
+  Protected methods: 0
+  Static methods: 19
+  Fields methods: 11
+----------org.json.XML$1----------
+  Public methods: 1
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 1
+----------org.json.XML$1$1----------
+  Public methods: 4
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 3
+----------org.json.XMLParserConfiguration----------
+  Public methods: 10
+  Private methods: 0
+  Protected methods: 2
+  Static methods: 0
+  Fields methods: 7
+----------org.json.XMLTokener----------
+  Public methods: 6
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 1
+  Fields methods: 1
+----------org.json.XMLXsiTypeConverter----------
+  Public methods: 1
+  Private methods: 0
+  Protected methods: 0
+  Static methods: 0
+  Fields methods: 0
