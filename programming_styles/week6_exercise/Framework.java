@@ -1,28 +1,45 @@
-// class main {
-//     Class cls = null;
-//     URL classUrl = null;
-//     try {
-//       // TODO: Grab URLS from a cfg file.
-//       // WRONG!!!!
-//       classUrl = new URL("file:///home/runner/ReflectionAndPlugins/deploy/app1.jar");
-//     } catch (Exception e) {
-//       e.printStackTrace();
-//     }
-//     URL[] classUrls = {classUrl};
-//     URLClassLoader cloader = new URLClassLoader(classUrls);
-//     try {
-//       cls = cloader.loadClass();
-//     } catch (Exception e) {
-//       e.printStackTrace();
-//     } 
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
-//     if (cls != null) {
-// 	    try {
-//     		ISurprise adder = (ISurprise)cls.newInstance();
-// 		    System.out.println("Surprise result: " + adder.surpriseOperation(4, 6));
-// 	    } catch (Exception e) {
-// 		    e.printStackTrace();
-// 	    }
+class main {
+    public static void main(String [] args) {
+        try {
+            Properties props = new Properties();
+            String wordsJarPath = null;
+            String freqJarPath = null;
+            try (FileInputStream fis = new FileInputStream("config.properties")) {
+                props.load(fis);
+                wordsJarPath = props.getProperty("WORD_LOADER_JAR_PATH");
+                freqJarPath = props.getProperty("FREQ_LOADER_JAR_PATH");
 
-//     }
-// }
+            } catch (IOException e) {
+                System.out.println("Config file not found");
+                e.printStackTrace();
+            }
+            // Load the plugin JARs
+            URL[] classUrls = {
+                new File(wordsJarPath).toURI().toURL(),
+                new File(freqJarPath).toURI().toURL(),
+            };
+            URLClassLoader cloader = new URLClassLoader(classUrls);
+            // Load class 
+            Class<?> cls1 = cloader.loadClass("words1"); 
+            Class<?> cls2 = cloader.loadClass("freq1");
+            // Create instance
+            IWords wordPlugin = (IWords) cls1.getDeclaredConstructor().newInstance();
+            IFreq freqPlugin = (IFreq) cls2.getDeclaredConstructor().newInstance();
+            // Use the plugin
+            ArrayList<String> words = wordPlugin.getWordList("stop_words.txt", "pride-and-prejudice.txt");
+            String top25 = freqPlugin.getTop25(words);
+            System.out.println(top25);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+}
