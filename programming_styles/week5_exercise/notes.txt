@@ -1,0 +1,2 @@
+Find api to read jar files
+first step = get references to classes

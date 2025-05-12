@@ -1,0 +1,13 @@
+$ cd framework
+$ javac *.java
+$ jar cfm framework.jar manifest.mf *.class
+$ cd ../app
+$ javac -cp ../framework/framework.jar *.java
+$ jar cf app.jar *.class
+$ cd ../deploy
+$ cp ../framework/*.jar ../app/*.jar .
+Windows?
+Copy-Item ../framework/*.jar -Destination .
+Copy-Item ../app1/*.jar -Destination .
+
+$ java -jar framework.jar 
