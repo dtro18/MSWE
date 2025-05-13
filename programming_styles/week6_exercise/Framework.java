@@ -12,10 +12,14 @@ class main {
             Properties props = new Properties();
             String wordsJarPath = null;
             String freqJarPath = null;
+            String wordClassName = null;
+            String freqClassName = null;
             try (FileInputStream fis = new FileInputStream("config.properties")) {
                 props.load(fis);
                 wordsJarPath = props.getProperty("WORD_LOADER_JAR_PATH");
                 freqJarPath = props.getProperty("FREQ_LOADER_JAR_PATH");
+                wordClassName = props.getProperty("WORD_CLASS_NAME");
+                freqClassName = props.getProperty("FREQ_CLASS_NAME");
 
             } catch (IOException e) {
                 System.out.println("Config file not found");
@@ -28,8 +32,8 @@ class main {
             };
             URLClassLoader cloader = new URLClassLoader(classUrls);
             // Load class 
-            Class<?> cls1 = cloader.loadClass("words1"); 
-            Class<?> cls2 = cloader.loadClass("freq1");
+            Class<?> cls1 = cloader.loadClass(wordClassName); 
+            Class<?> cls2 = cloader.loadClass(freqClassName);
             // Create instance
             IWords wordPlugin = (IWords) cls1.getDeclaredConstructor().newInstance();
             IFreq freqPlugin = (IFreq) cls2.getDeclaredConstructor().newInstance();
