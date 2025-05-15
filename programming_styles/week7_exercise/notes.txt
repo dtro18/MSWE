@@ -1,0 +1,36 @@
+When using iterators in java,
+must overload hasNext and next
+then, when setting up the iterator, 
+while (iter.hasNext) {
+    call next
+}
+
+generator
+- yield values every time they are called
+- keep function state every time they are called
+- yield holds execution at a certain point until it's called again
+- java doesn't support these??
+
+stream
+- overrides related to how the stream will be split into chunks
+- milestone 4 - figure out how to split a large json object into a stream of similar objects
+- weekly exercise can be solved in two lines
+- java gives help in splitting objects: spliterator object
+    - must implement an interface Spliterator<objectwanttoimplement>
+    - must implement tryAdvance
+        - perform an action
+        
+
+
+
+milestone4
+- overload a tostring method
+- can lose information in the pass. can remove nesting and just give all objects
+
+end of quarter demo
+- 20-30 mins
+- demo is 50% of the grade
+- incrementally improve previous milestones
+- branches are supposed to be temporary
+- tags are supposed to come from the main
+- find out workflow for branching, prs, and then tagging

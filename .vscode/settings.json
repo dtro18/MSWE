@@ -9,5 +9,26 @@
     "python.testing.pytestEnabled": false,
     "python.testing.unittestEnabled": true,
     "python.REPL.enableREPLSmartSend": false,
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\dtro1\\Downloads\\json-20250107.jar"
+    ],
+    "java.home": "C:\\Program Files\\Java\\jdk-21",
+    "terminal.integrated.env.windows": {
+        "JAVA_HOME": "C:\\Program Files\\Java\\jdk-21",
+        "PATH": "C:\\Program Files\\Java\\jdk-21\\bin;${env:PATH}"
+    },
+    "java.configuration.runtimes": [
+    {
+        "name": "JavaSE-21",
+        "path": "C:\\Program Files\\Java\\jdk-21",
+        "default": true
+    }
+    ],
+
+
+
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable"
 }
